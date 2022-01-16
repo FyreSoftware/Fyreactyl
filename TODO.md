@@ -1,0 +1,3 @@
+# Upcoming features
+
+- Email authentication
