@@ -48,7 +48,7 @@
     <!-- loader END -->
     
     <%- include('../components/sidebar') %>
-    </aside>    <main class="main-content">
+    <main class="main-content">
       <div class="position-relative">
         <!--Nav Start-->
         <nav class="nav navbar navbar-expand-lg navbar-light iq-navbar">
@@ -99,6 +99,7 @@
                         <path opacity="0.4" d="M14.0088 19.2283C13.5088 19.1215 10.4627 19.1215 9.96275 19.2283C9.53539 19.327 9.07324 19.5566 9.07324 20.0602C9.09809 20.5406 9.37935 20.9646 9.76895 21.2335L9.76795 21.2345C10.2718 21.6273 10.8632 21.877 11.4824 21.9667C11.8123 22.012 12.1482 22.01 12.4901 21.9667C13.1083 21.877 13.6997 21.6273 14.2036 21.2345L14.2026 21.2335C14.5922 20.9646 14.8734 20.5406 14.8983 20.0602C14.8983 19.5566 14.4361 19.327 14.0088 19.2283Z" fill="currentColor"></path>
                       </svg>
                       <span class="bg-danger dots"></span>
+                
                   </a>
                   <div class="p-0 sub-drop dropdown-menu dropdown-menu-end" id="nof" aria-labelledby="notification-drop">
                       <div id="nof" class="m-0 shadow-none card">
@@ -110,8 +111,8 @@
                         <div id="nof" class="p-0 card-body">
                             <a href="#" class="iq-sub-card">
                               <div class="d-flex align-items-center">
-                                 <% if (variables) { %>
-                                  <img class="p-1 avatar-40 rounded-pill bg-soft-primary" src="../assets/images/shapes/01.png" alt="">
+                                 <img% if (variables) { %>
+                                  <img class="p-1 avatar-40 rounded-pill bg-soft-primary" src="../assets/images/shapes/01.png" alt="" /> 
                                   <div class="ms-3 w-100">
                                     <h6 class="mb-0 "><% if (variables.error && status_replies.error[variables.error]) { %>
         <p style="color: red;"><%- eval(`\`${status_replies.error[variables.error]}\``) %></p>
@@ -131,7 +132,8 @@
                         </div>
                       </div>
                   </div>
-                  </li>
+                </li>
+                </ul>
                 <li class="nav-item dropdown">
                   <a class="py-0 nav-link d-flex align-items-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <img src="../assets/images/avatars/01.png" alt="User-Profile" class="theme-color-default-img img-fluid avatar avatar-50 avatar-rounded">
@@ -144,7 +146,9 @@
                         <h6 class="mb-0 caption-title"><%= data.userinfo.username %>#<%= data.userinfo.discriminator %></h6>
                         <p class="mb-0 caption-sub-title"><%= package.display %></p>
                     </div>
+                  
                   </a>
+                  </li>
                   <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                     <li><a class="dropdown-item" href="/dashboard">Profile</a></li>
                     <li><hr class="dropdown-divider"></li>
@@ -185,7 +189,7 @@
                   <img src="../assets/images/dashboard/top-header5.png" alt="header" class="theme-color-pink-img img-fluid w-100 h-100 animated-scaleX">
               </div>
           </div>
-          </div>
+        
                   <!-- Nav Header Component End -->
         <!--Nav End-->
         
@@ -329,14 +333,12 @@
          </div>
       </div>
       </div>
-      
+      </main>
 
 
-   
-</div>
-      </div>
+
       <!-- Footer Section Start -->
-      <%- include("../components/footer.ejs") %> 
+      <r%- include("../components/footer.ejs") %> 
       <!-- Footer Section End -->    </main>
     <a class="btn btn-fixed-end btn-warning btn-icon btn-setting" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" role="button" aria-controls="offcanvasExample">
       <svg width="24" viewBox="0 0 24 24" class="animated-rotate" fill="none" xmlns="http://www.w3.org/2000/svg">
