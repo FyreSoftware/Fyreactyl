@@ -27,6 +27,12 @@ pages:
   loginpage:
     file: login.ejs
     permission: 0
+  login:
+    file: login.ejs
+    permission: 0
+  reset/password:
+    file: reset/request.ejs
+    permission: 0
 
   dashboard:
     file: dashboard/dashboard.ejs
@@ -46,6 +52,10 @@ pages:
     file: server/modify.ejs
     permission: 1
     no_permission_redirect: /accounts/login
+
+  signup:
+    file: singup.ejs
+    permission: 0
 
   store:
     file: dashboard/store.ejs

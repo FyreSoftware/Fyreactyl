@@ -17,7 +17,9 @@ const pool = mysql.createPool({
 pool.query(
   `
     CREATE TABLE IF NOT EXISTS \`accounts\` (
-      \`discord_id\` varchar(255) PRIMARY KEY,
+      \`email\` varchar(255) PRIMARY KEY,
+      \`password\` varchar(255) DEFAULT NULL,
+      \`discord_id\` varchar(255) DEFAULT NULL,
       \`pterodactyl_id\` varchar(255) DEFAULT NULL,
       \`blacklisted\` varchar(255) DEFAULT NULL,
       \`coins\` int(11) DEFAULT NULL,
@@ -25,7 +27,9 @@ pool.query(
       \`memory\` int(11) DEFAULT NULL,
       \`disk\` int(11) DEFAULT NULL,
       \`cpu\` int(11) DEFAULT NULL,
-      \`servers\` int(11) DEFAULT NULL
+      \`servers\` int(11) DEFAULT NULL,
+      \`name\` varchar(255) DEFAULT NULL,
+      \`reset_id\` varchar(255) DEFAULT NULL
     ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
   `
 );
@@ -120,6 +124,34 @@ module.exports = {
       );
     });
   },
+  async updatePassword(email, password) {
+    return new Promise((resolve, reject) => {
+      pool.query(
+        "UPDATE accounts SET password = ? WHERE email = ?",
+        [password, email],
+
+        function (error, results, fields) {
+          if (error) return reject(error);
+
+          resolve(true);
+        }
+      );
+    });
+  },
+  async updateResetId(email, newID) {
+    return new Promise((resolve, reject) => {
+      pool.query(
+        "UPDATE accounts SET reset_id = ? WHERE email = ?",
+        [newID, email],
+
+        function (error, results, fields) {
+          if (error) return reject(error);
+
+          resolve(true);
+        }
+      );
+    });
+  },
   async updateName(id, name) {
     return new Promise((resolve, reject) => {
       pool.query(
@@ -134,11 +166,30 @@ module.exports = {
       );
     });
   },
-  async createAccountOnDB(discord_id, pterodactyl_id) {
+  async createAccountOnDB(
+    email,
+    pterodactyl_id,
+    discord_id = null,
+    name = null,
+    password = null
+  ) {
     return new Promise((resolve, reject) => {
       pool.query(
-        "INSERT INTO accounts (discord_id, pterodactyl_id, blacklisted, coins, package, memory, disk, cpu, servers) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
-        [discord_id, pterodactyl_id, "false", 0, null, 0, 0, 0, 0],
+        "INSERT INTO accounts (email, discord_id, pterodactyl_id, blacklisted, coins, package, memory, disk, cpu, servers, name, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        [
+          email,
+          discord_id,
+          pterodactyl_id,
+          "false",
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          name,
+          password,
+        ],
 
         function (error, results, fields) {
           if (error) return reject(error);
@@ -149,7 +200,14 @@ module.exports = {
     });
   },
 
-  async createOrFindAccount(username, email, first_name, last_name) {
+  async createOrFindAccount(
+    username,
+    email,
+    first_name,
+    last_name,
+    discord_id = null,
+    password = null
+  ) {
     const generated_password =
       Math.random().toString(36).substring(2, 15) +
       Math.random().toString(36).substring(2, 15);
@@ -167,9 +225,7 @@ module.exports = {
           email: email,
           first_name: first_name,
           last_name: last_name,
-          password: process.env.pterodactyl.generate_password_on_sign_up
-            ? generated_password
-            : undefined,
+          password: password ? password : generated_password,
         }),
       }
     );
@@ -178,7 +234,13 @@ module.exports = {
       // Successfully created account.
       const accountinfo = await account.json();
 
-      await this.createAccountOnDB(username, accountinfo.attributes.id);
+      await this.createAccountOnDB(
+        email,
+        accountinfo.attributes.id,
+        discord_id,
+        username,
+        password
+      );
 
       accountinfo.attributes.password = generated_password;
 
@@ -211,7 +273,13 @@ module.exports = {
 
       if (user.length === 1) {
         const userid = user[0].attributes.id;
-        await this.createAccountOnDB(username, userid);
+        await this.createAccountOnDB(
+          email,
+          userid,
+          discord_id,
+          username,
+          password
+        );
 
         return user[0].attributes;
       }
@@ -249,21 +317,83 @@ module.exports = {
           if (results.length !== 1) return resolve(null);
 
           const userInfo = results[0];
-          userInfo.blacklisted = userInfo.blacklisted === "true";
 
           resolve(userInfo);
         }
       );
     });
   },
+  async fetchAccountByEmail(email) {
+    return new Promise((resolve, reject) => {
+      pool.query(
+        "SELECT * FROM accounts WHERE email = ?",
+        [email],
+        function (error, results, fields) {
+          if (error) return reject(error);
 
+          if (results.length !== 1) return resolve(null);
+
+          const userInfo = results[0];
+
+          resolve(userInfo);
+        }
+      );
+    });
+  },
+  async fetchAccountByEmailAndPassword(email, password) {
+    return new Promise((resolve, reject) => {
+      pool.query(
+        "SELECT * FROM accounts WHERE email = ? AND password = ?",
+        [email, password],
+        function (error, results, fields) {
+          if (error) return reject(error);
+
+          if (results.length !== 1) return resolve(null);
+
+          const userInfo = results[0];
+
+          resolve(userInfo);
+        }
+      );
+    });
+  },
+  async getCoinsByEmail(email) {
+    const dbinfo = await this.fetchAccountByEmail(email);
+    if (!dbinfo) return null;
+
+    return dbinfo.coins || 0;
+  },
   async getCoinsByDiscordID(discord_id) {
     const dbinfo = await this.fetchAccountDiscordID(discord_id);
     if (!dbinfo) return null;
 
     return dbinfo.coins || 0;
   },
+  async addCoinsByEmail(email, amount) {
+    const dbinfo = await this.fetchAccountByEmail(email);
+    if (!dbinfo) return null;
 
+    let coins = dbinfo.coins || 0;
+    coins += amount;
+
+    coins = Math.round(coins);
+
+    if (coins < 0) coins = 0;
+    if (coins > 2147483647) coins = 2147483647;
+
+    return new Promise((resolve, reject) => {
+      pool.query(
+        "UPDATE accounts SET coins = ? WHERE accounts.email = ?",
+        [coins, email],
+
+        function (error, results, fields) {
+          if (error) return reject(error);
+
+          resolve(coins);
+        }
+      );
+    });
+  },
   async addCoinsByDiscordID(discord_id, amount) {
     const dbinfo = await this.fetchAccountDiscordID(discord_id);
     if (!dbinfo) return null;
@@ -285,6 +415,29 @@ module.exports = {
           if (error) return reject(error);
 
           resolve(coins);
+        }
+      );
+    });
+  },
+
+  async setCoinsByEmail(email, amount) {
+    const dbinfo = await this.fetchAccountByEmail(email);
+    if (!dbinfo) return null;
+
+    let coins = Math.round(amount);
+
+    if (coins < 0) coins = 0;
+    if (coins > 2147483647) coins = 2147483647;
+
+    return new Promise((resolve, reject) => {
+      pool.query(
+        "UPDATE accounts SET coins = ? WHERE email = ?",
+        [coins, email],
+
+        function (error, results, fields) {
+          if (error) return reject(error);
+
+          resolve(Math.round(coins));
         }
       );
     });
@@ -313,6 +466,21 @@ module.exports = {
     });
   },
 
+  async setPackageByEmail(email, pkg) {
+    return new Promise((resolve, reject) => {
+      pool.query(
+        "UPDATE accounts SET package = ? WHERE email = ?",
+        [pkg, email],
+
+        function (error, results, fields) {
+          if (error) return reject(error);
+
+          resolve(pkg);
+        }
+      );
+    });
+  },
+
   async setPackageByDiscordID(discord_id, pkg) {
     return new Promise((resolve, reject) => {
       pool.query(
@@ -323,6 +491,56 @@ module.exports = {
           if (error) return reject(error);
 
           resolve(pkg);
+        }
+      );
+    });
+  },
+
+  async setResourcesByEmail(email, memory, disk, cpu, servers) {
+    const additions = [];
+    const the_array = []; // Contains variables for "?" in MySQL.
+
+    // Beautiful code that hurts my eyes, and I'm lazy af. - Two
+
+    if (typeof memory === "number") {
+      additions.push("memory = ?");
+      the_array.push(memory);
+
+      if (memory > 1073741823) memory = 1073741823;
+    }
+
+    if (typeof disk === "number") {
+      additions.push("disk = ?");
+      the_array.push(disk);
+
+      if (disk > 1073741823) disk = 1073741823;
+    }
+
+    if (typeof cpu === "number") {
+      additions.push("cpu = ?");
+      the_array.push(cpu);
+
+      if (cpu > 1073741823) cpu = 1073741823;
+    }
+
+    if (typeof servers === "number") {
+      additions.push("servers = ?");
+      the_array.push(servers);
+
+      if (servers > 1073741823) servers = 1073741823;
+    }
+
+    the_array.push(email);
+
+    return new Promise((resolve, reject) => {
+      pool.query(
+        `UPDATE accounts SET ${additions.join(", ")} WHERE email = ?`,
+        the_array,
+
+        function (error, results, fields) {
+          if (error) return reject(error);
+
+          resolve(true);
         }
       );
     });
@@ -716,13 +934,34 @@ module.exports = {
       return null;
     }
   },
-
-  async blacklistStatus(discord_id) {
+  async blacklistStatusByEmail(email) {
+    return (await this.fetchAccountByEmail(email)).blacklisted;
+  },
+  async blacklistStatusByDiscordID(discord_id) {
     return (await this.fetchAccountDiscordID(discord_id)).blacklisted;
   },
+  async toggleBlacklistByEmail(email, specific) {
+    const new_status = specific || !(await this.blacklistStatusByEmail(email));
 
-  async toggleBlacklist(discord_id, specific) {
-    const new_status = specific || !(await this.blacklistStatus(discord_id));
+    return new Promise((resolve, reject) => {
+      pool.query(
+        "UPDATE accounts SET blacklisted = ? WHERE email = ?",
+        [
+          new_status.toString(), // Is .toString() required? Too lazy to check.
+          email,
+        ],
+
+        function (error, results, fields) {
+          if (error) return reject(error);
+
+          resolve(new_status);
+        }
+      );
+    });
+  },
+  async toggleBlacklistByDiscordID(discord_id, specific) {
+    const new_status =
+      specific || !(await this.blacklistStatusByDiscordID(discord_id));
 
     return new Promise((resolve, reject) => {
       pool.query(

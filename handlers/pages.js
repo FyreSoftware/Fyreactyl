@@ -60,7 +60,7 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
 
           if (permission === 1 || permission === 2) {
             // Must be signed in pages.
-            if (!req.session.data || !req.session.data.userinfo) {
+            if (!req.session.data || !req.session.data.dbinfo) {
               if (pathexists.no_permission_redirect)
                 return functions.doRedirect(
                   req,

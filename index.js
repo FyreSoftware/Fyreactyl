@@ -52,6 +52,35 @@ setInterval(() => {
     fs.readFileSync("./frontend/pages.yml", "utf8")
   ); // This line of code is suppose to update any new pages.yml settings every minute.
 }, 60000);
+// Makes the mailer
+const { google } = require("googleapis");
+const OAuth2 = google.auth.OAuth2;
+/*const oauth2Client = new OAuth2(
+  "837027640937-p6rotkc0pib57ldtm87cddgchlclpt61.apps.googleusercontent.com",
+  "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", // Client Secret
+  "https://developers.google.com/oauthplayground" // Redirect URL
+);*/
+//oauth2Client.setCredentials({
+//refresh_token:
+//"1//0483yzgc0moZdCgYIARAAGAQSNwF-L9IrIUqvib0gFu2jxTLe5ItZ8EJyRE07L8PAn3FRU1l8-Bm9eknnm2jYxq9QdQMnhl8LlHQ",
+//});
+//const accessToken = oauth2Client.getAccessToken();
+const nodemailer = require("nodemailer");
+process.mailer = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
+  auth: {
+    type: "OAuth2",
+    clientId:
+      "837027640937-p6rotkc0pib57ldtm87cddgchlclpt61.apps.googleusercontent.com",
+    clientSecret: "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",
+    refreshToken:
+      "1//0483yzgc0moZdCgYIARAAGAQSNwF-L9IrIUqvib0gFu2jxTLe5ItZ8EJyRE07L8PAn3FRU1l8-Bm9eknnm2jYxq9QdQMnhl8LlHQ",
+    accessToken:
+      "ya29.A0ARrdaM-EGvDnwhn2nbR1TU5vMmV_7zmiyl61ztR7Qb5HQLqOiFzqOzLfGpyMQsgUPs3I_ij0LQMZeELGPVDSV1fMYZSaEnFEcBDXEofXi09wC7ADx8awIevtDl8LzJj3frEcIkma8dgmdw2gPdafNKljj0nl",
+  },
+});
 
 // Makes "process.db" have the database functions.
 
@@ -116,17 +145,19 @@ app.use(
 
 app.use(async (req, res, next) => {
   if (req.session.data) {
-    const blacklist_status = await process.db.blacklistStatus(
-      req.session.data.userinfo.id
-    );
-    if (blacklist_status && !req.session.data.panelinfo.root_admin) {
-      delete req.session.data;
-      functions.doRedirect(
-        req,
-        res,
-        process.pagesettings.redirectactions.blacklisted
+    if (req.session.data.dbinfo?.id) {
+      const blacklist_status = await process.db.blacklistStatusByDiscordID(
+        req.session.data.userinfo.id
       );
-      return;
+      if (blacklist_status && !req.session.data.panelinfo.root_admin) {
+        delete req.session.data;
+        functions.doRedirect(
+          req,
+          res,
+          process.pagesettings.redirectactions.blacklisted
+        );
+        return;
+      }
     }
   }
 

@@ -114,6 +114,7 @@
                                  <img% if (variables) { %>
                                   <img class="p-1 avatar-40 rounded-pill bg-soft-primary" src="../assets/images/shapes/01.png" alt="" /> 
                                   <div class="ms-3 w-100">
+                                    <% if (variables)  {%> 
                                     <h6 class="mb-0 "><% if (variables.error && status_replies.error[variables.error]) { %>
         <p style="color: red;"><%- eval(`\`${status_replies.error[variables.error]}\``) %></p>
     <% } else if (variables.success && status_replies.success[variables.success]) { %>
@@ -123,7 +124,8 @@
             <%= JSON.stringify(variables) %>
         </p>
         <% } %></h6>
-        <% } %>
+        
+        <% } %> 
                                     <div class="d-flex justify-content-between align-items-center">
                                     </div>
                                   </div>
@@ -290,6 +292,7 @@
                     <button class="btn btn-danger" onclick="asyncAlert(revokeCoupon(document.getElementById('revokecoupon_code').value));">Revoke</button>
                 </p>
             </div>
+            <% if (settings.j4r.enabled) { %>
             <div class="form-group mb-20">
               <h3>Create J4R.</h3>
               <p class="text-danger">You cannot modify a J4R after it has been made. Make sure you have every information correct before creating the J4R.<br>
@@ -315,6 +318,7 @@
                   <button class="btn btn-danger" onclick="asyncAlert(createJ4R(document.getElementById('createj4r_j4rid').value, document.getElementById('createj4r_serverid').value, parseFloat(document.getElementById('createj4r_expiresonindays').value), parseFloat(document.getElementById('createj4r_memory').value), parseFloat(document.getElementById('createj4r_disk').value), parseFloat(document.getElementById('createj4r_cpu').value), parseFloat(document.getElementById('createj4r_servers').value)), parseFloat(document.getElementById('createj4r_invite').value))">Create</button>
               </p>
           </div>
+          
           <div class="form-group mb-20">
             <h3>Remove j4r.</h3>
             <p>
@@ -323,6 +327,8 @@
                 <button class="btn btn-danger" onclick="asyncAlert(deleteJ4R(document.getElementById('removej4r_id').value));">Delete</button>
             </p>
         </div>
+        
+        <% } %> 
                         
              </div>
             </div>
@@ -338,7 +344,7 @@
 
 
       <!-- Footer Section Start -->
-      <r%- include("../components/footer.ejs") %> 
+      <%- include("../components/footer.ejs") %> 
       <!-- Footer Section End -->    </main>
     <a class="btn btn-fixed-end btn-warning btn-icon btn-setting" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" role="button" aria-controls="offcanvasExample">
       <svg width="24" viewBox="0 0 24 24" class="animated-rotate" fill="none" xmlns="http://www.w3.org/2000/svg">
