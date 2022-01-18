@@ -130,7 +130,7 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
       console.log(userinfo);
       return res.redirect("/signup");
     }
-    panel_id = dbinfo.pterodactyl_id;
+    panel_id = userinfo.pterodactyl_id;
 
     dbinfo = {
       email: req.body.email,
