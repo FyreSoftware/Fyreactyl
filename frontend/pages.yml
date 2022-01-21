@@ -88,6 +88,10 @@ pages:
     permission: 2
     no_permission_redirect: /accounts/login
 
+  reset/password/form:
+    file: reset/password.ejs
+    permission: 0
+
 redirectactions:
   logout:
     path: "/"

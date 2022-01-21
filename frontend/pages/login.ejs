@@ -110,12 +110,27 @@
                         <%= dbSettings.name %>
                       </h4>
                     </a>
-                    <% if(variables) { %> <% if(variables.message) { %>
+                    <% if(variables) { %> <% if(variables.error &&
+                    variables.error.message) { %>
                     <div
                       class="alert alert-bottom alert-danger alert-dismissible fade show"
                       role="alert"
                     >
-                      <span> <%= variables.message %> </span>
+                      <span> <%= variables.error.message %> </span>
+                      <button
+                        type="button"
+                        class="btn-close btn-close-white"
+                        data-bs-dismiss="alert"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <% } %> <% } %> <% if(variables) { %> <%
+                    if(variables.success && variables.success.message) { %>
+                    <div
+                      class="alert alert-left alert-success alert-dismissible fade show mb-3"
+                      role="alert"
+                    >
+                      <span><%= variables.success.message %></span>
                       <button
                         type="button"
                         class="btn-close btn-close-white"
@@ -282,5 +297,7 @@
 
     <!-- App Script -->
     <script src="../../assets/js/hope-ui.js" defer></script>
+    <!--Prevent copy pasta script-->
+    <script src="../assets/js/prevent-inspect.js"></script>
   </body>
 </html>

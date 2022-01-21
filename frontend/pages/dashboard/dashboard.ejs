@@ -4,6 +4,11 @@
   <head>
     <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <style>
+        body {
+          overflow-x: hidden;
+        }
+      </style>
       <title>Hope UI | <%= dbSettings.name %></title>
       
       <!-- Favicon -->
@@ -393,7 +398,7 @@
             </div>            
           <div class="mb-3">
                 <label class="form-label">Panel Password</label>
-                <input style="color:red" value="<%= variables ? (variables.password ? `${variables.password}` : "") : "" %>" disabled class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                <input style="color:red" value="<%= variables ? (variables.password ? `${variables.password}` : '') : '' %>" disabled class="form-control">
             </div>
 
             <form action="/accounts/regenerate_password" method="POST">

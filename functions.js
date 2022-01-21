@@ -9,6 +9,7 @@ module.exports = {
       req.session.variables.error = redirect.error;
       req.session.variables.success = redirect.success;
     }
+    console.log(redirect);
 
     return res.redirect(redirect.path + (extra || ""));
   },
@@ -75,5 +76,14 @@ module.exports = {
       total: total,
       current: current,
     };
+  },
+  makeid(length) {
+    var result = "";
+    var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
   },
 };

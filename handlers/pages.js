@@ -3,7 +3,7 @@
 
 const fetch = require("node-fetch");
 const functions = require("../functions.js");
-const afk = require("./earn afk.js");
+const afk = require("./earning/afk.js");
 const yaml = require("js-yaml");
 const fs = require("fs");
 const ms = require("ms");
@@ -120,6 +120,20 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
             console.log(
               `[WEBSITE] "${pathname}" had an invalid 'special' type.`
             );
+          }
+        }
+        if (pathexists.file) {
+          if (pathexists.file === "reset/password.ejs") {
+            if (!req.query.id) {
+              return res.redirect("/login");
+            }
+            const confirm = await process.db.fetchAccountByResetId(
+              req.query.id
+            );
+
+            if (!confirm) {
+              return res.redirect("/login");
+            }
           }
         }
       } else {

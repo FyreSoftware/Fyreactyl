@@ -6,6 +6,7 @@
 // Load packages.
 
 const fs = require("fs");
+const glob = require("glob");
 const yaml = require("js-yaml");
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -52,16 +53,17 @@ setInterval(() => {
     fs.readFileSync("./frontend/pages.yml", "utf8")
   ); // This line of code is suppose to update any new pages.yml settings every minute.
 }, 60000);
-// Makes the mailer
-/*const nodemailer = require("nodemailer");
+const nodemailer = require("nodemailer");
+const path = require("path");
 process.mailer = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 465,
+  host: process.env.mail.server,
+  port: process.env.port,
   secure: true,
   auth: {
-  
+    user: process.env.mail.user,
+    pass: process.env.mail.pass,
   },
-});*/
+});
 
 // Makes "process.db" have the database functions.
 
@@ -92,6 +94,8 @@ app.use(
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+app.set("views", path.join(__dirname, "frontend", "pages"));
 
 app.use((err, req, res, next) => {
   if (err instanceof SyntaxError && err.status === 400 && "body" in err) {
@@ -126,9 +130,9 @@ app.use(
 
 app.use(async (req, res, next) => {
   if (req.session.data) {
-    if (req.session.data.dbinfo?.id) {
+    if (req.session.data.dbinfo?.discord_id) {
       const blacklist_status = await process.db.blacklistStatusByDiscordID(
-        req.session.data.userinfo.id
+        req.session.data.dbinfo.discord_id
       );
       if (blacklist_status && !req.session.data.panelinfo.root_admin) {
         delete req.session.data;
@@ -155,16 +159,11 @@ const listener = server.listen(process.env.website.port, function () {
     }.`
   ); // Message sent when the port is successfully listening and the website is ready.
 
-  const apifiles = fs
-    .readdirSync("./handlers")
-    .filter((file) => file.endsWith(".js") && file !== "pages.js"); // Gets a list of all files in the "handlers" folder. Doesn't add any "pages.js" to the array.
-  apifiles.push("pages.js"); // Adds "pages.js" to the end of the array. (so it loads last, because it has a "*" request)
-
-  apifiles.forEach((file) => {
-    // Loops all files in the "handlers" folder.
-    const apifile = require(`./handlers/${file}`); // Loads the file.
-    if (typeof apifile.load === "function") apifile.load(app, ifValidAPI, ejs); // Gives "app" to the file.
-  });
+  const apiFiles = glob.sync("./handlers/**/**/*.js");
+  for (const file of apiFiles) {
+    const api = require(file);
+    if (typeof api.load === "function") api.load(app, ifValidAPI, ejs);
+  }
 });
 
 /*

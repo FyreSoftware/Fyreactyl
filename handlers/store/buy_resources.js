@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
-const functions = require("../functions.js");
-const suspendCheck = require("./server suspension system.js");
+const functions = require("../../functions.js");
+const suspendCheck = require("../servers/suspension_system.js");
 
 module.exports.load = async function (app, ifValidAPI, ejs) {
   app.post(

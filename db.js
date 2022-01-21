@@ -305,6 +305,23 @@ module.exports = {
       );
     });
   },
+  async fetchAccountByResetId(resetId) {
+    return new Promise((resolve, reject) => {
+      pool.query(
+        "SELECT * FROM accounts WHERE reset_id = ?",
+        [resetId],
+        function (error, results, fields) {
+          if (error) return reject(error);
+
+          if (results.length !== 1) return resolve(null);
+
+          const userInfo = results[0];
+
+          resolve(userInfo);
+        }
+      );
+    });
+  },
 
   async fetchAccountDiscordID(discord_id) {
     return new Promise((resolve, reject) => {
@@ -935,10 +952,10 @@ module.exports = {
     }
   },
   async blacklistStatusByEmail(email) {
-    return (await this.fetchAccountByEmail(email)).blacklisted;
+    return (await this.fetchAccountByEmail(email))?.blacklisted;
   },
   async blacklistStatusByDiscordID(discord_id) {
-    return (await this.fetchAccountDiscordID(discord_id)).blacklisted;
+    return (await this.fetchAccountDiscordID(discord_id))?.blacklisted;
   },
   async toggleBlacklistByEmail(email, specific) {
     const new_status = specific || !(await this.blacklistStatusByEmail(email));
