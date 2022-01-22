@@ -3,25 +3,23 @@
 const fetch = require("node-fetch");
 
 module.exports.load = async function (app, ifValidAPI, ejs) {
-  app.post("/api/users/blacklist/:id", async (req, res) => {
+  app.post("/api/users/blacklist/email/:email", async (req, res) => {
     if (
       (req.session.data && req.session.data.panelinfo.root_admin) ||
       ifValidAPI(req, res, "blacklist user")
     ) {
-      const user_id = req.params.id; // Discord ID.
-      const userinfo = await process.db.fetchAccountDiscordID(user_id);
+      const email = req.params.email; // Discord ID.
+      const userinfo = await process.db.fetchAccountByEmail(email);
       if (!userinfo)
         return res.json({ error: process.api_messages.extra.invaliduserid });
 
-      const blacklist_status = await process.db.blacklistStatusByDiscordID(
-        user_id
-      );
+      const blacklist_status = await process.db.blacklistStatusByEmail(email);
       if (blacklist_status)
         return res.json({
           error: process.api_messages.blacklist.alreadyBlacklisted,
         });
 
-      await process.db.toggleBlacklistByDiscordID(user_id, true);
+      await process.db.toggleBlacklistByEmail(email, true);
 
       for (const server of req.session.data.panelinfo.relationships.servers
         .data) {

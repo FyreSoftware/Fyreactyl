@@ -17,7 +17,7 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
 
     async (req, res) => {
       const redirects = process.pagesettings.redirectactions.create_server;
-      if (!req.session.data || !req.session.data.userinfo)
+      if (!req.session.data || !req.session.data.dbinfo)
         return functions.doRedirect(req, res, redirects.notsignedin);
 
       const { total, current, packageinfo } = await functions.getUserResource(

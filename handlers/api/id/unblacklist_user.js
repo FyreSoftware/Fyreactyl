@@ -22,7 +22,7 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
       await process.db.toggleBlacklist(user_id, false);
 
       suspendCheck(
-        req.session.data.userinfo.id,
+        req.session.data.dbinfo.email,
         req.session.data.panelinfo.root_admin
       );
 

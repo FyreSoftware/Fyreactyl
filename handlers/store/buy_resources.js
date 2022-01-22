@@ -17,19 +17,19 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
       // when copy and paste from set resources API. - Two
 
       const redirects = process.pagesettings.redirectactions.buy_resources;
-      if (!req.session.data || !req.session.data.userinfo)
+      if (!req.session.data || !req.session.data.dbinfo)
         return functions.doRedirect(req, res, redirects.notsignedin);
 
-      const current = await process.db.fetchAccountDiscordID(
-        req.session.data.userinfo.id
+      const current = await process.db.fetchAccountByEmail(
+        req.session.data.dbinfo.email
       );
 
       if (req.body.packages && req.body.packages !== null) {
-        suspendCheck(req.session.data.userinfo.id);
+        suspendCheck(req.session.data.dbinfo.email);
         const package = process.env.packages.list[req.body.packages];
         if (package && package.price < current.coins) {
-          await process.db.setPackageByDiscordID(
-            req.session.data.userinfo.id,
+          await process.db.setPackageByEmail(
+            req.session.data.dbinfo.email,
             req.body.packages
           );
           return functions.doRedirect(req, res, redirects.boughtresources);
@@ -136,13 +136,13 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
           return functions.doRedirect(req, res, redirects.cannotafford);
         }
 
-        await process.db.setCoinsByDiscordID(
-          req.session.data.userinfo.id,
+        await process.db.setCoinsByEmail(
+          req.session.data.dbinfo.email,
           current.coins - cost
         );
 
-        await process.db.setResourcesByDiscordID(
-          req.session.data.userinfo.id,
+        await process.db.setResourcesByEmail(
+          req.session.data.dbinfo.email,
           added_resources.memory,
           added_resources.disk,
           added_resources.cpu,
@@ -150,7 +150,7 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
         );
 
         functions.doRedirect(req, res, redirects.boughtresources);
-        suspendCheck(req.session.data.userinfo.id);
+        suspendCheck(req.session.data.dbinfo.email);
       }
     }
   );

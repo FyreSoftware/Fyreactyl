@@ -138,6 +138,20 @@ module.exports = {
       );
     });
   },
+  async updateDiscordId(email, newId) {
+    return new Promise((resolve, reject) => {
+      pool.query(
+        "UPDATE accounts SET discord_id = ? WHERE email = ?",
+        [newId, email],
+
+        function (error, results, fields) {
+          if (error) return reject(error);
+
+          resolve(results);
+        }
+      );
+    });
+  },
   async updateResetId(email, newID) {
     return new Promise((resolve, reject) => {
       pool.query(

@@ -50,16 +50,6 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
       if (check_exists)
         return res.json({ error: process.api_messages.j4r.alreadyexists });
 
-      // Reason why this can't be an API endpoint. - everything is a comment by Two
-      if (
-        req.session.data.userinfo.guilds.filter((s) => s.id === server_id)
-          .length !== 1
-      )
-        return res.json({ error: process.api_messages.j4r.notinj4rserver });
-      // ^^^
-
-      // Copy and paste go brr. - Two
-
       const resources = {
         memory: req.body.memory,
         disk: req.body.disk,

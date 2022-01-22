@@ -8,6 +8,7 @@ core:
 
 extra:
   invaliduserid: "The user ID with the provided ID could not be found."
+  invalidemail: "The email is invalid, please provide a valid email as the account was not found."
 
 coins:
   mustbeanumber: "The variable 'coins' must be a number."

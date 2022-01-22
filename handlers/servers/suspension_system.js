@@ -2,13 +2,13 @@
 const fetch = require("node-fetch");
 const functions = require("../../functions.js");
 
-module.exports = async (discord_id, isAdmin) => {
+module.exports = async (email, isAdmin) => {
   // console.error()s should be impossible to get if you set it up properly.
 
-  const userinfo = await process.db.fetchAccountDiscordID(discord_id);
+  const userinfo = await process.db.fetchAccountByEmail(email);
   if (!userinfo)
     return console.error(
-      `[SERVER SUSPENSION] Could not find user database information. | User ID: ${discord_id}`
+      `[SERVER SUSPENSION] Could not find user database information. | Email: ${email}`
     );
 
   if (userinfo.blacklisted) return;
@@ -26,7 +26,7 @@ module.exports = async (discord_id, isAdmin) => {
 
   if ((await account_info_json.statusText) === "Not Found")
     return console.error(
-      `[SERVER SUSPENSION] Could not find user panel information. | User ID: ${discord_id} | Pterodactyl Panel ID: ${userinfo.pterodactyl_id}`
+      `[SERVER SUSPENSION] Could not find user panel information. | Email: ${email} | Pterodactyl Panel ID: ${userinfo.pterodactyl_id}`
     );
 
   const panelinfo = (await account_info_json.json()).attributes;

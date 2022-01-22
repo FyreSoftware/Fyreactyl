@@ -17,7 +17,7 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
 
     async (req, res) => {
       const redirects = process.pagesettings.redirectactions.modify_server;
-      if (!req.session.data || !req.session.data.userinfo)
+      if (!req.session.data || !req.session.data.dbinfo)
         return functions.doRedirect(req, res, redirects.notsignedin);
 
       const server_id = req.params.id;
@@ -176,7 +176,7 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
         redirects.modifiedserver,
         `?id=${req.params.id}`
       );
-      suspendCheck(req.session.data.userinfo.id);
+      suspendCheck(req.session.data.dbinfo.email);
     }
   );
 };

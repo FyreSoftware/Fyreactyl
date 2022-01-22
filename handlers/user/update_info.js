@@ -16,7 +16,7 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
 
     async (req, res) => {
       const redirects = process.pagesettings.redirectactions.update_info;
-      if (!req.session.data || !req.session.data.userinfo)
+      if (!req.session.data || !req.session.data.dbinfo)
         return functions.doRedirect(req, res, redirects.notsignedin);
 
       const guildinfo_raw = await fetch(

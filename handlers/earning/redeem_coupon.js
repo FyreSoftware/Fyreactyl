@@ -15,7 +15,7 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
 
     async (req, res) => {
       const redirects = process.pagesettings.redirectactions.redeem_coupon;
-      if (!req.session.data || !req.session.data.userinfo)
+      if (!req.session.data || !req.session.data.dbinfo)
         return functions.doRedirect(req, res, redirects.notsignedin);
 
       const code = req.body.code;
@@ -32,15 +32,15 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
       if (!coupon_info)
         return functions.doRedirect(req, res, redirects.invalidcouponcode);
 
-      const current = await process.db.fetchAccountDiscordID(
-        req.session.data.userinfo.id
+      const current = await process.db.fetchAccountByEmail(
+        req.session.data.dbinfo.email
       );
 
       if (coupon_info.coins) {
         current.coins += coupon_info.coins;
 
-        await process.db.setCoinsByDiscordID(
-          req.session.data.userinfo.id,
+        await process.db.setCoinsByEmail(
+          req.session.data.dbinfo.email,
           current.coins
         );
       }
@@ -57,7 +57,7 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
         if (coupon_info.servers) current.servers += coupon_info.servers;
 
         await process.db.setResourcesByDiscordID(
-          req.session.data.userinfo.id,
+          req.session.data.dbinfo.email,
           current.memory,
           current.disk,
           current.cpu,
@@ -67,7 +67,7 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
 
       functions.doRedirect(req, res, redirects.successfullyclaimedcoupon);
 
-      suspendCheck(req.session.data.userinfo.id);
+      suspendCheck(req.session.data.dbinfo.email);
     }
   );
 };

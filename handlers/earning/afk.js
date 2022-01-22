@@ -43,7 +43,7 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
 
     const ip = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
 
-    if (currentlyonpage[req.session.data.userinfo.id]) {
+    if (currentlyonpage[req.session.data.dbinfo.email]) {
       // currentlyonpage_ip[ip]
       delete req.session.arcsessiontoken;
       if (ws.readyState === 1) await ws.send('{"error": "Already on page."}');
@@ -55,12 +55,12 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
 
     onpage = true;
 
-    currentlyonpage[req.session.data.userinfo.id] = true;
+    currentlyonpage[req.session.data.dbinfo.email] = true;
     currentlyonpage_ip[ip] = true;
 
     const coinloop = setInterval(async () => {
-      await process.db.addCoinsByDiscordID(
-        req.session.data.userinfo.id,
+      await process.db.addCoinsByEmail(
+        req.session.data.dbinfo.email,
         gaincoins
       );
     }, everywhat * 1000);
@@ -69,7 +69,7 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
       if (!onpage) return;
 
       clearInterval(coinloop);
-      delete currentlyonpage[req.session.data.userinfo.id];
+      delete currentlyonpage[req.session.data.dbinfo.email];
       delete currentlyonpage_ip[ip];
     };
   });

@@ -67,11 +67,6 @@ pages:
     permission: 1
     no_permission_redirect: /accounts/login
 
-  earn/j4r:
-    file: earn/j4r.ejs
-    permission: 1
-    no_permission_redirect: /accounts/login
-
   earn/afk:
     file: earn/afk.ejs
     permission: 1
@@ -132,6 +127,9 @@ redirectactions:
     success:
       path: "/dashboard"
       success: "SIGN_IN"
+    linked:
+      path: "/dashboard"
+      success: "LINKED"
 
   regenerate_password:
     notsignedin:

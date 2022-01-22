@@ -166,7 +166,7 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
     async (req, res) => {
       const redirects = process.pagesettings.redirectactions.renew_server;
 
-      if (!req.session.data || !req.session.data.userinfo)
+      if (!req.session.data || !req.session.data.dbinfo)
         return functions.doRedirect(req, res, redirects.notsignedin);
 
       const { current, total } = await functions.getUserResource(req);
@@ -249,7 +249,7 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
     async (req, res) => {
       const redirects = process.pagesettings.redirectactions.auto_renew_server;
 
-      if (!req.session.data || !req.session.data.userinfo)
+      if (!req.session.data || !req.session.data.dbinfo)
         return functions.doRedirect(req, res, redirects.notsignedin);
 
       const server_id = req.params.id;

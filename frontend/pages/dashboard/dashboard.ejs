@@ -155,6 +155,9 @@
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                     <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <% if(!req.session.data?.dbinfo?.discord_id) { %>
+                      <li><a class="dropdown-item" href="/accounts/discord/link">Link discord account</a></li>
+                      <% } %>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="/accounts/logout">Logout</a></li>
                   </ul>
