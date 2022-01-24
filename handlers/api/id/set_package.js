@@ -45,7 +45,7 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
         user_id: user_id,
       });
 
-      suspendCheck(user_id);
+      suspendCheck(userinfo.email);
     }
   });
 };

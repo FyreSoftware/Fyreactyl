@@ -3,7 +3,7 @@
 const fetch = require("node-fetch");
 const functions = require("../../functions.js");
 const suspendCheck = require("../servers/suspension_system.js");
-
+const nodemailer = require("nodemailer");
 module.exports.load = async function (app, ifValidAPI, ejs) {
   app.post("/accounts/email/reset", async (req, res) => {
     const email = req.body.email;
@@ -22,6 +22,15 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
     const dbSettings = await process.db.findOrCreateSettings(
       process.env.discord.guild
     );
+    const mailer = nodemailer.createTransport({
+      host: dbSettings.smtp_server,
+      port: dbSettings.smtp_port,
+      secure: true,
+      auth: {
+        user: dbSettings.smtp_user,
+        pass: dbSettings.smtp_pass,
+      },
+    });
     const id = functions.makeid(9);
     var contentHTML = ` 
     <h1>${dbSettings.name}</h1>
@@ -30,7 +39,7 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
       If this was you please click this <a href="${process.env.website.url}/reset/password/form?id=${id}">link</a><br>
       Kind regards,<br>${dbSettings.name}
   `;
-    process.mailer.sendMail({
+    mailer.sendMail({
       from: "main@tovade.xyz",
       to: email,
       subject: "Reset password",

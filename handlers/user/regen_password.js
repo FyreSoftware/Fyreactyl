@@ -15,7 +15,7 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
     async (req, res) => {
       const redirects =
         process.pagesettings.redirectactions.regenerate_password;
-      if (!req.session.data || !req.session.data.userinfo)
+      if (!req.session.data || !req.session.data.dbinfo)
         return functions.doRedirect(req, res, redirects.notsignedin);
 
       // eslint-disable-next-line camelcase

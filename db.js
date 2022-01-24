@@ -48,7 +48,11 @@ pool.query(
   `
     CREATE TABLE IF NOT EXISTS \`settings\` (
       \`id\` varchar(255) PRIMARY KEY,
-      \`name\` varchar(255) DEFAULT NULL
+      \`name\` varchar(255) DEFAULT NULL,
+      \`smtp_server\` varchar(255) DEFAULT NULL,
+      \`smtp_port\` int(11) DEFAULT NULL,
+      \`smtp_user\` varchar(255) DEFAULT NULL,
+      \`smtp_pass\` varchar(255) DEFAULT NULL
     ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
   `
 );
@@ -61,8 +65,7 @@ pool.query(
       \`memory\` int(11) DEFAULT NULL,
       \`disk\` int(11) DEFAULT NULL,
       \`cpu\` int(11) DEFAULT NULL,
-      \`servers\` int(11) DEFAULT NULL,
-      \`uses\` int(11) DEFAULT NULL
+      \`servers\` int(11) DEFAULT NULL
     ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
   `
 );
@@ -95,8 +98,15 @@ pool.query(
 async function createSettings(id) {
   return new Promise((resolve, reject) => {
     pool.query(
-      "INSERT INTO settings (id, name) VALUES (?, ?)",
-      [id, "Dashactyl"],
+      "INSERT INTO settings (id, name, smtp_server, smtp_port, smtp_user, smtp_pass) VALUES (?, ?, ?, ?, ?, ?)",
+      [
+        id,
+        "Dashactyl",
+        process.env.mail.server,
+        process.env.mail.port,
+        process.env.mail.user,
+        process.env.mail.pass,
+      ],
 
       function (error, results, fields) {
         if (error) return reject(error);
@@ -171,6 +181,20 @@ module.exports = {
       pool.query(
         "UPDATE settings SET name = ? WHERE id = ?",
         [name, id],
+
+        function (error, results, fields) {
+          if (error) return reject(error);
+
+          resolve(true);
+        }
+      );
+    });
+  },
+  async updateSmtp(id, server, port, user, password) {
+    return new Promise((resolve, reject) => {
+      pool.query(
+        "UPDATE settings SET smtp_server = ?, smtp_port = ?, smtp_user = ?, smtp_pass = ? WHERE id = ?",
+        [server, port, user, password, id],
 
         function (error, results, fields) {
           if (error) return reject(error);
@@ -700,14 +724,14 @@ module.exports = {
     });
   },
 
-  async createCoupon(code, coins, memory, disk, cpu, servers, uses) {
+  async createCoupon(code, coins, memory, disk, cpu, servers) {
     const check_if_coupon_exists = await this.getCouponInfo(code);
 
     if (!check_if_coupon_exists) {
       return new Promise((resolve, reject) => {
         pool.query(
-          "INSERT INTO coupons (code, coins, memory, disk, cpu, servers, uses) VALUES (?, ?, ?, ?, ?, ?, ?)",
-          [code, coins, memory, disk, cpu, servers, uses],
+          "INSERT INTO coupons (code, coins, memory, disk, cpu, servers) VALUES (?, ?, ?, ?, ?, ?)",
+          [code, coins, memory, disk, cpu, servers],
 
           function (error, results, fields) {
             if (error) return reject(error);
@@ -719,8 +743,8 @@ module.exports = {
     } else {
       return new Promise((resolve, reject) => {
         pool.query(
-          "UPDATE coupons SET coins = ?, memory = ?, disk = ?, cpu = ?, servers = ? WHERE code = ? WHERE uses = ?",
-          [coins, memory, disk, cpu, servers, code, uses],
+          "UPDATE coupons SET coins = ?, memory = ?, disk = ?, cpu = ?, servers = ? WHERE code = ?",
+          [coins, memory, disk, cpu, servers, code],
 
           function (error, results, fields) {
             if (error) return reject(error);
@@ -734,8 +758,7 @@ module.exports = {
 
   async claimCoupon(code) {
     const check_if_coupon_exists = await this.getCouponInfo(code);
-
-    if (check_if_coupon_exists.uses === 1) {
+    if (check_if_coupon_exists) {
       return new Promise((resolve, reject) => {
         pool.query(
           "DELETE FROM coupons WHERE code = ?",
@@ -748,17 +771,6 @@ module.exports = {
           }
         );
       });
-    } else if (check_if_coupon_exists.uses > 1) {
-      await this.createCoupon(
-        code,
-        check_if_coupon_exists.coins,
-        check_if_coupon_exists.memory,
-        check_if_coupon_exists.disk,
-        check_if_coupon_exists.cpu,
-        check_if_coupon_exists.servers,
-        check_if_coupon_exists.uses - 1
-      );
-      return check_if_coupon_exists;
     } else {
       return null;
     }

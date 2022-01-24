@@ -6,42 +6,33 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <title>Hope UI | Dashactyl</title>
+    <style>
+      body {
+        overflow-x: hidden;
+      }
+    </style>
+    <title>FireActyl | <%= dbSettings.name %></title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="../assets/images/favicon.ico" />
-
-    <!-- Nofications JS -->
-    <link rel="shortcut icon" href="../assets/js/nofications.js" />
+    <link rel="shortcut icon" href="../../assets/images/favicon.ico" />
 
     <!-- Library / Plugin Css Build -->
-    <link rel="stylesheet" href="../assets/css/core/libs.min.css" />
-
-    <!-- Aos Animation Css -->
-    <link rel="stylesheet" href="../assets/vendor/aos/dist/aos.css" />
+    <link rel="stylesheet" href="../../assets/css/core/libs.min.css" />
 
     <!-- Hope Ui Design System Css -->
-    <link rel="stylesheet" href="../assets/css/hope-ui.min.css?v=1.1.1" />
+    <link rel="stylesheet" href="../../assets/css/hope-ui.min.css?v=1.1.2" />
 
     <!-- Custom Css -->
-    <link rel="stylesheet" href="../assets/css/custom.min.css?v=1.1.1" />
-
-    <!-- Dark Css -->
-    <link rel="stylesheet" href="../assets/css/dark.min.css" />
-
-    <!-- RTL Css -->
-    <link rel="stylesheet" href="../assets/css/rtl.min.css" />
+    <link rel="stylesheet" href="../../assets/css/custom.min.css?v=1.1.2" />
 
     <!-- Customizer Css -->
-    <link rel="stylesheet" href="../assets/css/customizer.min.css" />
+    <link rel="stylesheet" href="../../assets/css/customizer.min.css" />
 
-    <!-- SVG icon Css -->
-    <link rel="stylesheet" href="http://svgicons.sparkk.fr/svgicons.css" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css"
-      rel="stylesheet"
-    />
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
+    <!-- Dark Css -->
+    <link rel="stylesheet" href="../../assets/css/dark.min.css" />
+
+    <!-- RTL Css -->
+    <link rel="stylesheet" href="../../assets/css/rtl.min.css" />
   </head>
   <body class="  ">
     <!-- loader Start -->
@@ -51,8 +42,7 @@
       </div>
     </div>
     <!-- loader END -->
-
-    <%- include('../components/sidebar') %>
+    <%- include('../components/sidebar.ejs') %>
     <main class="main-content">
       <div class="position-relative">
         <!--Nav Start-->
@@ -105,7 +95,7 @@
                 />
               </svg>
               <!--logo End-->
-              <h4 class="logo-title">Dashactyl</h4>
+              <h4 class="logo-title"><%= dbSettings.name %></h4>
             </a>
             <div
               class="sidebar-toggle"
@@ -145,6 +135,7 @@
                     href="#"
                     class="nav-link"
                     id="notification-drop"
+                    id="notification"
                     data-bs-toggle="dropdown"
                   >
                     <% if (variables) {%> <% if (variables.error &&
@@ -226,19 +217,17 @@
                   </a>
                   <div
                     class="p-0 sub-drop dropdown-menu dropdown-menu-end"
-                    id="nof"
                     aria-labelledby="notification-drop"
                   >
-                    <div id="nof" class="m-0 shadow-none card">
+                    <div class="m-0 shadow-none card">
                       <div
-                        id="nof"
                         class="py-3 card-header d-flex justify-content-between bg-primary"
                       >
-                        <div id="nof" class="header-title">
+                        <div class="header-title">
                           <h5 class="mb-0 text-white">All Notifications</h5>
                         </div>
                       </div>
-                      <div id="nof" class="p-0 card-body">
+                      <div class="p-0 card-body">
                         <a href="#" class="iq-sub-card">
                           <div class="d-flex align-items-center">
                             <% if (variables) { %>
@@ -330,9 +319,14 @@
                     class="dropdown-menu dropdown-menu-end"
                     aria-labelledby="navbarDropdown"
                   >
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <% if(!req.session.data?.dbinfo?.discord_id) { %>
                     <li>
-                      <a class="dropdown-item" href="/dashboard">Profile</a>
+                      <a class="dropdown-item" href="/accounts/discord/link"
+                        >Link discord account</a
+                      >
                     </li>
+                    <% } %>
                     <li><hr class="dropdown-divider" /></li>
                     <li>
                       <a class="dropdown-item" href="/accounts/logout"
@@ -355,6 +349,7 @@
                 >
                   <div>
                     <h1>Hello <%= data.dbinfo.name %></h1>
+                    <p>Welcome back!</p>
                   </div>
                   <div>
                     <a
@@ -386,32 +381,32 @@
           </div>
           <div class="iq-header-img">
             <img
-              src="../assets/images/dashboard/top-header.png"
+              src="../../assets/images/dashboard/top-header.png"
               alt="header"
               class="theme-color-default-img img-fluid w-100 h-100 animated-scaleX"
             />
             <img
-              src="../assets/images/dashboard/top-header1.png"
+              src="../../assets/images/dashboard/top-header1.png"
               alt="header"
               class="theme-color-purple-img img-fluid w-100 h-100 animated-scaleX"
             />
             <img
-              src="../assets/images/dashboard/top-header2.png"
+              src="../../assets/images/dashboard/top-header2.png"
               alt="header"
               class="theme-color-blue-img img-fluid w-100 h-100 animated-scaleX"
             />
             <img
-              src="../assets/images/dashboard/top-header3.png"
+              src="../../assets/images/dashboard/top-header3.png"
               alt="header"
               class="theme-color-green-img img-fluid w-100 h-100 animated-scaleX"
             />
             <img
-              src="../assets/images/dashboard/top-header4.png"
+              src="../../assets/images/dashboard/top-header4.png"
               alt="header"
               class="theme-color-yellow-img img-fluid w-100 h-100 animated-scaleX"
             />
             <img
-              src="../assets/images/dashboard/top-header5.png"
+              src="../../assets/images/dashboard/top-header5.png"
               alt="header"
               class="theme-color-pink-img img-fluid w-100 h-100 animated-scaleX"
             />
@@ -421,146 +416,211 @@
         <!--Nav End-->
       </div>
       <div class="conatiner-fluid content-inner mt-n5 py-0">
-        <div class="col-md-12 col-lg-8">
+        <div class="container-fluid">
           <div class="row">
-            <div class="col-md-12">
-              <div class="card" data-aos="fade-up" data-aos-delay="900">
-                <div class="pb-4 border-0 card-header">
-                  <div
-                    class="p-4 border border-white rounded primary-gradient-card"
-                  >
-                    <div
-                      class="d-flex justify-content-between align-items-center"
-                    >
-                      <div class="col-md-5 col-sm-12">
-                        <h3>Settings</h3>
-                        <br />
-                        <div class="bd-example">
-                          <nav>
-                            <div
-                              class="nav nav-tabs mb-2"
-                              id="nav-tab"
-                              role="tablist"
-                            >
-                              <button
-                                class="nav-link active"
-                                id="nav-home-tab"
-                                data-bs-toggle="tab"
-                                data-bs-target="#nav-home"
-                                type="button"
-                                role="tab"
-                                aria-controls="nav-home"
-                                aria-selected="true"
-                              >
-                                Main Settings
-                              </button>
-                              <button
-                                class="nav-link"
-                                id="nav-smtp-tab"
-                                data-bs-toggle="tab"
-                                data-bs-target="#nav-smtp"
-                                type="button"
-                                role="tab"
-                                aria-controls="nav-smtp"
-                                aria-selected="false"
-                              >
-                                SMTP
-                              </button>
-                            </div>
-                          </nav>
-                          <div class="tab-content" id="nav-tabContent">
-                            <div
-                              class="tab-pane fade show active"
-                              id="nav-home"
-                              role="tabpanel"
-                              aria-labelledby="nav-home-tab"
-                            >
-                              <div class="form-group mb-20">
-                                <h3>Change name:</h3>
-                                <p>
-                                  <label for="name">New name:</label>
-                                  <input
-                                    name="name"
-                                    type="text"
-                                    class="form-control"
-                                    id="name"
-                                    value="<%= dbSettings.name %>"
-                                  /><br />
-                                  <button
-                                    class="btn btn-primary"
-                                    onclick="asyncAlert(updateName('<%= settings.discord.guild %>', document.getElementById('name').value))"
-                                  >
-                                    Update
-                                  </button>
-                                </p>
-                              </div>
-                            </div>
-                            <div
-                              class="tab-pane fade"
-                              id="nav-smtp"
-                              role="tabpanel"
-                              aria-labelledby="nav-smtp-tab"
-                            >
-                              <form>
-                                <div class="form-group mb-20">
-                                  <h3>Change settings:</h3>
-                                  <p>
-                                    <label for="server">Server:</label>
-                                    <input
-                                      name="server"
-                                      type="text"
-                                      class="form-control"
-                                      id="server"
-                                      value="<%= dbSettings.smtp_server %>"
-                                      required
-                                    /><br />
-                                    <label for="port">Port:</label>
-                                    <input
-                                      name="port"
-                                      type="text"
-                                      class="form-control"
-                                      id="port"
-                                      value="<%= dbSettings.smtp_port %>"
-                                      required
-                                    /><br />
-                                    <label for="user">Username:</label>
-                                    <input
-                                      name="user"
-                                      type="text"
-                                      class="form-control"
-                                      id="user"
-                                      value="<%=dbSettings.smtp_user%>"
-                                      required
-                                    /><br />
-                                    <label for="pass">Password:</label>
-                                    <input
-                                      name="pass"
-                                      type="password"
-                                      class="form-control"
-                                      id="pass"
-                                      required
-                                    /><br />
-                                    <button
-                                      class="btn btn-primary"
-                                      onclick="asyncAlert(updateSmtp(document.getElementById('server').value, document.getElementById('port').value, document.getElementById('user').value, document.getElementById('pass').value))"
-                                    >
-                                      Update
-                                    </button>
-                                  </p>
-                                </div>
-                              </form>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+            <div class="col-lg-12">
+              <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                  <div class="header-title">
+                    <h4 class="card-title">What is Lorem Ipsum?</h4>
                   </div>
+                </div>
+                <div class="card-body">
+                  <p>
+                    Lorem Ipsum is simply dummy text of the printing and
+                    typesetting industry. Lorem Ipsum has been the industry's
+                    standard dummy text ever since the 1500s, when an unknown
+                    printer took a galley of type and scrambled it to make a
+                    type specimen book. It has survived not only five centuries,
+                    but also the leap into electronic typesetting, remaining
+                    essentially unchanged. It was popularised in the 1960s with
+                    the release of Letraset sheets containing Lorem Ipsum
+                    passages, and more recently with desktop publishing software
+                    like Aldus PageMaker including versions of Lorem Ipsum.
+                  </p>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                  <div class="header-title">
+                    <h4 class="card-title">Why do we use it?</h4>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <p>
+                    It is a long established fact that a reader will be
+                    distracted by the readable content of a page when looking at
+                    its layout. The point of using Lorem Ipsum is that it has a
+                    more-or-less normal distribution of letters, as opposed to
+                    using 'Content here, content here', making it look like
+                    readable English. Many desktop publishing packages and web
+                    page editors now use Lorem Ipsum as their default model
+                    text, and a search for 'lorem ipsum' will uncover many web
+                    sites still in their infancy. Various versions have evolved
+                    over the years, sometimes by accident, sometimes on purpose
+                    (injected humour and the like).
+                  </p>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                  <div class="header-title">
+                    <h4 class="card-title">Where does it come from?</h4>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <p>
+                    It is a long established fact that a reader will be
+                    distracted by the readable content of a page when looking at
+                    its layout. The point of using Lorem Ipsum is that it has a
+                    more-or-less normal distribution of letters, as opposed to
+                    using 'Content here, content here', making it look like
+                    readable English. Many desktop publishing packages and web
+                    page editors now use Lorem Ipsum as their default model
+                    text, and a search for 'lorem ipsum' will uncover many web
+                    sites still in their infancy. Various versions have evolved
+                    over the years, sometimes by accident, sometimes on purpose
+                    (injected humour and the like).
+                  </p>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                  <div class="header-title">
+                    <h4 class="card-title">Where can I get some?</h4>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <p>
+                    It is a long established fact that a reader will be
+                    distracted by the readable content of a page when looking at
+                    its layout. The point of using Lorem Ipsum is that it has a
+                    more-or-less normal distribution of letters, as opposed to
+                    using 'Content here, content here', making it look like
+                    readable English. Many desktop publishing packages and web
+                    page editors now use Lorem Ipsum as their default model
+                    text, and a search for 'lorem ipsum' will uncover many web
+                    sites still in their infancy. Various versions have evolved
+                    over the years, sometimes by accident, sometimes on purpose
+                    (injected humour and the like).
+                  </p>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                  <div class="header-title">
+                    <h4 class="card-title">Why do we use it?</h4>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <p>
+                    It is a long established fact that a reader will be
+                    distracted by the readable content of a page when looking at
+                    its layout. The point of using Lorem Ipsum is that it has a
+                    more-or-less normal distribution of letters, as opposed to
+                    using 'Content here, content here', making it look like
+                    readable English. Many desktop publishing packages and web
+                    page editors now use Lorem Ipsum as their default model
+                    text, and a search for 'lorem ipsum' will uncover many web
+                    sites still in their infancy. Various versions have evolved
+                    over the years, sometimes by accident, sometimes on purpose
+                    (injected humour and the like).
+                  </p>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                  <div class="header-title">
+                    <h4 class="card-title">Why do we use it?</h4>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <p>
+                    It is a long established fact that a reader will be
+                    distracted by the readable content of a page when looking at
+                    its layout. The point of using Lorem Ipsum is that it has a
+                    more-or-less normal distribution of letters, as opposed to
+                    using 'Content here, content here', making it look like
+                    readable English. Many desktop publishing packages and web
+                    page editors now use Lorem Ipsum as their default model
+                    text, and a search for 'lorem ipsum' will uncover many web
+                    sites still in their infancy. Various versions have evolved
+                    over the years, sometimes by accident, sometimes on purpose
+                    (injected humour and the like).
+                  </p>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                  <div class="header-title">
+                    <h4 class="card-title">Why do we use it?</h4>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <p>
+                    It is a long established fact that a reader will be
+                    distracted by the readable content of a page when looking at
+                    its layout. The point of using Lorem Ipsum is that it has a
+                    more-or-less normal distribution of letters, as opposed to
+                    using 'Content here, content here', making it look like
+                    readable English. Many desktop publishing packages and web
+                    page editors now use Lorem Ipsum as their default model
+                    text, and a search for 'lorem ipsum' will uncover many web
+                    sites still in their infancy. Various versions have evolved
+                    over the years, sometimes by accident, sometimes on purpose
+                    (injected humour and the like).
+                  </p>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                  <div class="header-title">
+                    <h4 class="card-title">Why do we use it?</h4>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <p>
+                    It is a long established fact that a reader will be
+                    distracted by the readable content of a page when looking at
+                    its layout. The point of using Lorem Ipsum is that it has a
+                    more-or-less normal distribution of letters, as opposed to
+                    using 'Content here, content here', making it look like
+                    readable English. Many desktop publishing packages and web
+                    page editors now use Lorem Ipsum as their default model
+                    text, and a search for 'lorem ipsum' will uncover many web
+                    sites still in their infancy. Various versions have evolved
+                    over the years, sometimes by accident, sometimes on purpose
+                    (injected humour and the like).
+                  </p>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                  <div class="header-title">
+                    <h4 class="card-title">Why do we use it?</h4>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <p>
+                    It is a long established fact that a reader will be
+                    distracted by the readable content of a page when looking at
+                    its layout. The point of using Lorem Ipsum is that it has a
+                    more-or-less normal distribution of letters, as opposed to
+                    using 'Content here, content here', making it look like
+                    readable English. Many desktop publishing packages and web
+                    page editors now use Lorem Ipsum as their default model
+                    text, and a search for 'lorem ipsum' will uncover many web
+                    sites still in their infancy. Various versions have evolved
+                    over the years, sometimes by accident, sometimes on purpose
+                    (injected humour and the like).
+                  </p>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+
       <!-- Footer Section Start -->
       <%- include("../components/footer.ejs") %>
       <!-- Footer Section End -->
@@ -650,25 +710,6 @@
                 class="btn-border"
                 data-setting="color-mode"
                 data-name="color"
-                data-value="light"
-              >
-                <svg
-                  width="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M12,8A4,4 0 0,0 8,12A4,4 0 0,0 12,16A4,4 0 0,0 16,12A4,4 0 0,0 12,8M12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18M20,8.69V4H15.31L12,0.69L8.69,4H4V8.69L0.69,12L4,15.31V20H8.69L12,23.31L15.31,20H20V15.31L23.31,12L20,8.69Z"
-                  />
-                </svg>
-                <span class="ms-2"> Light</span>
-              </div>
-              <div
-                class="btn-border active"
-                data-setting="color-mode"
-                data-name="color"
                 data-value="dark"
               >
                 <svg
@@ -683,6 +724,25 @@
                   />
                 </svg>
                 <span class="ms-2"> Dark </span>
+              </div>
+              <div
+                class="btn-border active"
+                data-setting="color-mode"
+                data-name="color"
+                data-value="light"
+              >
+                <svg
+                  width="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M12,8A4,4 0 0,0 8,12A4,4 0 0,0 12,16A4,4 0 0,0 16,12A4,4 0 0,0 12,8M12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18M20,8.69V4H15.31L12,0.69L8.69,4H4V8.69L0.69,12L4,15.31V20H8.69L12,23.31L15.31,20H20V15.31L23.31,12L20,8.69Z"
+                  />
+                </svg>
+                <span class="ms-2"> Light</span>
               </div>
             </div>
             <hr class="hr-horizontal" />
@@ -833,7 +893,7 @@
             <div class="d-grid gap-x-3 grid-cols-2 mb-4">
               <div class="text-center">
                 <img
-                  src="../assets/images/settings/dark/01.png"
+                  src="../../assets/images/settings/dark/01.png"
                   alt="ltr"
                   class="mode dark-img img-fluid btn-border p-0 flex-column active"
                   data-setting="dir-mode"
@@ -841,7 +901,7 @@
                   data-value="ltr"
                 />
                 <img
-                  src="../assets/images/settings/light/01.png"
+                  src="../../assets/images/settings/light/01.png"
                   alt="ltr"
                   class="mode light-img img-fluid btn-border p-0 flex-column active"
                   data-setting="dir-mode"
@@ -852,7 +912,7 @@
               </div>
               <div class="text-center">
                 <img
-                  src="../assets/images/settings/dark/02.png"
+                  src="../../assets/images/settings/dark/02.png"
                   alt=""
                   class="mode dark-img img-fluid btn-border p-0 flex-column"
                   data-setting="dir-mode"
@@ -860,7 +920,7 @@
                   data-value="rtl"
                 />
                 <img
-                  src="../assets/images/settings/light/02.png"
+                  src="../../assets/images/settings/light/02.png"
                   alt=""
                   class="mode light-img img-fluid btn-border p-0 flex-column"
                   data-setting="dir-mode"
@@ -965,7 +1025,7 @@
             <div class="d-grid gap-x-3 grid-cols-3 mb-4">
               <div class="text-center">
                 <img
-                  src="../assets/images/settings/dark/03.png"
+                  src="../../assets/images/settings/dark/03.png"
                   alt="mini"
                   class="mode dark-img img-fluid btn-border p-0 flex-column"
                   data-setting="sidebar"
@@ -973,7 +1033,7 @@
                   data-value="sidebar-mini"
                 />
                 <img
-                  src="../assets/images/settings/light/03.png"
+                  src="../../assets/images/settings/light/03.png"
                   alt="mini"
                   class="mode light-img img-fluid btn-border p-0 flex-column"
                   data-setting="sidebar"
@@ -984,7 +1044,7 @@
               </div>
               <div class="text-center">
                 <img
-                  src="../assets/images/settings/dark/04.png"
+                  src="../../assets/images/settings/dark/04.png"
                   alt="hover"
                   class="mode dark-img img-fluid btn-border p-0 flex-column"
                   data-setting="sidebar"
@@ -993,7 +1053,7 @@
                   data-extra-value="sidebar-mini"
                 />
                 <img
-                  src="../assets/images/settings/light/04.png"
+                  src="../../assets/images/settings/light/04.png"
                   alt="hover"
                   class="mode light-img img-fluid btn-border p-0 flex-column"
                   data-setting="sidebar"
@@ -1005,7 +1065,7 @@
               </div>
               <div class="text-center">
                 <img
-                  src="../assets/images/settings/dark/05.png"
+                  src="../../assets/images/settings/dark/05.png"
                   alt="boxed"
                   class="mode dark-img img-fluid btn-border p-0 flex-column"
                   data-setting="sidebar"
@@ -1013,7 +1073,7 @@
                   data-value="sidebar-boxed"
                 />
                 <img
-                  src="../assets/images/settings/light/05.png"
+                  src="../../assets/images/settings/light/05.png"
                   alt="boxed"
                   class="mode light-img img-fluid btn-border p-0 flex-column"
                   data-setting="sidebar"
@@ -1028,7 +1088,7 @@
             <div class="d-grid gap-x-3 grid-cols-2 mb-4">
               <div class="mb-4 text-center">
                 <img
-                  src="../assets/images/settings/dark/06.png"
+                  src="../../assets/images/settings/dark/06.png"
                   alt="rounded-one-side"
                   class="mode dark-img img-fluid btn-border p-0 flex-column"
                   data-setting="sidebar"
@@ -1036,7 +1096,7 @@
                   data-value="navs-rounded"
                 />
                 <img
-                  src="../assets/images/settings/light/06.png"
+                  src="../../assets/images/settings/light/06.png"
                   alt="rounded-one-side"
                   class="mode light-img img-fluid btn-border p-0 flex-column"
                   data-setting="sidebar"
@@ -1047,7 +1107,7 @@
               </div>
               <div class="mb-4 text-center">
                 <img
-                  src="../assets/images/settings/dark/07.png"
+                  src="../../assets/images/settings/dark/07.png"
                   alt="rounded-all"
                   class="mode dark-img img-fluid btn-border p-0 flex-column active"
                   data-setting="sidebar"
@@ -1055,7 +1115,7 @@
                   data-value="navs-rounded-all"
                 />
                 <img
-                  src="../assets/images/settings/light/07.png"
+                  src="../../assets/images/settings/light/07.png"
                   alt="rounded-all"
                   class="mode light-img img-fluid btn-border p-0 flex-column active"
                   data-setting="sidebar"
@@ -1066,7 +1126,7 @@
               </div>
               <div class="mb-4 text-center">
                 <img
-                  src="../assets/images/settings/dark/08.png"
+                  src="../../assets/images/settings/dark/08.png"
                   alt="pill-one-side"
                   class="mode dark-img img-fluid btn-border p-0 flex-column"
                   data-setting="sidebar"
@@ -1074,7 +1134,7 @@
                   data-value="navs-pill"
                 />
                 <img
-                  src="../assets/images/settings/light/08.png"
+                  src="../../assets/images/settings/light/08.png"
                   alt="pill-one-side"
                   class="mode light-img img-fluid btn-border p-0 flex-column"
                   data-setting="sidebar"
@@ -1085,7 +1145,7 @@
               </div>
               <div class="mb-4 text-center">
                 <img
-                  src="../assets/images/settings/dark/09.png"
+                  src="../../assets/images/settings/dark/09.png"
                   alt="pill-all"
                   class="mode dark-img img-fluid btn-border p-0 flex-column"
                   data-setting="sidebar"
@@ -1093,7 +1153,7 @@
                   data-value="navs-pill-all"
                 />
                 <img
-                  src="../assets/images/settings/light/09.png"
+                  src="../../assets/images/settings/light/09.png"
                   alt="pill-all"
                   class="mode light-img img-fluid btn-border p-0 flex-column"
                   data-setting="sidebar"
@@ -1108,7 +1168,7 @@
             <div class="d-grid gap-x-3 grid-cols-2">
               <div class="mb-4 text-center">
                 <img
-                  src="../assets/images/settings/dark/10.png"
+                  src="../../assets/images/settings/dark/10.png"
                   alt="image"
                   class="mode dark-img img-fluid btn-border p-0 flex-column"
                   data-setting="navbar"
@@ -1117,7 +1177,7 @@
                   data-value="nav-glass"
                 />
                 <img
-                  src="../assets/images/settings/light/10.png"
+                  src="../../assets/images/settings/light/10.png"
                   alt="image"
                   class="mode light-img img-fluid btn-border p-0 flex-column"
                   data-setting="navbar"
@@ -1129,7 +1189,7 @@
               </div>
               <div class="mb-4 text-center">
                 <img
-                  src="../assets/images/settings/dark/11.png"
+                  src="../../assets/images/settings/dark/11.png"
                   alt="color"
                   class="mode dark-img img-fluid btn-border p-0 flex-column"
                   data-setting="navbar"
@@ -1138,7 +1198,7 @@
                   data-value="navs-bg-color"
                 />
                 <img
-                  src="../assets/images/settings/light/11.png"
+                  src="../../assets/images/settings/light/11.png"
                   alt="color"
                   class="mode light-img img-fluid btn-border p-0 flex-column"
                   data-setting="navbar"
@@ -1150,7 +1210,7 @@
               </div>
               <div class="mb-4 text-center">
                 <img
-                  src="../assets/images/settings/dark/12.png"
+                  src="../../assets/images/settings/dark/12.png"
                   alt="sticky"
                   class="mode dark-img img-fluid btn-border p-0 flex-column"
                   data-setting="navbar"
@@ -1159,7 +1219,7 @@
                   data-value="navs-sticky"
                 />
                 <img
-                  src="../assets/images/settings/light/12.png"
+                  src="../../assets/images/settings/light/12.png"
                   alt="sticky"
                   class="mode light-img img-fluid btn-border p-0 flex-column"
                   data-setting="navbar"
@@ -1171,7 +1231,7 @@
               </div>
               <div class="mb-4 text-center">
                 <img
-                  src="../assets/images/settings/dark/12.png"
+                  src="../../assets/images/settings/dark/12.png"
                   alt="transparent"
                   class="mode dark-img img-fluid btn-border p-0 flex-column"
                   data-setting="navbar"
@@ -1180,7 +1240,7 @@
                   data-value="navs-transparent"
                 />
                 <img
-                  src="../assets/images/settings/light/12.png"
+                  src="../../assets/images/settings/light/12.png"
                   alt="transparent"
                   class="mode light-img img-fluid btn-border p-0 flex-column"
                   data-setting="navbar"
@@ -1221,35 +1281,30 @@
       </div>
     </div>
     <!-- Library Bundle Script -->
-    <script src="../assets/js/core/libs.min.js"></script>
+    <script src="../../assets/js/core/libs.min.js"></script>
 
     <!-- External Library Bundle Script -->
-    <script src="../assets/js/core/external.min.js"></script>
+    <script src="../../assets/js/core/external.min.js"></script>
 
     <!-- Widgetchart Script -->
-    <script src="../assets/js/charts/widgetcharts.js"></script>
+    <script src="../../assets/js/charts/widgetcharts.js"></script>
 
     <!-- mapchart Script -->
-    <script src="../assets/js/charts/vectore-chart.js"></script>
-    <script src="../assets/js/charts/dashboard.js"></script>
+    <script src="../../assets/js/charts/vectore-chart.js"></script>
+    <script src="../../assets/js/charts/dashboard.js"></script>
 
     <!-- fslightbox Script -->
-    <script src="../assets/js/plugins/fslightbox.js"></script>
+    <script src="../../assets/js/plugins/fslightbox.js"></script>
 
     <!-- Settings Script -->
-    <script src="../assets/js/plugins/setting.js"></script>
+    <script src="../../assets/js/plugins/setting.js"></script>
 
     <!-- Form Wizard Script -->
-    <script src="../assets/js/plugins/form-wizard.js"></script>
+    <script src="../../assets/js/plugins/form-wizard.js"></script>
 
     <!-- AOS Animation Plugin-->
-    <script src="../assets/vendor/aos/dist/aos.js"></script>
 
     <!-- App Script -->
-    <script src="../assets/js/hope-ui.js" defer></script>
-    <!-- Notification script -->
-    <script src="../assets/js/notifications.js"></script>
-
-    <script type="text/javascript" src="../assets/js/admin.js"></script>
+    <script src="../../assets/js/hope-ui.js" defer></script>
   </body>
 </html>

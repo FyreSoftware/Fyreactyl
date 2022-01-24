@@ -64,8 +64,8 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
 
                 while (!end_loop) {
                   if (coins < coinstotakeaway + cost) {
-                    await process.db.addCoinsByDiscordID(
-                      user_info.discord_id,
+                    await process.db.addCoinsByEmail(
+                      user_info.email,
                       -coinstotakeaway
                     );
                     end_loop = true;
@@ -82,8 +82,8 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
                 }
 
                 if (!successful_loop) {
-                  await process.db.addCoinsByDiscordID(
-                    user_info.discord_id,
+                  await process.db.addCoinsByEmail(
+                    user_info.email,
                     -coinstotakeaway
                   );
                   the_date = another_date_check; // CHECK IF THIS IS RIGHT.
@@ -91,8 +91,8 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
               }
 
               if (successful_loop) {
-                await process.db.addCoinsByDiscordID(
-                  user_info.discord_id,
+                await process.db.addCoinsByEmail(
+                  user_info.email,
                   -coinstotakeaway
                 );
                 await this.set(server_id, undefined, "auto");
@@ -195,8 +195,8 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
         return functions.doRedirect(req, res, redirects.dontneedtorenew);
 
       const cost = process.env.renewal.renew_fee;
-      const coins = await process.db.getCoinsByDiscordID(
-        req.session.data.dbinfo.discord_id
+      const coins = await process.db.getCoinsByEmail(
+        req.session.data.dbinfo.email
       );
 
       if (coins < cost) {
@@ -208,10 +208,7 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
         return functions.doRedirect(req, res, redirects.insufficientcoins);
       }
 
-      await process.db.addCoinsByDiscordID(
-        req.session.data.dbinfo.discord_id,
-        -cost
-      );
+      await process.db.addCoinsByEmail(req.session.data.dbinfo.email, -cost);
 
       if (renewal_date.action === "auto") {
         await this.set(server_id, undefined, "auto");
@@ -316,7 +313,7 @@ module.exports.set = async function (server_id, timer, action) {
         const coins = user_info.coins;
 
         if (coins >= cost) {
-          await process.db.addCoinsByDiscordID(user_info.discord_id, -cost);
+          await process.db.addCoinsByEmail(user_info.email, -cost);
           await this.set(server_id, undefined, "auto");
           return;
         }

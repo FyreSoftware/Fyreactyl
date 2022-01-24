@@ -37,21 +37,26 @@ pages:
   dashboard:
     file: dashboard/dashboard.ejs
     permission: 1 # 0 = anyone, 1 = must be logged in, 2 = administrator
-    no_permission_redirect: /accounts/login
+    no_permission_redirect: /login
 
-  dashboard/tickets:
-    file: dashboard/tickets.ejs
-    permission: 1
-    no_permission_redirect: /accounts/login
+  extra/privacy-policy:
+    file: extra/privacy-policy.ejs
+    permission: 1 # 0 = anyone, 1 = must be logged in, 2 = administrator
+    no_permission_redirect: /login
+
+  extra/tos:
+    file: extra/tos.ejs
+    permission: 1 # 0 = anyone, 1 = must be logged in, 2 = administrator
+    no_permission_redirect: /login
 
   servers/new:
     file: server/create.ejs
     permission: 1
-    no_permission_redirect: /accounts/login
+    no_permission_redirect: /login
   servers/modify:
     file: server/modify.ejs
     permission: 1
-    no_permission_redirect: /accounts/login
+    no_permission_redirect: /login
 
   signup:
     file: singup.ejs
@@ -60,28 +65,28 @@ pages:
   store:
     file: dashboard/store.ejs
     permission: 1
-    no_permission_redirect: /accounts/login
+    no_permission_redirect: /login
 
   earn/redeem:
     file: earn/redeem.ejs
     permission: 1
-    no_permission_redirect: /accounts/login
+    no_permission_redirect: /login
 
   earn/afk:
     file: earn/afk.ejs
     permission: 1
-    no_permission_redirect: /accounts/login
+    no_permission_redirect: /login
     special: afk
 
   admin/main:
     file: admin/main.ejs
     permission: 2
-    no_permission_redirect: /accounts/login
+    no_permission_redirect: /login
 
   admin/settings:
     file: admin/settings.ejs
     permission: 2
-    no_permission_redirect: /accounts/login
+    no_permission_redirect: /login
 
   reset/password/form:
     file: reset/password.ejs

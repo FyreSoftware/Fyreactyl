@@ -351,7 +351,7 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
       };
 
       if (!generated_password)
-        suspendCheck(req.session.data.dbinfo.discord_id, panelinfo.root_admin);
+        suspendCheck(req.session.data.dbinfo.email, panelinfo.root_admin);
 
       functions.doRedirect(req, res, redirects.success);
     }
@@ -543,7 +543,7 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
       }
 
       if (!generated_password)
-        suspendCheck(dbinfo.discord_id, panelinfo.root_admin);
+        suspendCheck(dbinfo.email, panelinfo.root_admin);
 
       functions.doRedirect(req, res, redirects.success);
     }

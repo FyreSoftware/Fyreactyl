@@ -217,3 +217,20 @@ async function blacklistById() {
     );
   }
 }
+async function updateSmtp(server, port, user, password) {
+  const req = await fetch("/api/smtp/update", {
+    method: "post",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify({
+      server: String(server),
+      user: String(user),
+      port: Number(port),
+      password: String(password),
+    }),
+  });
+
+  return await req.json();
+}

@@ -5,7 +5,11 @@
     <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <title>Hope UI | <%= dbSettings.name %></title>
-      
+      <style>
+        body {
+          overflow-x: hidden;
+        }
+      </style>
       <!-- Favicon -->
       <link rel="shortcut icon" href="../assets/images/favicon.ico" />
       
@@ -330,11 +334,7 @@
 
             <form action="/accounts/regenerate_password" method="POST">
                     <button type="sumbit" class="btn btn-primary">Reset Password</button>
-            </form>
-                    <br></br>
-        <form action="/accounts/update_information" method="POST">   
-                    <button type="sumbit" class="btn btn-primary">Update Information</button>
-             </form>       
+            </form>     
             </div>
                   </div>
                </div>

@@ -56,7 +56,7 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
         if (coupon_info.cpu) current.cpu += coupon_info.cpu;
         if (coupon_info.servers) current.servers += coupon_info.servers;
 
-        await process.db.setResourcesByDiscordID(
+        await process.db.setResourcesByEmail(
           req.session.data.dbinfo.email,
           current.memory,
           current.disk,

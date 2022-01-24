@@ -53,18 +53,7 @@ setInterval(() => {
     fs.readFileSync("./frontend/pages.yml", "utf8")
   ); // This line of code is suppose to update any new pages.yml settings every minute.
 }, 60000);
-const nodemailer = require("nodemailer");
 const path = require("path");
-process.mailer = nodemailer.createTransport({
-  host: process.env.mail.server,
-  port: process.env.port,
-  secure: true,
-  auth: {
-    user: process.env.mail.user,
-    pass: process.env.mail.pass,
-  },
-});
-
 // Makes "process.db" have the database functions.
 
 process.db = db;

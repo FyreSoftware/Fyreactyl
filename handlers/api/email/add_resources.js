@@ -90,10 +90,10 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
       res.json({
         error: process.api_messages.core.noError,
         new_resources: added_resources,
-        user_id: user_id,
+        email: email,
       });
 
-      suspendCheck(user_id);
+      suspendCheck(email);
     }
   });
 };

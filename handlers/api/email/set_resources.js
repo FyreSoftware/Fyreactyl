@@ -3,7 +3,7 @@
 const suspendCheck = require("../../servers/suspension_system.js");
 
 module.exports.load = async function (app, ifValidAPI, ejs) {
-  app.post("/api/resources/add_resources/:id", async (req, res) => {
+  app.post("/api/resources/set_resources/email/:email", async (req, res) => {
     if (
       (req.session.data && req.session.data.panelinfo.root_admin) ||
       ifValidAPI(req, res, "set resources")
@@ -17,10 +17,10 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
           error: process.api_messages.core.bodycannotbeanarray,
         });
 
-      const user_id = req.params.id; // Discord ID.
-      const userinfo = await process.db.fetchAccountDiscordID(user_id);
+      const email = req.params.email; // Discord ID.
+      const userinfo = await process.db.fetchAccountByEmail(email);
       if (!userinfo)
-        return res.json({ error: process.api_messages.extra.invaliduserid });
+        return res.json({ error: process.api_messages.extra.invalidemail });
 
       const resources = {
         memory: req.body.memory,
@@ -49,14 +49,14 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
 
           // Straight up bad and lazy code: - Two
 
-          if (amount + userinfo[type] < 0) {
+          if (amount < 0) {
             resource_check_errors.push(
               process.api_messages.resources.cannotbelessthanzero.replace(
                 /{{type}}/g,
                 type
               )
             );
-          } else if (amount + userinfo[type] > 1073741823) {
+          } else if (amount > 1073741823) {
             // Due to Javascript number limitations.
             resource_check_errors.push(
               process.api_messages.resources.cannotbeoverabignumber.replace(
@@ -65,8 +65,8 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
               )
             );
           } else {
-            resources[type] = amount + userinfo[type]; // To save rounding changes.
-            added_resources[type] = amount + userinfo[type];
+            resources[type] = amount; // To save rounding changes.
+            added_resources[type] = amount;
           }
         }
       }
@@ -79,8 +79,8 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
           errors: resource_check_errors,
         });
 
-      await process.db.setResourcesByDiscordID(
-        user_id,
+      await process.db.setResourcesByEmail(
+        email,
         resources.memory,
         resources.disk,
         resources.cpu,
@@ -89,11 +89,11 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
 
       res.json({
         error: process.api_messages.core.noError,
-        new_resources: added_resources,
-        user_id: user_id,
+        resources: added_resources,
+        email: email,
       });
 
-      suspendCheck(userinfo.email);
+      suspendCheck(email);
     }
   });
 };

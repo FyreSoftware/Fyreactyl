@@ -104,8 +104,8 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
 
       if (process.env.locations[location].renewal) {
         const cost = process.env.renewal.renew_fee;
-        const coins = await process.db.getCoinsByDiscordID(
-          req.session.data.dbinfo.discord_id
+        const coins = await process.db.getCoinsByEmail(
+          req.session.data.dbinfo.email
         );
 
         if (coins < cost) {
@@ -117,10 +117,7 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
           return functions.doRedirect(req, res, redirects.insufficientcoins);
         }
 
-        await process.db.addCoinsByDiscordID(
-          req.session.data.dbinfo.discord_id,
-          -cost
-        );
+        await process.db.addCoinsByEmail(req.session.data.dbinfo.email, -cost);
       }
 
       specs.name = name;
