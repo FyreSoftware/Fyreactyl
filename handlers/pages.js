@@ -195,7 +195,6 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
     const dbSettings = await process.db.findOrCreateSettings(
       process.env.discord.guild
     );
-    const allj4r = await process.db.allJ4Rs();
 
     let packages = Object.values(process.env.packages.list);
     packages = packages.filter((pack) => pack.paid === true);
@@ -213,7 +212,6 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
       special: special,
       server_timers: server_timers,
       status_replies: status_replies,
-      j4r: allj4r,
       dbSettings: dbSettings,
       ms,
       packages,

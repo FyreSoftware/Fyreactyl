@@ -515,8 +515,6 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
           email: userinfo.email,
           name: userinfo.username,
         };
-
-        await process.db.checkJ4R(userinfo.id, guilds);
       } else {
         req.session.variables = {
           message:
@@ -542,8 +540,7 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
         };
       }
 
-      if (!generated_password)
-        suspendCheck(dbinfo.email, panelinfo.root_admin);
+      if (!generated_password) suspendCheck(dbinfo.email, panelinfo.root_admin);
 
       functions.doRedirect(req, res, redirects.success);
     }
