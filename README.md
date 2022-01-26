@@ -18,4 +18,4 @@ FyreActyl uses apache 2.0 as a license, you can remove the credits if its a priv
 ## Example's
 
 ![image](https://user-images.githubusercontent.com/66245404/151224399-ed68e4b5-6cf3-467c-abd7-9f722d244d24.png)
-![image](https://user-images.githubusercontent.com/66245404/151224457-130ccd33-0388-425c-a590-6e6a00d1943a.png)
+![image](https://user-images.githubusercontent.com/66245404/151224595-b6b72e7a-a833-46ab-9d76-ef77b387495e.png)
