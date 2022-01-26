@@ -11,6 +11,7 @@ success:
   TOGGLED_AUTO: You have successfully enabled automatic renewals on a server.
   TOGGLED_SUSPEND: You have successfully disabled automatic renewals on a server.
   UPDATE_INFO: You have successfully updated your user information.
+  LINKED: You have successfully linked your discord account.
 
 error:
   ALL_VALUES_CANNOT_BE_ZERO: All the values for resources cannot be zero.
@@ -43,7 +44,7 @@ error:
   MISSING_EGG: An unexpected error has occured where the egg for the server could not be found. (MISSING_EGG)
   MISSING_RESOURCES: You have not provided your resource values.
   MUST_RENEW_FIRST: You must renew the selected server, before you can enable automatic renewals.
-  NOTLOGGEDIN: You are not logged in. 
+  NOTLOGGEDIN: You are not logged in.
   NO_ACCESS_TO_LOCATION: Your package does not have access to the selected location.
   NO_CHANGES_TO_SERVER: You have not provided any resource modifications to the selected server.
   OVER_RESOURCES: Cannot renew server, because the amount of resources your servers have exceeded your resource quota.

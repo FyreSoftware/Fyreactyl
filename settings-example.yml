@@ -6,27 +6,36 @@ website:
   port: 8000
   secret: "extremely secret very secret MAXIMUM secret LMAO."
   secure: false # This option requires https.
+  url: "http://localhost:8000"
+
+mail:
+  server: ""
+  port: 465
+  user: ""
+  pass: ""
 
 discord:
   id: ""
   secret: ""
-  callbackpath: "http://localhost:8000/accounts/callback"
+  signup_callback: "http://localhost:8000/accounts/discord/signup/callback"
+  login_callback: "http://localhost:8000/accounts/discord/login/callback"
+  link_callback: "http://localhost:8000/accounts/discord/link/callback"
   prompt: false
 
   token: ""
   guild: "000000000000000000" # Add your server ID you want to force users to join on login here.
 
 pterodactyl:
-  domain: ""
+  domain: "" # The panel domain
   key: "" # Make sure to higher/remove rate limits for application API keys, so the dashboard doesn't get rate limited.
   generate_password_on_sign_up: true
 
 database: # MySQL database.
   host: ""
-  port: ""
+  port: "3306"
   user: ""
   password: ""
-  database: ""
+  database: "dashactyl"
 
 api: # The client area might break if there are no API codes, so I highly recommend adding a single secure API code.
   apicodepassword: # This would be the "Bearer apicodepassword".
@@ -39,10 +48,11 @@ api: # The client area might break if there are no API codes, so I highly recomm
     create coupon: true
     revoke coupon: true
     change name: true
+
 locations:
   "1": # Location ID.
-    name: "Location Name" # Location display name.
-    enabled: false # Enable or disable server creation on this location.
+    name: "Africa" # Location display name.
+    enabled: true # Enable or disable server creation on this location.
     package: null # Required package to make a server on this location.
 
     # package:
@@ -123,7 +133,7 @@ afk:
   domain_lock:
     - localhost:8000 # Change this to your actual domain.
   redirect_on_attempt_to_steal_code: https://www.youtube.com/watch?v=dQw4w9WgXcQ
-  arc_id: "" # Arc id without the '#'
+  arc_id: ""
   google_ads_pub_key: ""
   everywhat: 60 # seconds
   gaincoins: 1 # coins
@@ -133,6 +143,3 @@ renewal:
   deletion_time: 8.64e+7
 
   renew_fee: 10 # coins
-
-j4r:
-  enabled: true

@@ -6,6 +6,7 @@
 // Load packages.
 
 const fs = require("fs");
+const glob = require("glob");
 const yaml = require("js-yaml");
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -52,7 +53,7 @@ setInterval(() => {
     fs.readFileSync("./frontend/pages.yml", "utf8")
   ); // This line of code is suppose to update any new pages.yml settings every minute.
 }, 60000);
-
+const path = require("path");
 // Makes "process.db" have the database functions.
 
 process.db = db;
@@ -83,6 +84,8 @@ app.use(
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+app.set("views", path.join(__dirname, "frontend", "pages"));
+
 app.use((err, req, res, next) => {
   if (err instanceof SyntaxError && err.status === 400 && "body" in err) {
     // https://stackoverflow.com/questions/53048642/node-js-handle-body-parser-invalid-json-error
@@ -101,9 +104,6 @@ app.use(
     secret: process.env.website.secret,
     resave: true,
     saveUninitialized: true,
-    cookie: {
-      secure: process.env.website.secure,
-    },
     store: new SqliteStore({
       client: session_db,
       expired: {
@@ -116,17 +116,19 @@ app.use(
 
 app.use(async (req, res, next) => {
   if (req.session.data) {
-    const blacklist_status = await process.db.blacklistStatus(
-      req.session.data.userinfo.id
-    );
-    if (blacklist_status && !req.session.data.panelinfo.root_admin) {
-      delete req.session.data;
-      functions.doRedirect(
-        req,
-        res,
-        process.pagesettings.redirectactions.blacklisted
+    if (req.session.data.dbinfo?.discord_id) {
+      const blacklist_status = await process.db.blacklistStatusByDiscordID(
+        req.session.data.dbinfo.discord_id
       );
-      return;
+      if (blacklist_status && !req.session.data.panelinfo.root_admin) {
+        delete req.session.data;
+        functions.doRedirect(
+          req,
+          res,
+          process.pagesettings.redirectactions.blacklisted
+        );
+        return;
+      }
     }
   }
 
@@ -143,16 +145,11 @@ const listener = server.listen(process.env.website.port, function () {
     }.`
   ); // Message sent when the port is successfully listening and the website is ready.
 
-  const apifiles = fs
-    .readdirSync("./handlers")
-    .filter((file) => file.endsWith(".js") && file !== "pages.js"); // Gets a list of all files in the "handlers" folder. Doesn't add any "pages.js" to the array.
-  apifiles.push("pages.js"); // Adds "pages.js" to the end of the array. (so it loads last, because it has a "*" request)
-
-  apifiles.forEach((file) => {
-    // Loops all files in the "handlers" folder.
-    const apifile = require(`./handlers/${file}`); // Loads the file.
-    if (typeof apifile.load === "function") apifile.load(app, ifValidAPI, ejs); // Gives "app" to the file.
-  });
+  const apiFiles = glob.sync("./handlers/**/**/*.js");
+  for (const file of apiFiles) {
+    const api = require(file);
+    if (typeof api.load === "function") api.load(app, ifValidAPI, ejs);
+  }
 });
 
 /*

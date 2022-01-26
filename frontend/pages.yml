@@ -27,56 +27,88 @@ pages:
   loginpage:
     file: login.ejs
     permission: 0
+  login:
+    file: login.ejs
+    permission: 0
+  reset/password:
+    file: reset/request.ejs
+    permission: 0
 
   dashboard:
     file: dashboard/dashboard.ejs
     permission: 1 # 0 = anyone, 1 = must be logged in, 2 = administrator
-    no_permission_redirect: /accounts/login
+    no_permission_redirect: /login
 
-  dashboard/tickets:
-    file: dashboard/tickets.ejs
-    permission: 1
-    no_permission_redirect: /accounts/login
+  extra/privacy-policy:
+    file: extra/privacy-policy.ejs
+    permission: 1 # 0 = anyone, 1 = must be logged in, 2 = administrator
+    no_permission_redirect: /login
+
+  extra/tos:
+    file: extra/tos.ejs
+    permission: 1 # 0 = anyone, 1 = must be logged in, 2 = administrator
+    no_permission_redirect: /login
 
   servers/new:
     file: server/create.ejs
     permission: 1
-    no_permission_redirect: /accounts/login
+    no_permission_redirect: /login
   servers/modify:
     file: server/modify.ejs
     permission: 1
-    no_permission_redirect: /accounts/login
+    no_permission_redirect: /login
+
+  signup:
+    file: singup.ejs
+    permission: 0
 
   store:
     file: dashboard/store.ejs
     permission: 1
-    no_permission_redirect: /accounts/login
+    no_permission_redirect: /login
 
   earn/redeem:
     file: earn/redeem.ejs
     permission: 1
-    no_permission_redirect: /accounts/login
-
-  earn/j4r:
-    file: earn/j4r.ejs
-    permission: 1
-    no_permission_redirect: /accounts/login
+    no_permission_redirect: /login
 
   earn/afk:
     file: earn/afk.ejs
     permission: 1
-    no_permission_redirect: /accounts/login
+    no_permission_redirect: /login
     special: afk
 
   admin/main:
     file: admin/main.ejs
     permission: 2
-    no_permission_redirect: /accounts/login
+
+  admin/actions/blacklist:
+    file: admin/actions/blacklist.ejs
+    permission: 2
+
+  admin/actions/coins:
+    file: admin/actions/coins.ejs
+    permission: 2
+
+  admin/actions/resource:
+    file: admin/actions/resources.ejs
+    permission: 2
+
+  admin/actions/coupons:
+    file: admin/actions/coupon.ejs
+    permission: 2
+
+  admin/actions/package:
+    file: admin/actions/package.ejs
+    permission: 2
 
   admin/settings:
     file: admin/settings.ejs
     permission: 2
-    no_permission_redirect: /accounts/login
+
+  reset/password/form:
+    file: reset/password.ejs
+    permission: 0
 
 redirectactions:
   logout:
@@ -118,6 +150,9 @@ redirectactions:
     success:
       path: "/dashboard"
       success: "SIGN_IN"
+    linked:
+      path: "/dashboard"
+      success: "LINKED"
 
   regenerate_password:
     notsignedin:

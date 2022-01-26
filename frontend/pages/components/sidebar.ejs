@@ -1,5 +1,7 @@
 <aside class="sidebar sidebar-default navs-rounded-all">
-  <div class="sidebar-header d-flex align-items-center justify-content-start">
+  <div
+    class="sidebar-header d-flex align-items-center justify-content-start scroll-content"
+  >
     <a href="/dashboard/" class="navbar-brand">
       <!--Logo start-->
       <svg
@@ -112,31 +114,6 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="/dashboard/tickets">
-            <i class="icon">
-              <svg
-                width="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  opacity="0.4"
-                  d="M16.191 2H7.81C4.77 2 3 3.78 3 6.83V17.16C3 20.26 4.77 22 7.81 22H16.191C19.28 22 21 20.26 21 17.16V6.83C21 3.78 19.28 2 16.191 2Z"
-                  fill="currentColor"
-                ></path>
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M8.07996 6.6499V6.6599C7.64896 6.6599 7.29996 7.0099 7.29996 7.4399C7.29996 7.8699 7.64896 8.2199 8.07996 8.2199H11.069C11.5 8.2199 11.85 7.8699 11.85 7.4289C11.85 6.9999 11.5 6.6499 11.069 6.6499H8.07996ZM15.92 12.7399H8.07996C7.64896 12.7399 7.29996 12.3899 7.29996 11.9599C7.29996 11.5299 7.64896 11.1789 8.07996 11.1789H15.92C16.35 11.1789 16.7 11.5299 16.7 11.9599C16.7 12.3899 16.35 12.7399 15.92 12.7399ZM15.92 17.3099H8.07996C7.77996 17.3499 7.48996 17.1999 7.32996 16.9499C7.16996 16.6899 7.16996 16.3599 7.32996 16.1099C7.48996 15.8499 7.77996 15.7099 8.07996 15.7399H15.92C16.319 15.7799 16.62 16.1199 16.62 16.5299C16.62 16.9289 16.319 17.2699 15.92 17.3099Z"
-                  fill="currentColor"
-                ></path>
-              </svg>
-            </i>
-            <span class="item-name">Tickets</span>
-          </a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link" aria-current="page" href="servers/new">
             <i class="icon">
               <svg
@@ -205,26 +182,6 @@
             <span class="item-name">Earn Afk</span>
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="/earn/j4r">
-            <i class="icon">
-              <svg
-                width="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M11.8861 2H16.9254C19.445 2 21.5 4 21.5 6.44V17.56C21.5 20.01 19.445 22 16.9047 22H11.8758C9.35611 22 7.29083 20.01 7.29083 17.57V12.77H13.6932L12.041 14.37C11.7312 14.67 11.7312 15.16 12.041 15.46C12.1959 15.61 12.4024 15.68 12.6089 15.68C12.8051 15.68 13.0117 15.61 13.1666 15.46L16.1819 12.55C16.3368 12.41 16.4194 12.21 16.4194 12C16.4194 11.8 16.3368 11.6 16.1819 11.46L13.1666 8.55C12.8568 8.25 12.3508 8.25 12.041 8.55C11.7312 8.85 11.7312 9.34 12.041 9.64L13.6932 11.23H7.29083V6.45C7.29083 4 9.35611 2 11.8861 2ZM2.5 11.9999C2.5 11.5799 2.85523 11.2299 3.2815 11.2299H7.29052V12.7699H3.2815C2.85523 12.7699 2.5 12.4299 2.5 11.9999Z"
-                  fill="currentColor"
-                ></path>
-              </svg>
-            </i>
-            <span class="item-name">Earn J4R</span>
-          </a>
-        </li>
 
         <li class="nav-item">
           <a class="nav-link" aria-current="page" href="/earn/redeem">
@@ -280,6 +237,165 @@
           </a>
         </li>
         <li class="nav-item">
+          <a
+            class="nav-link"
+            data-bs-toggle="collapse"
+            href="#sidebar-actions"
+            role="button"
+            aria-expanded="false"
+            aria-controls="sidebar-actions"
+          >
+            <i class="icon">
+              <svg
+                width="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M16.6653 2.01034C18.1038 1.92043 19.5224 2.41991 20.5913 3.3989C21.5703 4.46779 22.0697 5.88633 21.9898 7.33483V16.6652C22.0797 18.1137 21.5703 19.5322 20.6013 20.6011C19.5323 21.5801 18.1038 22.0796 16.6653 21.9897H7.33487C5.88636 22.0796 4.46781 21.5801 3.39891 20.6011C2.41991 19.5322 1.92043 18.1137 2.01034 16.6652V7.33483C1.92043 5.88633 2.41991 4.46779 3.39891 3.3989C4.46781 2.41991 5.88636 1.92043 7.33487 2.01034H16.6653ZM10.9811 16.845L17.7042 10.102C18.3136 9.4826 18.3136 8.48364 17.7042 7.87427L16.4056 6.57561C15.7862 5.95625 14.7872 5.95625 14.1679 6.57561L13.4985 7.25491C13.3986 7.35481 13.3986 7.52463 13.4985 7.62453C13.4985 7.62453 15.0869 9.20289 15.1169 9.24285C15.2268 9.36273 15.2967 9.52256 15.2967 9.70238C15.2967 10.062 15.007 10.3617 14.6374 10.3617C14.4675 10.3617 14.3077 10.2918 14.1978 10.1819L12.5295 8.5236C12.4496 8.44368 12.3098 8.44368 12.2298 8.5236L7.46474 13.2887C7.13507 13.6183 6.94527 14.0579 6.93528 14.5274L6.87534 16.8949C6.87534 17.0248 6.9153 17.1447 7.00521 17.2346C7.09512 17.3245 7.21499 17.3744 7.34486 17.3744H9.69245C10.172 17.3744 10.6315 17.1846 10.9811 16.845Z"
+                  fill="currentColor"
+                ></path>
+              </svg>
+            </i>
+            <span class="item-name">Actions</span>
+            <i class="right-icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </i>
+          </a>
+          <ul
+            class="sub-nav collapse"
+            id="sidebar-actions"
+            data-bs-parent="#sidebar-menu"
+          >
+            <li class="nav-item">
+              <a class="nav-link" href="/admin/actions/blacklist">
+                <i class="icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="10"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <g>
+                      <circle
+                        cx="12"
+                        cy="12"
+                        r="8"
+                        fill="currentColor"
+                      ></circle>
+                    </g>
+                  </svg>
+                </i>
+                <span class="item-name">Blacklist</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/admin/actions/coins">
+                <i class="icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="10"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <g>
+                      <circle
+                        cx="12"
+                        cy="12"
+                        r="8"
+                        fill="currentColor"
+                      ></circle>
+                    </g>
+                  </svg>
+                </i>
+                <span class="item-name">Coins</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/admin/actions/package">
+                <i class="icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="10"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <g>
+                      <circle
+                        cx="12"
+                        cy="12"
+                        r="8"
+                        fill="currentColor"
+                      ></circle>
+                    </g>
+                  </svg>
+                </i>
+                <span class="item-name">Set package</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/admin/actions/resource">
+                <i class="icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="10"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <g>
+                      <circle
+                        cx="12"
+                        cy="12"
+                        r="8"
+                        fill="currentColor"
+                      ></circle>
+                    </g>
+                  </svg>
+                </i>
+                <span class="item-name">Manage Resources</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/admin/actions/coupons">
+                <i class="icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="10"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <g>
+                      <circle
+                        cx="12"
+                        cy="12"
+                        r="8"
+                        fill="currentColor"
+                      ></circle>
+                    </g>
+                  </svg>
+                </i>
+                <span class="item-name">Coupons</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item mb-5">
           <a class="nav-link" aria-current="page" href="/admin/settings">
             <i class="icon">
               <svg
@@ -299,9 +415,8 @@
             <span class="item-name">Settings</span>
           </a>
         </li>
+        <% } %>
       </ul>
-      <% } %>
-      <!-- Sidebar Menu End -->
     </div>
   </div>
 </aside>

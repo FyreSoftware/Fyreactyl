@@ -3,13 +3,14 @@
 
 const fetch = require("node-fetch");
 const functions = require("../functions.js");
-const afk = require("./earn afk.js");
+const afk = require("./earning/afk.js");
 const yaml = require("js-yaml");
 const fs = require("fs");
 const ms = require("ms");
 const status_replies = yaml.load(
   fs.readFileSync("./status replies.yml", "utf8")
 );
+const axios = require("axios");
 
 const express = require("express");
 
@@ -60,7 +61,7 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
 
           if (permission === 1 || permission === 2) {
             // Must be signed in pages.
-            if (!req.session.data || !req.session.data.userinfo) {
+            if (!req.session.data || !req.session.data.dbinfo) {
               if (pathexists.no_permission_redirect)
                 return functions.doRedirect(
                   req,
@@ -122,6 +123,20 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
             );
           }
         }
+        if (pathexists.file) {
+          if (pathexists.file === "reset/password.ejs") {
+            if (!req.query.id) {
+              return res.redirect("/login");
+            }
+            const confirm = await process.db.fetchAccountByResetId(
+              req.query.id
+            );
+
+            if (!confirm) {
+              return res.redirect("/login");
+            }
+          }
+        }
       } else {
         // Multiple instances of the path name exists within pages.yml.
         console.log(
@@ -181,7 +196,19 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
     const dbSettings = await process.db.findOrCreateSettings(
       process.env.discord.guild
     );
-    const allj4r = await process.db.allJ4Rs();
+    const accounts = await process.db.allAccounts();
+
+    const d = await axios({
+      url: `${process.env.pterodactyl.domain}/api/application/servers`,
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.pterodactyl.key}`,
+        Accept: "application/json",
+      },
+    });
+
+    const nodes = Object.entries(process.env.locations);
 
     let packages = Object.values(process.env.packages.list);
     packages = packages.filter((pack) => pack.paid === true);
@@ -199,10 +226,12 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
       special: special,
       server_timers: server_timers,
       status_replies: status_replies,
-      j4r: allj4r,
       dbSettings: dbSettings,
       ms,
       packages,
+      accounts,
+      servers: d,
+      nodes,
     };
 
     if (req.session.variables) delete req.session.variables; // Deletes any given variables from another path after it is set on the "variables" object.
