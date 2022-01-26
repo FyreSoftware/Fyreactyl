@@ -143,6 +143,3 @@ renewal:
   deletion_time: 8.64e+7
 
   renew_fee: 10 # coins
-
-j4r:
-  enabled: false
