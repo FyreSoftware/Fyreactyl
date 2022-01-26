@@ -75,7 +75,7 @@ async function createSettings(id) {
       "INSERT INTO settings (id, name, smtp_server, smtp_port, smtp_user, smtp_pass) VALUES (?, ?, ?, ?, ?, ?)",
       [
         id,
-        "FyreActyl",
+        "Fyreactyl",
         process.env.mail.server,
         process.env.mail.port,
         process.env.mail.user,
@@ -729,16 +729,15 @@ module.exports = {
       });
     }
   },
-  async allAccounts () {
+  async allAccounts() {
     return new Promise((resolve, reject) => {
-      pool.query('SELECT * FROM accounts', function (error, results, fields) {
-        if (error) return reject(error)
+      pool.query("SELECT * FROM accounts", function (error, results, fields) {
+        if (error) return reject(error);
 
-        resolve(results)
-      })
-    })
+        resolve(results);
+      });
+    });
   },
-
 
   async claimCoupon(code) {
     const check_if_coupon_exists = await this.getCouponInfo(code);
