@@ -7,8 +7,6 @@ We highly discourage you to not ask support in votion development and instead as
 
 FyreActyl is a fork of dashactyl with custom features.
 
-FyreActyl uses [hope-ui](https://hopeui.iqonic.design/) as the theme.
-
 ## Installation
 
 FyreActyl doesn't require additional installation methods so you can just follow the [Dashactyl](https://docs.votion.dev/docs/Dashactyl/introduction/) installation method.
