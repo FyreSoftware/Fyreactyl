@@ -1,6 +1,7 @@
 # FyreActyl
 
 This is a fork of dashactyl all credits go to them.
+We highly discourage you to not ask support in votion development and instead ask in the [Fyre Developers Discord](https://discord.gg/mufvdGjKpP)
 
 ## What is FyreActyl?
 
