@@ -278,6 +278,9 @@
         border-bottom: 1px solid #30384f; }
   .dark .list-group-item {
     background-color: unset; }
+  @media (max-width: 991.98px) {
+    .dark .iq-navbar .navbar-collapse:not(.offcanvas-collapse) {
+      background: #222738; } }
   .dark .alert-primary {
     color: #6179ed;
     background-color: #17235d;
@@ -532,6 +535,30 @@
   .dark #top-tabbar-vertical li a {
     color: #8A92A6;
     background-color: #151824; }
+  .dark #top-tab-list li a {
+    color: #222738;
+    background: #151824; }
+    .dark #top-tab-list li a .iq-icon {
+      background: #222738; }
+      .dark #top-tab-list li a .iq-icon .svg-icon {
+        color: #fff; }
+    .dark #top-tab-list li a .dark-wizard {
+      color: white; }
+  .dark #top-tab-list li.active a {
+    background: #3a57e8;
+    color: #fff; }
+    .dark #top-tab-list li.active a .iq-icon {
+      background: #fff; }
+      .dark #top-tab-list li.active a .iq-icon .svg-icon {
+        color: #3a57e8; }
+  .dark #top-tab-list li.active.done a {
+    background: #1aa053; }
+    .dark #top-tab-list li.active.done a i {
+      color: #1aa053; }
+  .dark #top-tab-list li#confirm.active a {
+    background: #1aa053; }
+    .dark #top-tab-list li#confirm.active a i {
+      color: #1aa053; }
   .dark .table thead tr th {
     background-color: #151824; }
   .dark .table tbody tr td {

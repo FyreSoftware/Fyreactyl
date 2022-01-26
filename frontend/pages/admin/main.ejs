@@ -4,7 +4,12 @@
   <head>
     <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <title>Hope UI | Dashactyl</title>
+      <style>
+        body {
+          overflow-x: hidden;
+        }
+      </style>
+      <title>Hope UI | <%= dbSettings.name%></title>
       
       <!-- Favicon -->
       <link rel="shortcut icon" href="../assets/images/favicon.ico" />
@@ -196,108 +201,59 @@
         <!--Nav End-->
         </div>
       <div class="conatiner-fluid content-inner mt-n5 py-0">
-<div class="col-md-12 col-lg-8">
       <div class="row">
-         <div class="col-md-12">
-            <div class="card" data-aos="fade-up" data-aos-delay="900">
-               <div class="pb-4 border-0 card-header">
-                  <div class="p-4 border border-white rounded primary-gradient-card">
-                     <div class="d-flex justify-content-between align-items-center">
-                      <div class="col-md-5 col-sm-12">
-                        <h3>Administration</h3>
-                        <br>
-                        <div class="form-group mb-20">
-                          <h3>Blacklist user:</h3>
-                          <p>
-                                                  <label for="name">Discord ID:</label>
-                                                  <input name="name" type="text" id="userinfo_id" class="form-control"
-                                                      placeholder="Discord user id"><br>
-                                                     <!--  <button  class="btn btn-primary" onclick="asyncFunc(blacklistById())">Blacklist by ID</button> -->
-                                                      <button class="btn btn-primary"onclick="asyncAlert(userInfo(document.getElementById('userinfo_id').value))">Get Info</button>
-                                                      <button class="btn btn-success" onclick="asyncAlert(blacklistUser(document.getElementById('userinfo_id').value))">Blacklist</button>
-                                                      <button class="btn btn-danger"onclick="asyncAlert(unblacklistUser(document.getElementById('userinfo_id').value))">Unblacklist</button>
- 
-                       </p>
+                      <div class="col-lg-3 col-md-6">
+                        <div class="card">
+                           <div class="card-body">
+                              <div class="d-flex justify-content-between align-items-center">
+                                 <div class="bg-warning text-white rounded p-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 20 20" fill="currentColor">
+                                       <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                                    </svg>
+                                 </div>
+                                 <div class="text-end">
+                                    Users
+                                       <h2 class="counter"><%= accounts.length %></h2>
+                                 </div>
+                              </div>
+                           </div>
                         </div>
-                        <div class="form-group mb-20">
-                          <h3>Set coins</h3>
-                         <p>
-                             <label>Discord ID:</label>
-                             <input class="form-control" id="setcoins_id" placeholder="Discord ID">
-                             <label>Coins:</label>
-                              <input class="form-control" id="setcoins_coins"><br>
-                             <button class="btn btn-success" onclick="asyncAlert(setCoins(document.getElementById('setcoins_id').value, parseFloat(document.getElementById('setcoins_coins').value), true))">Add</button>
-                             <button class="btn btn-success"onclick="asyncAlert(setCoins(document.getElementById('setcoins_id').value, parseFloat(document.getElementById('setcoins_coins').value)))">Set</button>
-                         </p>
-             </div>
-             <div class="form-group mb-20">
-              <h3>Set package</h3>
-              <p>
-                  <label>Discord ID:</label>
-                  <input class="form-control" id="setpackage_id" placeholder="Discord ID">
-                  <label>Package:</label>
-                  <select class="form-select" id="setpackage_package">
-                      <option value="">Default package. (ID: <%= settings.packages.default %>)</option>
-                      <% for (let [ id, info ] of Object.entries(settings.packages.list)) { %>
-                          <option value="<%= id %>"><%= info.display %> (ID: <%= id %>) | Memory: <%= info.memory %>MB, Disk: <%= info.disk %>, CPU: <%= info.cpu %>, Servers: <%= info.servers %></option>
-                      <% } %>
-                  </select><br>
-                  <button class="btn btn-success"onclick="asyncAlert(setPackage(document.getElementById('setpackage_id').value, document.getElementById('setpackage_package').value.length == 0 ? null : document.getElementById('setpackage_package').value))">Set</button>
-              </p>
-          </div>
-          <div class="form-group mb-20">
-            <h3>Set extra resources</h3>
-            <p class="text-danger">Be careful when using this tool. The user might lose their extra resources from leaving a J4R server. Since resources can't become negatives, if their resources is supposed to go under zero, their resources will just be set to 0.</p>
-            <p>
-                <label>Discord ID:</label>
-                 <input class="form-control" id="setresources_id">
-                 <label>Memory:</label>
-                 <input class="form-control" id="setresources_memory">
-                <label>Disk:</label>
-                 <input class="form-control" id="setresources_disk">
-                <label>CPU:</label>
-                 <input class="form-control" id="setresources_cpu">
-                <label>Servers:</label>
-                 <input class="form-control" id="setresources_servers"><br>
-                <button class="btn btn-success"onclick="asyncAlert(setResources(document.getElementById('setresources_id').value, parseFloat(document.getElementById('setresources_memory').value), parseFloat(document.getElementById('setresources_disk').value), parseFloat(document.getElementById('setresources_cpu').value), parseFloat(document.getElementById('setresources_servers').value), true))">Add</button>
-                <button class="btn btn-success"onclick="asyncAlert(setResources(document.getElementById('setresources_id').value, parseFloat(document.getElementById('setresources_memory').value), parseFloat(document.getElementById('setresources_disk').value), parseFloat(document.getElementById('setresources_cpu').value), parseFloat(document.getElementById('setresources_servers').value)))">Set</button>
-            </p>
-            </div> 
-            <div class="form-group mb-20">
-              <h3>Create coupon.</h3>
-              <p>
-                  <label>Code:</label>
-                  <input class="form-control" id="createcoupon_code">
-                  <label>Coins:</label>
-                  <input class="form-control"id="createcoupon_coins">
-                  <label>Memory:</label>
-                  <input class="form-control"id="createcoupon_memory">
-                  <label>Disk:</label>
-                  <input class="form-control" id="createcoupon_disk">
-                  <label>CPU:</label>
-                  <input class="form-control" id="createcoupon_cpu">
-                  <label>Servers:</label>
-                  <input class="form-control" id="createcoupon_servers"><br>
-                  <button class="btn btn-success" onclick="asyncAlert(createCoupon(document.getElementById('createcoupon_code').value, parseFloat(document.getElementById('createcoupon_coins').value), parseFloat(document.getElementById('createcoupon_memory').value), parseFloat(document.getElementById('createcoupon_disk').value), parseFloat(document.getElementById('createcoupon_cpu').value), parseFloat(document.getElementById('createcoupon_servers').value)))">Create</button>
-              </p>
-              </div>
-              <div class="form-group mb-20">
-                <h3>Revoke coupon.</h3>
-                <p>
-                    <label>Code:</label>
-                    <input class="form-control " id="revokecoupon_code"><br>
-                    <button class="btn btn-danger" onclick="asyncAlert(revokeCoupon(document.getElementById('revokecoupon_code').value));">Revoke</button>
-                </p>
-            </div>
-                        
-             </div>
-            </div>
-        </div>
-                  </div>
+                     </div>
+                     <div class="col-lg-3 col-md-6">
+                      <div class="card">
+                         <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                               <div class="bg-warning text-white rounded p-3">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 20 20" fill="currentColor">
+                                     <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                                  </svg>
+                               </div>
+                               <div class="text-end">
+                                  Servers
+                                     <h2 class="counter"><%= servers.length || "0" %></h2>
+                               </div>
+                            </div>
+                         </div>
+                      </div>
                </div>
-            </div>
+               <div class="col-lg-3 col-md-6">
+                <div class="card">
+                   <div class="card-body">
+                      <div class="d-flex justify-content-between align-items-center">
+                         <div class="bg-warning text-white rounded p-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 20 20" fill="currentColor">
+                               <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                            </svg>
+                         </div>
+                         <div class="text-end">
+                            Nodes
+                               <h2 class="counter"><%= nodes.length %></h2>
+                         </div>
+                      </div>
+                   </div>
+                </div>
          </div>
-      </div>
+         </div>
       </div>
 
 

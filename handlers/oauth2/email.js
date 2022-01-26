@@ -22,37 +22,47 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
     const dbSettings = await process.db.findOrCreateSettings(
       process.env.discord.guild
     );
-    const mailer = nodemailer.createTransport({
-      host: dbSettings.smtp_server,
-      port: dbSettings.smtp_port,
-      secure: true,
-      auth: {
-        user: dbSettings.smtp_user,
-        pass: dbSettings.smtp_pass,
-      },
-    });
-    const id = functions.makeid(9);
-    var contentHTML = ` 
+    try {
+      const mailer = nodemailer.createTransport({
+        host: dbSettings.smtp_server,
+        port: dbSettings.smtp_port,
+        secure: true,
+        auth: {
+          user: dbSettings.smtp_user,
+          pass: dbSettings.smtp_pass,
+        },
+      });
+      const id = functions.makeid(9);
+      var contentHTML = ` 
     <h1>${dbSettings.name}</h1>
       Hello ${account.name}!
       <br>We've recently received a request for resetting your password, if this wasn't you, you can ignore this email.<br>
       If this was you please click this <a href="${process.env.website.url}/reset/password/form?id=${id}">link</a><br>
       Kind regards,<br>${dbSettings.name}
   `;
-    mailer.sendMail({
-      from: "main@tovade.xyz",
-      to: email,
-      subject: "Reset password",
-      html: contentHTML,
-    });
-    req.session.variables = {
-      success: {
-        message: `Sent an email to ${email}`,
-      },
-    };
+      mailer.sendMail({
+        from: "main@tovade.xyz",
+        to: email,
+        subject: "Reset password",
+        html: contentHTML,
+      });
+      req.session.variables = {
+        success: {
+          message: `Sent an email to ${email}`,
+        },
+      };
 
-    await process.db.updateResetId(email, id);
-    return res.redirect("/reset/password");
+      await process.db.updateResetId(email, id);
+      return res.redirect("/reset/password");
+    } catch (err) {
+      req.session.variables = {
+        error: {
+          message:
+            "Something went wrong with the smtp config. Please contact an administrator to fix this issue.",
+        },
+      };
+      return res.redirect("/login");
+    }
   });
   app.post("/accounts/email/password/reset/:id", async (req, res) => {
     if (!req.params.id) {

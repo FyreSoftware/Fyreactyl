@@ -81,12 +81,30 @@ pages:
   admin/main:
     file: admin/main.ejs
     permission: 2
-    no_permission_redirect: /login
+
+  admin/actions/blacklist:
+    file: admin/actions/blacklist.ejs
+    permission: 2
+
+  admin/actions/coins:
+    file: admin/actions/coins.ejs
+    permission: 2
+
+  admin/actions/resource:
+    file: admin/actions/resources.ejs
+    permission: 2
+
+  admin/actions/coupons:
+    file: admin/actions/coupon.ejs
+    permission: 2
+
+  admin/actions/package:
+    file: admin/actions/package.ejs
+    permission: 2
 
   admin/settings:
     file: admin/settings.ejs
     permission: 2
-    no_permission_redirect: /login
 
   reset/password/form:
     file: reset/password.ejs

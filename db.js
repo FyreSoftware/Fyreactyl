@@ -729,6 +729,16 @@ module.exports = {
       });
     }
   },
+  async allAccounts () {
+    return new Promise((resolve, reject) => {
+      pool.query('SELECT * FROM accounts', function (error, results, fields) {
+        if (error) return reject(error)
+
+        resolve(results)
+      })
+    })
+  },
+
 
   async claimCoupon(code) {
     const check_if_coupon_exists = await this.getCouponInfo(code);

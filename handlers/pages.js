@@ -10,6 +10,7 @@ const ms = require("ms");
 const status_replies = yaml.load(
   fs.readFileSync("./status replies.yml", "utf8")
 );
+const axios = require("axios");
 
 const express = require("express");
 
@@ -195,6 +196,19 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
     const dbSettings = await process.db.findOrCreateSettings(
       process.env.discord.guild
     );
+    const accounts = await process.db.allAccounts();
+
+    const d = await axios({
+      url: `${process.env.pterodactyl.domain}/api/application/servers`,
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.pterodactyl.key}`,
+        Accept: "application/json",
+      },
+    });
+
+    const nodes = Object.entries(process.env.locations);
 
     let packages = Object.values(process.env.packages.list);
     packages = packages.filter((pack) => pack.paid === true);
@@ -215,6 +229,9 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
       dbSettings: dbSettings,
       ms,
       packages,
+      accounts,
+      servers: d,
+      nodes,
     };
 
     if (req.session.variables) delete req.session.variables; // Deletes any given variables from another path after it is set on the "variables" object.

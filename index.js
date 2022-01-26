@@ -104,9 +104,6 @@ app.use(
     secret: process.env.website.secret,
     resave: true,
     saveUninitialized: true,
-    cookie: {
-      secure: process.env.website.secure,
-    },
     store: new SqliteStore({
       client: session_db,
       expired: {

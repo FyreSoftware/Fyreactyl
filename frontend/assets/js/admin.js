@@ -19,11 +19,29 @@ async function blacklistUser(id) {
 
   return await req.json();
 }
+async function blacklistUser_email(email) {
+  if (!email) return { error: "You forgot to provide an email" }; // temp err
+
+  const req = await fetch(`/api/users/blacklist/email/${email}`, {
+    method: "post",
+  });
+
+  return await req.json();
+}
 
 async function unblacklistUser(id) {
   if (!id) return { error: "You have not provided a user ID." }; // temp err
 
   const req = await fetch(`/api/users/unblacklist/${id}`, {
+    method: "post",
+  });
+
+  return await req.json();
+}
+async function unblacklistUser_email(email) {
+  if (!email) return { error: "You have not provided a user ID." }; // temp err
+
+  const req = await fetch(`/api/users/unblacklist/email/${email}`, {
     method: "post",
   });
 
@@ -35,6 +53,25 @@ async function setCoins(id, coins, add_coins) {
 
   const req = await fetch(
     `/api/users/${add_coins ? "add" : "set"}_coins/${id}`,
+    {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        coins: coins,
+      }),
+    }
+  );
+
+  return await req.json();
+}
+async function setCoins_email(email, coins, add_coins) {
+  if (!email) return { error: "You have not provided a user ID." }; // temp err
+
+  const req = await fetch(
+    `/api/users/${add_coins ? "add" : "set"}_coins/email/${email}`,
     {
       method: "post",
       headers: {
@@ -66,12 +103,57 @@ async function setPackage(id, pkg) {
 
   return await req.json();
 }
+async function setPackage_email(email, pkg) {
+  if (!email) return { error: "You have not provided a user ID." }; // temp err
+
+  const req = await fetch(`/api/resources/set_package/email/${email}`, {
+    method: "post",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify({
+      package: pkg,
+    }),
+  });
+
+  return await req.json();
+}
 
 async function setResources(id, memory, disk, cpu, servers, add_resources) {
   if (!id) return { error: "You have not provided a user ID." };
 
   const req = await fetch(
     `/api/resources/${add_resources ? "add" : "set"}_resources/${id}`,
+    {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        memory: memory,
+        disk: disk,
+        cpu: cpu,
+        servers: servers,
+      }),
+    }
+  );
+
+  return await req.json();
+}
+async function setResources_email(
+  email,
+  memory,
+  disk,
+  cpu,
+  servers,
+  add_resources
+) {
+  if (!email) return { error: "You have not provided a user ID." };
+
+  const req = await fetch(
+    `/api/resources/${add_resources ? "add" : "set"}_resources/email/${email}`,
     {
       method: "post",
       headers: {
@@ -190,12 +272,12 @@ async function deleteJ4R(j4r_id) {
 
 async function asyncAlert(func) {
   // temp func
-  alert(JSON.stringify(await func));
+  Swal.fire(JSON.stringify(await func));
 }
 async function asyncFunc(func) {
   await func;
 }
-async function blacklistById() {
+/*async function blacklistById() {
   const { value: id } = await Swal.fire({
     title: "Blacklisting by discord Id",
     input: "text",
@@ -216,7 +298,7 @@ async function blacklistById() {
       "success"
     );
   }
-}
+}*/
 async function updateSmtp(server, port, user, password) {
   const req = await fetch("/api/smtp/update", {
     method: "post",
@@ -234,3 +316,21 @@ async function updateSmtp(server, port, user, password) {
 
   return await req.json();
 }
+async function userinfo_email(email) {
+  if (!email) return { error: "You forgot to provide an email." }; // temp err
+
+  const req = await fetch(`/api/users/info/email/${email}`, {
+    method: "get",
+  });
+
+  return await req.json();
+}
+$(".js-modal-rel-trigger").click(function () {
+  var modalId = $(this).attr("data-target");
+  $(modalId).modal();
+
+  $(".modal-backdrop")
+    .addClass("modal-rel-backdrop")
+    .appendTo($(modalId).parent());
+  $("body").removeClass("modal-open");
+});

@@ -203,7 +203,6 @@ Index Of Script
   };
 
   updateMode();
-
   //dark-mode & light-mode
   const colorMode = document.querySelectorAll(
     '[data-setting="color-mode"][data-name="color"]'

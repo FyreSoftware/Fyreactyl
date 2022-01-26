@@ -11,34 +11,34 @@
         overflow-x: hidden;
       }
     </style>
-    <title>Hope UI | <%= dbSettings.name%>></title>
+    <title>Hope UI | <%= dbSettings.name %></title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="../assets/images/favicon.ico" />
+    <link rel="shortcut icon" href="../../assets/images/favicon.ico" />
 
     <!-- Nofications JS -->
-    <link rel="shortcut icon" href="../assets/js/nofications.js" />
+    <link rel="shortcut icon" href="../../assets/js/nofications.js" />
 
     <!-- Library / Plugin Css Build -->
-    <link rel="stylesheet" href="../assets/css/core/libs.min.css" />
+    <link rel="stylesheet" href="../../assets/css/core/libs.min.css" />
 
     <!-- Aos Animation Css -->
-    <link rel="stylesheet" href="../assets/vendor/aos/dist/aos.css" />
+    <link rel="stylesheet" href="../../assets/vendor/aos/dist/aos.css" />
 
     <!-- Hope Ui Design System Css -->
-    <link rel="stylesheet" href="../assets/css/hope-ui.min.css?v=1.1.1" />
+    <link rel="stylesheet" href="../../assets/css/hope-ui.min.css?v=1.1.2" />
 
     <!-- Custom Css -->
-    <link rel="stylesheet" href="../assets/css/custom.min.css?v=1.1.1" />
+    <link rel="stylesheet" href="../../assets/css/custom.min.css?v=1.1.2" />
 
     <!-- Dark Css -->
-    <link rel="stylesheet" href="../assets/css/dark.min.css" />
+    <link rel="stylesheet" href="../../assets/css/dark.min.css" />
 
     <!-- RTL Css -->
-    <link rel="stylesheet" href="../assets/css/rtl.min.css" />
+    <link rel="stylesheet" href="../../assets/css/rtl.min.css" />
 
     <!-- Customizer Css -->
-    <link rel="stylesheet" href="../assets/css/customizer.min.css" />
+    <link rel="stylesheet" href="../../assets/css/customizer.min.css" />
 
     <!-- SVG icon Css -->
     <link rel="stylesheet" href="http://svgicons.sparkk.fr/svgicons.css" />
@@ -48,7 +48,13 @@
     />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
   </head>
-  <body class="  ">
+  <body
+    class="uikit"
+    data-bs-spy="scroll"
+    data-bs-target="#elements-section"
+    data-bs-offset="0"
+    tabindex="0"
+  >
     <!-- loader Start -->
     <div id="loading">
       <div class="loader simple-loader">
@@ -57,7 +63,7 @@
     </div>
     <!-- loader END -->
 
-    <%- include('../components/sidebar') %>
+    <%- include('../../components/sidebar') %>
     <main class="main-content">
       <div class="position-relative">
         <!--Nav Start-->
@@ -249,7 +255,7 @@
                             <% if (variables) { %>
                             <img
                               class="p-1 avatar-40 rounded-pill bg-soft-primary"
-                              src="../assets/images/shapes/01.png"
+                              src="../../assets/images/shapes/01.png"
                               alt=""
                             />
                             <div class="ms-3 w-100">
@@ -293,32 +299,32 @@
                     aria-expanded="false"
                   >
                     <img
-                      src="../assets/images/avatars/01.png"
+                      src="../../assets/images/avatars/01.png"
                       alt="User-Profile"
                       class="theme-color-default-img img-fluid avatar avatar-50 avatar-rounded"
                     />
                     <img
-                      src="../assets/images/avatars/avtar_1.png"
+                      src="../../assets/images/avatars/avtar_1.png"
                       alt="User-Profile"
                       class="theme-color-purple-img img-fluid avatar avatar-50 avatar-rounded"
                     />
                     <img
-                      src="../assets/images/avatars/avtar_2.png"
+                      src="../../assets/images/avatars/avtar_2.png"
                       alt="User-Profile"
                       class="theme-color-blue-img img-fluid avatar avatar-50 avatar-rounded"
                     />
                     <img
-                      src="../assets/images/avatars/avtar_4.png"
+                      src="../../assets/images/avatars/avtar_4.png"
                       alt="User-Profile"
                       class="theme-color-green-img img-fluid avatar avatar-50 avatar-rounded"
                     />
                     <img
-                      src="../assets/images/avatars/avtar_5.png"
+                      src="../../assets/images/avatars/avtar_5.png"
                       alt="User-Profile"
                       class="theme-color-yellow-img img-fluid avatar avatar-50 avatar-rounded"
                     />
                     <img
-                      src="../assets/images/avatars/avtar_3.png"
+                      src="../../assets/images/avatars/avtar_3.png"
                       alt="User-Profile"
                       class="theme-color-pink-img img-fluid avatar avatar-50 avatar-rounded"
                     />
@@ -391,32 +397,32 @@
           </div>
           <div class="iq-header-img">
             <img
-              src="../assets/images/dashboard/top-header.png"
+              src="../../assets/images/dashboard/top-header.png"
               alt="header"
               class="theme-color-default-img img-fluid w-100 h-100 animated-scaleX"
             />
             <img
-              src="../assets/images/dashboard/top-header1.png"
+              src="../../assets/images/dashboard/top-header1.png"
               alt="header"
               class="theme-color-purple-img img-fluid w-100 h-100 animated-scaleX"
             />
             <img
-              src="../assets/images/dashboard/top-header2.png"
+              src="../../assets/images/dashboard/top-header2.png"
               alt="header"
               class="theme-color-blue-img img-fluid w-100 h-100 animated-scaleX"
             />
             <img
-              src="../assets/images/dashboard/top-header3.png"
+              src="../../assets/images/dashboard/top-header3.png"
               alt="header"
               class="theme-color-green-img img-fluid w-100 h-100 animated-scaleX"
             />
             <img
-              src="../assets/images/dashboard/top-header4.png"
+              src="../../assets/images/dashboard/top-header4.png"
               alt="header"
               class="theme-color-yellow-img img-fluid w-100 h-100 animated-scaleX"
             />
             <img
-              src="../assets/images/dashboard/top-header5.png"
+              src="../../assets/images/dashboard/top-header5.png"
               alt="header"
               class="theme-color-pink-img img-fluid w-100 h-100 animated-scaleX"
             />
@@ -437,126 +443,48 @@
                     <div
                       class="d-flex justify-content-between align-items-center"
                     >
-                      <div class="col-md-5 col-sm-12">
-                        <h3>Settings</h3>
-                        <br />
-                        <div class="bd-example">
-                          <nav>
-                            <div
-                              class="nav nav-tabs mb-2"
-                              id="nav-tab"
-                              role="tablist"
-                            >
-                              <button
-                                class="nav-link active"
-                                id="nav-home-tab"
-                                data-bs-toggle="tab"
-                                data-bs-target="#nav-home"
-                                type="button"
-                                role="tab"
-                                aria-controls="nav-home"
-                                aria-selected="true"
-                              >
-                                Main Settings
-                              </button>
-                              <button
-                                class="nav-link"
-                                id="nav-smtp-tab"
-                                data-bs-toggle="tab"
-                                data-bs-target="#nav-smtp"
-                                type="button"
-                                role="tab"
-                                aria-controls="nav-smtp"
-                                aria-selected="false"
-                              >
-                                SMTP
-                              </button>
-                            </div>
-                          </nav>
-                          <div class="tab-content" id="nav-tabContent">
-                            <div
-                              class="tab-pane fade show active"
-                              id="nav-home"
-                              role="tabpanel"
-                              aria-labelledby="nav-home-tab"
-                            >
-                              <div class="form-group mb-20">
-                                <h3>Change name:</h3>
-                                <p>
-                                  <label for="name">New name:</label>
-                                  <input
-                                    name="name"
-                                    type="text"
-                                    class="form-control"
-                                    id="name"
-                                    value="<%= dbSettings.name %>"
-                                  /><br />
-                                  <button
-                                    class="btn btn-primary"
-                                    onclick="asyncAlert(updateName('<%= settings.discord.guild %>', document.getElementById('name').value))"
-                                  >
-                                    Update
-                                  </button>
-                                </p>
-                              </div>
-                            </div>
-                            <div
-                              class="tab-pane fade"
-                              id="nav-smtp"
-                              role="tabpanel"
-                              aria-labelledby="nav-smtp-tab"
-                            >
-                              <form>
-                                <div class="form-group mb-20">
-                                  <h3>Change settings:</h3>
-                                  <p>
-                                    <label for="server">Server:</label>
-                                    <input
-                                      name="server"
-                                      type="text"
-                                      class="form-control"
-                                      id="server"
-                                      value="<%= dbSettings.smtp_server %>"
-                                      required
-                                    /><br />
-                                    <label for="port">Port:</label>
-                                    <input
-                                      name="port"
-                                      type="text"
-                                      class="form-control"
-                                      id="port"
-                                      value="<%= dbSettings.smtp_port %>"
-                                      required
-                                    /><br />
-                                    <label for="user">Username:</label>
-                                    <input
-                                      name="user"
-                                      type="text"
-                                      class="form-control"
-                                      id="user"
-                                      value="<%=dbSettings.smtp_user%>"
-                                      required
-                                    /><br />
-                                    <label for="pass">Password:</label>
-                                    <input
-                                      name="pass"
-                                      type="password"
-                                      class="form-control"
-                                      id="pass"
-                                      required
-                                    /><br />
-                                    <button
-                                      class="btn btn-primary"
-                                      onclick="asyncAlert(updateSmtp(document.getElementById('server').value, document.getElementById('port').value, document.getElementById('user').value, document.getElementById('pass').value))"
-                                    >
-                                      Update
-                                    </button>
-                                  </p>
-                                </div>
-                              </form>
-                            </div>
-                          </div>
-                        </div>
+                      <div class="col-md-6 col-sm-12">
+                        <h3>Create coupon.</h3>
+                        <p>
+                          <label>Code:</label>
+                          <input class="form-control" id="createcoupon_code" />
+                          <label>Coins:</label>
+                          <input class="form-control" id="createcoupon_coins" />
+                          <label>Memory:</label>
+                          <input
+                            class="form-control"
+                            id="createcoupon_memory"
+                          />
+                          <label>Disk:</label>
+                          <input class="form-control" id="createcoupon_disk" />
+                          <label>CPU:</label>
+                          <input class="form-control" id="createcoupon_cpu" />
+                          <label>Servers:</label>
+                          <input
+                            class="form-control"
+                            id="createcoupon_servers"
+                          /><br />
+                          <button
+                            class="btn btn-success"
+                            onclick="asyncAlert(createCoupon(document.getElementById('createcoupon_code').value, parseFloat(document.getElementById('createcoupon_coins').value), parseFloat(document.getElementById('createcoupon_memory').value), parseFloat(document.getElementById('createcoupon_disk').value), parseFloat(document.getElementById('createcoupon_cpu').value), parseFloat(document.getElementById('createcoupon_servers').value)))"
+                          >
+                            Create
+                          </button>
+                        </p>
+                        <h3>Revoke coupon.</h3>
+                        <p>
+                          <label>Code:</label>
+                          <input
+                            class="form-control"
+                            id="revokecoupon_code"
+                          /><br />
+                          <button
+                            class="btn btn-danger"
+                            onclick="asyncAlert(revokeCoupon(document.getElementById('revokecoupon_code').value));"
+                          >
+                            Revoke
+                          </button>
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -567,7 +495,7 @@
         </div>
       </div>
       <!-- Footer Section Start -->
-      <%- include("../components/footer.ejs") %>
+      <%- include("../../components/footer.ejs") %>
       <!-- Footer Section End -->
     </main>
     <a
@@ -838,7 +766,7 @@
             <div class="d-grid gap-x-3 grid-cols-2 mb-4">
               <div class="text-center">
                 <img
-                  src="../assets/images/settings/dark/01.png"
+                  src="../../assets/images/settings/dark/01.png"
                   alt="ltr"
                   class="mode dark-img img-fluid btn-border p-0 flex-column active"
                   data-setting="dir-mode"
@@ -846,7 +774,7 @@
                   data-value="ltr"
                 />
                 <img
-                  src="../assets/images/settings/light/01.png"
+                  src="../../assets/images/settings/light/01.png"
                   alt="ltr"
                   class="mode light-img img-fluid btn-border p-0 flex-column active"
                   data-setting="dir-mode"
@@ -857,7 +785,7 @@
               </div>
               <div class="text-center">
                 <img
-                  src="../assets/images/settings/dark/02.png"
+                  src="../../assets/images/settings/dark/02.png"
                   alt=""
                   class="mode dark-img img-fluid btn-border p-0 flex-column"
                   data-setting="dir-mode"
@@ -865,7 +793,7 @@
                   data-value="rtl"
                 />
                 <img
-                  src="../assets/images/settings/light/02.png"
+                  src="../../assets/images/settings/light/02.png"
                   alt=""
                   class="mode light-img img-fluid btn-border p-0 flex-column"
                   data-setting="dir-mode"
@@ -970,7 +898,7 @@
             <div class="d-grid gap-x-3 grid-cols-3 mb-4">
               <div class="text-center">
                 <img
-                  src="../assets/images/settings/dark/03.png"
+                  src="../../assets/images/settings/dark/03.png"
                   alt="mini"
                   class="mode dark-img img-fluid btn-border p-0 flex-column"
                   data-setting="sidebar"
@@ -978,7 +906,7 @@
                   data-value="sidebar-mini"
                 />
                 <img
-                  src="../assets/images/settings/light/03.png"
+                  src="../../assets/images/settings/light/03.png"
                   alt="mini"
                   class="mode light-img img-fluid btn-border p-0 flex-column"
                   data-setting="sidebar"
@@ -989,7 +917,7 @@
               </div>
               <div class="text-center">
                 <img
-                  src="../assets/images/settings/dark/04.png"
+                  src="../../assets/images/settings/dark/04.png"
                   alt="hover"
                   class="mode dark-img img-fluid btn-border p-0 flex-column"
                   data-setting="sidebar"
@@ -998,7 +926,7 @@
                   data-extra-value="sidebar-mini"
                 />
                 <img
-                  src="../assets/images/settings/light/04.png"
+                  src="../../assets/images/settings/light/04.png"
                   alt="hover"
                   class="mode light-img img-fluid btn-border p-0 flex-column"
                   data-setting="sidebar"
@@ -1010,7 +938,7 @@
               </div>
               <div class="text-center">
                 <img
-                  src="../assets/images/settings/dark/05.png"
+                  src="../../assets/images/settings/dark/05.png"
                   alt="boxed"
                   class="mode dark-img img-fluid btn-border p-0 flex-column"
                   data-setting="sidebar"
@@ -1018,7 +946,7 @@
                   data-value="sidebar-boxed"
                 />
                 <img
-                  src="../assets/images/settings/light/05.png"
+                  src="../../assets/images/settings/light/05.png"
                   alt="boxed"
                   class="mode light-img img-fluid btn-border p-0 flex-column"
                   data-setting="sidebar"
@@ -1033,7 +961,7 @@
             <div class="d-grid gap-x-3 grid-cols-2 mb-4">
               <div class="mb-4 text-center">
                 <img
-                  src="../assets/images/settings/dark/06.png"
+                  src="../../assets/images/settings/dark/06.png"
                   alt="rounded-one-side"
                   class="mode dark-img img-fluid btn-border p-0 flex-column"
                   data-setting="sidebar"
@@ -1041,7 +969,7 @@
                   data-value="navs-rounded"
                 />
                 <img
-                  src="../assets/images/settings/light/06.png"
+                  src="../../assets/images/settings/light/06.png"
                   alt="rounded-one-side"
                   class="mode light-img img-fluid btn-border p-0 flex-column"
                   data-setting="sidebar"
@@ -1052,7 +980,7 @@
               </div>
               <div class="mb-4 text-center">
                 <img
-                  src="../assets/images/settings/dark/07.png"
+                  src="../../assets/images/settings/dark/07.png"
                   alt="rounded-all"
                   class="mode dark-img img-fluid btn-border p-0 flex-column active"
                   data-setting="sidebar"
@@ -1060,7 +988,7 @@
                   data-value="navs-rounded-all"
                 />
                 <img
-                  src="../assets/images/settings/light/07.png"
+                  src="../../assets/images/settings/light/07.png"
                   alt="rounded-all"
                   class="mode light-img img-fluid btn-border p-0 flex-column active"
                   data-setting="sidebar"
@@ -1071,7 +999,7 @@
               </div>
               <div class="mb-4 text-center">
                 <img
-                  src="../assets/images/settings/dark/08.png"
+                  src="../../assets/images/settings/dark/08.png"
                   alt="pill-one-side"
                   class="mode dark-img img-fluid btn-border p-0 flex-column"
                   data-setting="sidebar"
@@ -1079,7 +1007,7 @@
                   data-value="navs-pill"
                 />
                 <img
-                  src="../assets/images/settings/light/08.png"
+                  src="../../assets/images/settings/light/08.png"
                   alt="pill-one-side"
                   class="mode light-img img-fluid btn-border p-0 flex-column"
                   data-setting="sidebar"
@@ -1090,7 +1018,7 @@
               </div>
               <div class="mb-4 text-center">
                 <img
-                  src="../assets/images/settings/dark/09.png"
+                  src="../../assets/images/settings/dark/09.png"
                   alt="pill-all"
                   class="mode dark-img img-fluid btn-border p-0 flex-column"
                   data-setting="sidebar"
@@ -1098,7 +1026,7 @@
                   data-value="navs-pill-all"
                 />
                 <img
-                  src="../assets/images/settings/light/09.png"
+                  src="../../assets/images/settings/light/09.png"
                   alt="pill-all"
                   class="mode light-img img-fluid btn-border p-0 flex-column"
                   data-setting="sidebar"
@@ -1113,7 +1041,7 @@
             <div class="d-grid gap-x-3 grid-cols-2">
               <div class="mb-4 text-center">
                 <img
-                  src="../assets/images/settings/dark/10.png"
+                  src="../../assets/images/settings/dark/10.png"
                   alt="image"
                   class="mode dark-img img-fluid btn-border p-0 flex-column"
                   data-setting="navbar"
@@ -1122,7 +1050,7 @@
                   data-value="nav-glass"
                 />
                 <img
-                  src="../assets/images/settings/light/10.png"
+                  src="../../assets/images/settings/light/10.png"
                   alt="image"
                   class="mode light-img img-fluid btn-border p-0 flex-column"
                   data-setting="navbar"
@@ -1134,7 +1062,7 @@
               </div>
               <div class="mb-4 text-center">
                 <img
-                  src="../assets/images/settings/dark/11.png"
+                  src="../../assets/images/settings/dark/11.png"
                   alt="color"
                   class="mode dark-img img-fluid btn-border p-0 flex-column"
                   data-setting="navbar"
@@ -1143,7 +1071,7 @@
                   data-value="navs-bg-color"
                 />
                 <img
-                  src="../assets/images/settings/light/11.png"
+                  src="../../assets/images/settings/light/11.png"
                   alt="color"
                   class="mode light-img img-fluid btn-border p-0 flex-column"
                   data-setting="navbar"
@@ -1155,7 +1083,7 @@
               </div>
               <div class="mb-4 text-center">
                 <img
-                  src="../assets/images/settings/dark/12.png"
+                  src="../../assets/images/settings/dark/12.png"
                   alt="sticky"
                   class="mode dark-img img-fluid btn-border p-0 flex-column"
                   data-setting="navbar"
@@ -1164,7 +1092,7 @@
                   data-value="navs-sticky"
                 />
                 <img
-                  src="../assets/images/settings/light/12.png"
+                  src="../../assets/images/settings/light/12.png"
                   alt="sticky"
                   class="mode light-img img-fluid btn-border p-0 flex-column"
                   data-setting="navbar"
@@ -1176,7 +1104,7 @@
               </div>
               <div class="mb-4 text-center">
                 <img
-                  src="../assets/images/settings/dark/12.png"
+                  src="../../assets/images/settings/dark/12.png"
                   alt="transparent"
                   class="mode dark-img img-fluid btn-border p-0 flex-column"
                   data-setting="navbar"
@@ -1185,7 +1113,7 @@
                   data-value="navs-transparent"
                 />
                 <img
-                  src="../assets/images/settings/light/12.png"
+                  src="../../assets/images/settings/light/12.png"
                   alt="transparent"
                   class="mode light-img img-fluid btn-border p-0 flex-column"
                   data-setting="navbar"
@@ -1226,35 +1154,34 @@
       </div>
     </div>
     <!-- Library Bundle Script -->
-    <script src="../assets/js/core/libs.min.js"></script>
-
+    <script src="../../assets/js/core/libs.min.js"></script>
     <!-- External Library Bundle Script -->
-    <script src="../assets/js/core/external.min.js"></script>
+    <script src="../../assets/js/core/external.min.js"></script>
 
     <!-- Widgetchart Script -->
-    <script src="../assets/js/charts/widgetcharts.js"></script>
+    <script src="../../assets/js/charts/widgetcharts.js"></script>
 
     <!-- mapchart Script -->
-    <script src="../assets/js/charts/vectore-chart.js"></script>
-    <script src="../assets/js/charts/dashboard.js"></script>
+    <script src="../../assets/js/charts/vectore-chart.js"></script>
+    <script src="../../assets/js/charts/dashboard.js"></script>
 
     <!-- fslightbox Script -->
-    <script src="../assets/js/plugins/fslightbox.js"></script>
+    <script src="../../assets/js/plugins/fslightbox.js"></script>
 
     <!-- Settings Script -->
-    <script src="../assets/js/plugins/setting.js"></script>
+    <script src="../../assets/js/plugins/setting.js"></script>
 
     <!-- Form Wizard Script -->
-    <script src="../assets/js/plugins/form-wizard.js"></script>
+    <script src="../../assets/js/form-wizard.js"></script>
 
     <!-- AOS Animation Plugin-->
-    <script src="../assets/vendor/aos/dist/aos.js"></script>
+    <script src="../../assets/vendor/aos/dist/aos.js"></script>
 
     <!-- App Script -->
-    <script src="../assets/js/hope-ui.js" defer></script>
+    <script src="../../assets/js/hope-ui.js" defer></script>
     <!-- Notification script -->
-    <script src="../assets/js/notifications.js"></script>
+    <script src="../../assets/js/notifications.js"></script>
 
-    <script type="text/javascript" src="../assets/js/admin.js"></script>
+    <script type="text/javascript" src="../../assets/js/admin.js"></script>
   </body>
 </html>
