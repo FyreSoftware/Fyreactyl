@@ -22,7 +22,7 @@ export const registerController = async (
       success: true,
       user: data,
     });
-  } catch (err) {
+  } catch (err: any) {
     res.status(500).json({
       success: false,
       error: err.message,

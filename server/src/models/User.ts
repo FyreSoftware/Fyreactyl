@@ -50,7 +50,7 @@ UserSchema.statics.build = (attr: IUser) => {
   return new User(attr);
 };
 
-UserSchema.pre("save", async function (this: UserDoc, next) {
+UserSchema.pre("save", async function (this: any, next: any) {
   if (!this.isModified("password")) {
     next();
   }
