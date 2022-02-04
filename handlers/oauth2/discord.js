@@ -128,41 +128,35 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
       userinfo.guilds = guilds;
 
       if (process.env.discord.guild) {
-        const check_if_banned = (
-          await fetch(
-            `https://discord.com/api/guilds/${process.env.discord.guild}/bans/${userinfo.id}`,
-            {
-              method: "get",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bot ${process.env.discord.token}`,
-              },
-            }
-          )
-        ).status;
+        const check_if_banned = await fetch(
+          `https://discord.com/api/guilds/${process.env.discord.guild}/bans/${userinfo.id}`,
+          {
+            method: "get",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bot ${process.env.discord.token}`,
+            },
+          }
+        ).then((d) => d.json());
 
-        if (check_if_banned === 200) {
-          await process.db.toggleBlacklistByDiscordID(userinfo.id, true);
-        } else if (check_if_banned === 404) {
-          await fetch(
-            `https://discord.com/api/guilds/${process.env.discord.guild}/members/${userinfo.id}`,
-            {
-              method: "put",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bot ${process.env.discord.token}`,
-              },
-              body: JSON.stringify({
-                access_token: tokenInfo.access_token,
-              }),
-            }
-          );
-        } else {
-          console.log(
-            "[AUTO JOIN SERVER] For some reason, the status code is " +
-              check_if_banned +
-              ", instead of 200 or 404. You should worry about this."
-          );
+        if (check_if_banned) {
+          if (check_if_banned.code === 10026) {
+            await fetch(
+              `https://discord.com/api/guilds/${process.env.discord.guild}/members/${userinfo.id}`,
+              {
+                method: "put",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bot ${process.env.discord.token}`,
+                },
+                body: JSON.stringify({
+                  access_token: tokenInfo.access_token,
+                }),
+              }
+            );
+          } else {
+            await process.db.toggleBlacklistByDiscordID(userinfo.id, true);
+          }
         }
       }
 
@@ -263,41 +257,35 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
       userinfo.guilds = guilds;
 
       if (process.env.discord.guild) {
-        const check_if_banned = (
-          await fetch(
-            `https://discord.com/api/guilds/${process.env.discord.guild}/bans/${userinfo.id}`,
-            {
-              method: "get",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bot ${process.env.discord.token}`,
-              },
-            }
-          )
-        ).status;
+        const check_if_banned = await fetch(
+          `https://discord.com/api/guilds/${process.env.discord.guild}/bans/${userinfo.id}`,
+          {
+            method: "get",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bot ${process.env.discord.token}`,
+            },
+          }
+        ).then((d) => d.json());
 
-        if (check_if_banned === 200) {
-          await process.db.toggleBlacklistByDiscordID(userinfo.id, true);
-        } else if (check_if_banned === 404) {
-          await fetch(
-            `https://discord.com/api/guilds/${process.env.discord.guild}/members/${userinfo.id}`,
-            {
-              method: "put",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bot ${process.env.discord.token}`,
-              },
-              body: JSON.stringify({
-                access_token: tokenInfo.access_token,
-              }),
-            }
-          );
-        } else {
-          console.log(
-            "[AUTO JOIN SERVER] For some reason, the status code is " +
-              check_if_banned +
-              ", instead of 200 or 404. You should worry about this."
-          );
+        if (check_if_banned) {
+          if (check_if_banned.code === 10026) {
+            await fetch(
+              `https://discord.com/api/guilds/${process.env.discord.guild}/members/${userinfo.id}`,
+              {
+                method: "put",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bot ${process.env.discord.token}`,
+                },
+                body: JSON.stringify({
+                  access_token: tokenInfo.access_token,
+                }),
+              }
+            );
+          } else {
+            await process.db.toggleBlacklistByDiscordID(userinfo.id, true);
+          }
         }
       }
 
@@ -447,41 +435,35 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
       userinfo.guilds = guilds;
 
       if (process.env.discord.guild) {
-        const check_if_banned = (
-          await fetch(
-            `https://discord.com/api/guilds/${process.env.discord.guild}/bans/${userinfo.id}`,
-            {
-              method: "get",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bot ${process.env.discord.token}`,
-              },
-            }
-          )
-        ).status;
+        const check_if_banned = await fetch(
+          `https://discord.com/api/guilds/${process.env.discord.guild}/bans/${userinfo.id}`,
+          {
+            method: "get",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bot ${process.env.discord.token}`,
+            },
+          }
+        ).then((d) => d.json());
 
-        if (check_if_banned === 200) {
-          await process.db.toggleBlacklistByDiscordID(userinfo.id, true);
-        } else if (check_if_banned === 404) {
-          await fetch(
-            `https://discord.com/api/guilds/${process.env.discord.guild}/members/${userinfo.id}`,
-            {
-              method: "put",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bot ${process.env.discord.token}`,
-              },
-              body: JSON.stringify({
-                access_token: tokenInfo.access_token,
-              }),
-            }
-          );
-        } else {
-          console.log(
-            "[AUTO JOIN SERVER] For some reason, the status code is " +
-              check_if_banned +
-              ", instead of 200 or 404. You should worry about this."
-          );
+        if (check_if_banned) {
+          if (check_if_banned.code === 10026) {
+            await fetch(
+              `https://discord.com/api/guilds/${process.env.discord.guild}/members/${userinfo.id}`,
+              {
+                method: "put",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bot ${process.env.discord.token}`,
+                },
+                body: JSON.stringify({
+                  access_token: tokenInfo.access_token,
+                }),
+              }
+            );
+          } else {
+            await process.db.toggleBlacklistByDiscordID(userinfo.id, true);
+          }
         }
       }
 
