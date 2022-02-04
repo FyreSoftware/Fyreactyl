@@ -489,8 +489,10 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
       let emailinfo = await process.db.fetchAccountByEmail(userinfo.email);
       if (emailinfo) {
         req.session.variables = {
-          message:
-            "You already have an account with that email please sign in!",
+          error: {
+            message:
+              "You already have an account with that email please sign in!",
+          },
         };
         return res.redirect("/");
       }
@@ -530,8 +532,10 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
         };
       } else {
         req.session.variables = {
-          message:
-            "You already have an account with that email please sign in!",
+          error: {
+            message:
+              "You already have an account with that email please sign in!",
+          },
         };
         return res.redirect("/");
       }
