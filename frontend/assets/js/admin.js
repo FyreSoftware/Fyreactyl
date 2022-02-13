@@ -60,7 +60,7 @@ async function setCoins(id, coins, add_coins) {
         Accept: "application/json",
       },
       body: JSON.stringify({
-        coins: coins,
+        coins: Number(coins),
       }),
     }
   );
@@ -79,7 +79,7 @@ async function setCoins_email(email, coins, add_coins) {
         Accept: "application/json",
       },
       body: JSON.stringify({
-        coins: coins,
+        coins: Number(coins),
       }),
     }
   );
@@ -132,10 +132,10 @@ async function setResources(id, memory, disk, cpu, servers, add_resources) {
         Accept: "application/json",
       },
       body: JSON.stringify({
-        memory: memory,
-        disk: disk,
-        cpu: cpu,
-        servers: servers,
+        memory: Number(memory),
+        disk: Number(disk),
+        cpu: Number(cpu),
+        servers: Number(servers),
       }),
     }
   );
@@ -161,10 +161,10 @@ async function setResources_email(
         Accept: "application/json",
       },
       body: JSON.stringify({
-        memory: memory,
-        disk: disk,
-        cpu: cpu,
-        servers: servers,
+        memory: Number(memory),
+        disk: Number(disk),
+        cpu: Number(cpu),
+        servers: Number(servers),
       }),
     }
   );
