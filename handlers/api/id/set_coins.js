@@ -21,6 +21,7 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
         return res.json({ error: process.api_messages.extra.invaliduserid });
 
       const coins = req.body.coins;
+      console.log(coins);
 
       if (typeof coins !== "number")
         return res.json({ error: process.api_messages.coins.mustbeanumber });

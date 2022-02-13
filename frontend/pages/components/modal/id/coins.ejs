@@ -38,7 +38,12 @@
                 placeholder="Enter discord id here"
               />
               <label>Coins:</label>
-              <input class="form-control" id="setcoins_coins" />
+              <input
+                class="form-control"
+                id="setcoins_coins_i"
+                type="text"
+                name="coins"
+              />
             </p>
           </div>
         </div>
@@ -52,13 +57,13 @@
           </button>
           <button
             class="btn btn-success"
-            onclick="asyncAlert(setCoins(document.getElementById('discord_id').value, parseFloat(document.getElementById('setcoins_coins').value), true))"
+            onclick="asyncAlert(setCoins(document.getElementById('discord_id').value, document.getElementById('setcoins_coins_i').value, true))"
           >
             Add
           </button>
           <button
             class="btn btn-success"
-            onclick="asyncAlert(setCoins(document.getElementById('discord_id').value, parseFloat(document.getElementById('setcoins_coins').value)))"
+            onclick="asyncAlert(setCoins(document.getElementById('discord_id').value, document.getElementById('setcoins_coins_i').value, false))"
           >
             Set
           </button>

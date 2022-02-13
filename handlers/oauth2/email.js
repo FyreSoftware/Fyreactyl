@@ -100,7 +100,7 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
       req.body.email
     );
 
-    if (userinfo_withemail.discord_id && !userinfo_withemail.password) {
+    if (userinfo_withemail?.discord_id && !userinfo_withemail.password) {
       req.session.variables = {
         error: {
           message:

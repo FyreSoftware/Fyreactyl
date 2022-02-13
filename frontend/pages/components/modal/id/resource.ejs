@@ -38,13 +38,13 @@
                 placeholder="Enter discord id here"
               />
               <label>Memory:</label>
-              <input class="form-control" id="setresources_memory" />
+              <input class="form-control" id="setresources_memory_i" />
               <label>Disk:</label>
-              <input class="form-control" id="setresources_disk" />
+              <input class="form-control" id="setresources_disk_i" />
               <label>CPU:</label>
-              <input class="form-control" id="setresources_cpu" />
+              <input class="form-control" id="setresources_cpu_i" />
               <label>Servers:</label>
-              <input class="form-control" id="setresources_servers" />
+              <input class="form-control" id="setresources_servers_i" />
             </p>
           </div>
         </div>
@@ -58,13 +58,13 @@
           </button>
           <button
             class="btn btn-success"
-            onclick="asyncAlert(setResources(document.getElementById('discord_id').value, parseFloat(document.getElementById('setresources_memory').value), parseFloat(document.getElementById('setresources_disk').value), parseFloat(document.getElementById('setresources_cpu').value), parseFloat(document.getElementById('setresources_servers').value), true))"
+            onclick="asyncAlert(setResources(document.getElementById('discord_id').value, parseFloat(document.getElementById('setresources_memory_i').value), parseFloat(document.getElementById('setresources_disk_i').value), parseFloat(document.getElementById('setresources_cpu_i').value), parseFloat(document.getElementById('setresources_servers_i').value), true))"
           >
             Add
           </button>
           <button
             class="btn btn-success"
-            onclick="asyncAlert(setResources(document.getElementById('discord_id').value, parseFloat(document.getElementById('setresources_memory').value), parseFloat(document.getElementById('setresources_disk').value), parseFloat(document.getElementById('setresources_cpu').value), parseFloat(document.getElementById('setresources_servers').value)))"
+            onclick="asyncAlert(setResources(document.getElementById('discord_id').value, parseFloat(document.getElementById('setresources_memory_i').value), parseFloat(document.getElementById('setresources_disk_i').value), parseFloat(document.getElementById('setresources_cpu_i').value), parseFloat(document.getElementById('setresources_servers_i').value)))"
           >
             Set
           </button>
