@@ -50,7 +50,7 @@ async function unblacklistUser_email(email) {
 
 async function setCoins(id, coins, add_coins) {
   if (!id) return { error: "You have not provided a user ID." }; // temp err
-  console.log(coins);
+  
 
   const req = await fetch(
     `/api/users/${add_coins ? "add" : "set"}_coins/${id}`,
