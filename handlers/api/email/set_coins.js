@@ -1,12 +1,12 @@
 /* eslint-disable camelcase */
 /* eslint-disable no-mixed-operators */
 module.exports.load = async function (app, ifValidAPI, ejs) {
-  app.post("/api/users/set_coins/email/:email", async (req, res) => {
+  app.post('/api/users/set_coins/email/:email', async (req, res) => {
     if (
       (req.session.data && req.session.data.panelinfo.root_admin) ||
-      ifValidAPI(req, res, "set coins")
+      ifValidAPI(req, res, 'set coins')
     ) {
-      if (typeof req.body !== "object")
+      if (typeof req.body !== 'object')
         return res.json({
           error: process.api_messages.core.bodymustbeanobject,
         });
@@ -22,7 +22,7 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
 
       const coins = req.body.coins;
 
-      if (typeof coins !== "number")
+      if (typeof coins !== 'number')
         return res.json({ error: process.api_messages.coins.mustbeanumber });
       if (isNaN(coins))
         return res.json({ error: process.api_messages.coins.cannotbenan }); // This might also not be possible.
@@ -34,7 +34,6 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
       res.json({
         error: process.api_messages.core.noError,
         coins: await process.db.setCoinsByEmail(email, coins),
-        user_id: user_id,
       });
     }
   });
