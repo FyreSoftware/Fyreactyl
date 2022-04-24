@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
-const fetch = require("node-fetch");
-const mysql = require("mysql2");
+const fetch = require('node-fetch');
+const mysql = require('mysql2');
 const pool = mysql.createPool({
   host: process.env.database.host,
   port: process.env.database.port,
@@ -72,10 +72,10 @@ pool.query(
 async function createSettings(id) {
   return new Promise((resolve, reject) => {
     pool.query(
-      "INSERT INTO settings (id, name, smtp_server, smtp_port, smtp_user, smtp_pass) VALUES (?, ?, ?, ?, ?, ?)",
+      'INSERT INTO settings (id, name, smtp_server, smtp_port, smtp_user, smtp_pass) VALUES (?, ?, ?, ?, ?, ?)',
       [
         id,
-        "Fyreactyl",
+        'Fyreactyl',
         process.env.mail.server,
         process.env.mail.port,
         process.env.mail.user,
@@ -94,7 +94,7 @@ module.exports = {
   async findOrCreateSettings(id) {
     return new Promise((resolve, reject) => {
       pool.query(
-        "SELECT * FROM settings WHERE id = ?",
+        'SELECT * FROM settings WHERE id = ?',
         [id],
         async function (error, results, fields) {
           if (error) return reject(error);
@@ -111,7 +111,7 @@ module.exports = {
   async updatePassword(email, password) {
     return new Promise((resolve, reject) => {
       pool.query(
-        "UPDATE accounts SET password = ? WHERE email = ?",
+        'UPDATE accounts SET password = ? WHERE email = ?',
         [password, email],
 
         function (error, results, fields) {
@@ -125,7 +125,7 @@ module.exports = {
   async updateDiscordId(email, newId) {
     return new Promise((resolve, reject) => {
       pool.query(
-        "UPDATE accounts SET discord_id = ? WHERE email = ?",
+        'UPDATE accounts SET discord_id = ? WHERE email = ?',
         [newId, email],
 
         function (error, results, fields) {
@@ -139,7 +139,7 @@ module.exports = {
   async updateResetId(email, newID) {
     return new Promise((resolve, reject) => {
       pool.query(
-        "UPDATE accounts SET reset_id = ? WHERE email = ?",
+        'UPDATE accounts SET reset_id = ? WHERE email = ?',
         [newID, email],
 
         function (error, results, fields) {
@@ -153,7 +153,7 @@ module.exports = {
   async updateName(id, name) {
     return new Promise((resolve, reject) => {
       pool.query(
-        "UPDATE settings SET name = ? WHERE id = ?",
+        'UPDATE settings SET name = ? WHERE id = ?',
         [name, id],
 
         function (error, results, fields) {
@@ -167,7 +167,7 @@ module.exports = {
   async updateSmtp(id, server, port, user, password) {
     return new Promise((resolve, reject) => {
       pool.query(
-        "UPDATE settings SET smtp_server = ?, smtp_port = ?, smtp_user = ?, smtp_pass = ? WHERE id = ?",
+        'UPDATE settings SET smtp_server = ?, smtp_port = ?, smtp_user = ?, smtp_pass = ? WHERE id = ?',
         [server, port, user, password, id],
 
         function (error, results, fields) {
@@ -187,12 +187,12 @@ module.exports = {
   ) {
     return new Promise((resolve, reject) => {
       pool.query(
-        "INSERT INTO accounts (email, discord_id, pterodactyl_id, blacklisted, coins, package, memory, disk, cpu, servers, name, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        'INSERT INTO accounts (email, discord_id, pterodactyl_id, blacklisted, coins, package, memory, disk, cpu, servers, name, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
         [
           email,
           discord_id,
           pterodactyl_id,
-          "false",
+          'false',
           0,
           null,
           0,
@@ -224,16 +224,22 @@ module.exports = {
       Math.random().toString(36).substring(2, 15) +
       Math.random().toString(36).substring(2, 15);
 
+    const specialChars = containsSpecialChars(username);
+
+    const generatedUsername =
+      Math.random().toString(36).substring(2, 15) +
+      Math.random().toString(36).substring(2, 15);
+
     const account = await fetch(
       `${process.env.pterodactyl.domain}/api/application/users`,
       {
-        method: "post",
+        method: 'post',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${process.env.pterodactyl.key}`,
         },
         body: JSON.stringify({
-          username: username,
+          username: specialChars ? generatedUsername : username,
           email: email,
           first_name: first_name,
           last_name: last_name,
@@ -257,7 +263,7 @@ module.exports = {
       accountinfo.attributes.password = generated_password;
 
       accountinfo.attributes.relationships = {
-        servers: { object: "list", data: [] },
+        servers: { object: 'list', data: [] },
       };
 
       return accountinfo.attributes;
@@ -270,9 +276,9 @@ module.exports = {
           email
         )}`,
         {
-          method: "get",
+          method: 'get',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
             Authorization: `Bearer ${process.env.pterodactyl.key}`,
           },
         }
@@ -303,7 +309,7 @@ module.exports = {
   async fetchAccountPterodactylID(pterodactyl_id) {
     return new Promise((resolve, reject) => {
       pool.query(
-        "SELECT * FROM accounts WHERE pterodactyl_id = ?",
+        'SELECT * FROM accounts WHERE pterodactyl_id = ?',
         [pterodactyl_id],
         function (error, results, fields) {
           if (error) return reject(error);
@@ -320,7 +326,7 @@ module.exports = {
   async fetchAccountByResetId(resetId) {
     return new Promise((resolve, reject) => {
       pool.query(
-        "SELECT * FROM accounts WHERE reset_id = ?",
+        'SELECT * FROM accounts WHERE reset_id = ?',
         [resetId],
         function (error, results, fields) {
           if (error) return reject(error);
@@ -338,7 +344,7 @@ module.exports = {
   async fetchAccountDiscordID(discord_id) {
     return new Promise((resolve, reject) => {
       pool.query(
-        "SELECT * FROM accounts WHERE discord_id = ?",
+        'SELECT * FROM accounts WHERE discord_id = ?',
         [discord_id],
         function (error, results, fields) {
           if (error) return reject(error);
@@ -355,7 +361,7 @@ module.exports = {
   async fetchAccountByEmail(email) {
     return new Promise((resolve, reject) => {
       pool.query(
-        "SELECT * FROM accounts WHERE email = ?",
+        'SELECT * FROM accounts WHERE email = ?',
         [email],
         function (error, results, fields) {
           if (error) return reject(error);
@@ -372,7 +378,7 @@ module.exports = {
   async fetchAccountByEmailAndPassword(email, password) {
     return new Promise((resolve, reject) => {
       pool.query(
-        "SELECT * FROM accounts WHERE email = ? AND password = ?",
+        'SELECT * FROM accounts WHERE email = ? AND password = ?',
         [email, password],
         function (error, results, fields) {
           if (error) return reject(error);
@@ -412,7 +418,7 @@ module.exports = {
 
     return new Promise((resolve, reject) => {
       pool.query(
-        "UPDATE accounts SET coins = ? WHERE accounts.email = ?",
+        'UPDATE accounts SET coins = ? WHERE accounts.email = ?',
         [coins, email],
 
         function (error, results, fields) {
@@ -437,7 +443,7 @@ module.exports = {
 
     return new Promise((resolve, reject) => {
       pool.query(
-        "UPDATE accounts SET coins = ? WHERE accounts.discord_id = ?",
+        'UPDATE accounts SET coins = ? WHERE accounts.discord_id = ?',
         [coins, discord_id],
 
         function (error, results, fields) {
@@ -460,7 +466,7 @@ module.exports = {
 
     return new Promise((resolve, reject) => {
       pool.query(
-        "UPDATE accounts SET coins = ? WHERE email = ?",
+        'UPDATE accounts SET coins = ? WHERE email = ?',
         [coins, email],
 
         function (error, results, fields) {
@@ -483,7 +489,7 @@ module.exports = {
 
     return new Promise((resolve, reject) => {
       pool.query(
-        "UPDATE accounts SET coins = ? WHERE discord_id = ?",
+        'UPDATE accounts SET coins = ? WHERE discord_id = ?',
         [coins, discord_id],
 
         function (error, results, fields) {
@@ -498,7 +504,7 @@ module.exports = {
   async setPackageByEmail(email, pkg) {
     return new Promise((resolve, reject) => {
       pool.query(
-        "UPDATE accounts SET package = ? WHERE email = ?",
+        'UPDATE accounts SET package = ? WHERE email = ?',
         [pkg, email],
 
         function (error, results, fields) {
@@ -513,7 +519,7 @@ module.exports = {
   async setPackageByDiscordID(discord_id, pkg) {
     return new Promise((resolve, reject) => {
       pool.query(
-        "UPDATE accounts SET package = ? WHERE discord_id = ?",
+        'UPDATE accounts SET package = ? WHERE discord_id = ?',
         [pkg, discord_id],
 
         function (error, results, fields) {
@@ -531,29 +537,29 @@ module.exports = {
 
     // Beautiful code that hurts my eyes, and I'm lazy af. - Two
 
-    if (typeof memory === "number") {
-      additions.push("memory = ?");
+    if (typeof memory === 'number') {
+      additions.push('memory = ?');
       the_array.push(memory);
 
       if (memory > 1073741823) memory = 1073741823;
     }
 
-    if (typeof disk === "number") {
-      additions.push("disk = ?");
+    if (typeof disk === 'number') {
+      additions.push('disk = ?');
       the_array.push(disk);
 
       if (disk > 1073741823) disk = 1073741823;
     }
 
-    if (typeof cpu === "number") {
-      additions.push("cpu = ?");
+    if (typeof cpu === 'number') {
+      additions.push('cpu = ?');
       the_array.push(cpu);
 
       if (cpu > 1073741823) cpu = 1073741823;
     }
 
-    if (typeof servers === "number") {
-      additions.push("servers = ?");
+    if (typeof servers === 'number') {
+      additions.push('servers = ?');
       the_array.push(servers);
 
       if (servers > 1073741823) servers = 1073741823;
@@ -563,7 +569,7 @@ module.exports = {
 
     return new Promise((resolve, reject) => {
       pool.query(
-        `UPDATE accounts SET ${additions.join(", ")} WHERE email = ?`,
+        `UPDATE accounts SET ${additions.join(', ')} WHERE email = ?`,
         the_array,
 
         function (error, results, fields) {
@@ -581,29 +587,29 @@ module.exports = {
 
     // Beautiful code that hurts my eyes, and I'm lazy af. - Two
 
-    if (typeof memory === "number") {
-      additions.push("memory = ?");
+    if (typeof memory === 'number') {
+      additions.push('memory = ?');
       the_array.push(memory);
 
       if (memory > 1073741823) memory = 1073741823;
     }
 
-    if (typeof disk === "number") {
-      additions.push("disk = ?");
+    if (typeof disk === 'number') {
+      additions.push('disk = ?');
       the_array.push(disk);
 
       if (disk > 1073741823) disk = 1073741823;
     }
 
-    if (typeof cpu === "number") {
-      additions.push("cpu = ?");
+    if (typeof cpu === 'number') {
+      additions.push('cpu = ?');
       the_array.push(cpu);
 
       if (cpu > 1073741823) cpu = 1073741823;
     }
 
-    if (typeof servers === "number") {
-      additions.push("servers = ?");
+    if (typeof servers === 'number') {
+      additions.push('servers = ?');
       the_array.push(servers);
 
       if (servers > 1073741823) servers = 1073741823;
@@ -613,7 +619,7 @@ module.exports = {
 
     return new Promise((resolve, reject) => {
       pool.query(
-        `UPDATE accounts SET ${additions.join(", ")} WHERE discord_id = ?`,
+        `UPDATE accounts SET ${additions.join(', ')} WHERE discord_id = ?`,
         the_array,
 
         function (error, results, fields) {
@@ -628,7 +634,7 @@ module.exports = {
   async getAllRenewalTimers() {
     return new Promise((resolve, reject) => {
       pool.query(
-        "SELECT * FROM renewal_timer",
+        'SELECT * FROM renewal_timer',
         function (error, results, fields) {
           if (error) return reject(error);
 
@@ -641,15 +647,15 @@ module.exports = {
   async getSingleRenewalDate(server_id) {
     return new Promise((resolve, reject) => {
       pool.query(
-        "SELECT * FROM renewal_timer WHERE server_id = ?",
+        'SELECT * FROM renewal_timer WHERE server_id = ?',
         [server_id],
         function (error, results, fields) {
           if (error) return reject(error);
 
           if (results.length !== 1) {
             return resolve({
-              action: "???",
-              timer: "???",
+              action: '???',
+              timer: '???',
             });
           }
 
@@ -662,7 +668,7 @@ module.exports = {
     });
   },
 
-  async runDBTimerActions(server_id, date, action = "suspend") {
+  async runDBTimerActions(server_id, date, action = 'suspend') {
     await this.removeRenewTimerFromDB(server_id);
     await this.addRenewTimerToDB(server_id, date, action);
     return true;
@@ -671,7 +677,7 @@ module.exports = {
   async addRenewTimerToDB(server_id, date, action) {
     return new Promise((resolve, reject) => {
       pool.query(
-        "INSERT INTO renewal_timer (server_id, date, action) VALUES (?, ?, ?)",
+        'INSERT INTO renewal_timer (server_id, date, action) VALUES (?, ?, ?)',
         [server_id, date, action],
 
         function (error, results, fields) {
@@ -686,7 +692,7 @@ module.exports = {
   async removeRenewTimerFromDB(server_id) {
     return new Promise((resolve, reject) => {
       pool.query(
-        "DELETE FROM renewal_timer WHERE server_id=?",
+        'DELETE FROM renewal_timer WHERE server_id=?',
         [server_id],
 
         function (error, results, fields) {
@@ -704,7 +710,7 @@ module.exports = {
     if (!check_if_coupon_exists) {
       return new Promise((resolve, reject) => {
         pool.query(
-          "INSERT INTO coupons (code, coins, memory, disk, cpu, servers) VALUES (?, ?, ?, ?, ?, ?)",
+          'INSERT INTO coupons (code, coins, memory, disk, cpu, servers) VALUES (?, ?, ?, ?, ?, ?)',
           [code, coins, memory, disk, cpu, servers],
 
           function (error, results, fields) {
@@ -717,7 +723,7 @@ module.exports = {
     } else {
       return new Promise((resolve, reject) => {
         pool.query(
-          "UPDATE coupons SET coins = ?, memory = ?, disk = ?, cpu = ?, servers = ? WHERE code = ?",
+          'UPDATE coupons SET coins = ?, memory = ?, disk = ?, cpu = ?, servers = ? WHERE code = ?',
           [coins, memory, disk, cpu, servers, code],
 
           function (error, results, fields) {
@@ -731,7 +737,7 @@ module.exports = {
   },
   async allAccounts() {
     return new Promise((resolve, reject) => {
-      pool.query("SELECT * FROM accounts", function (error, results, fields) {
+      pool.query('SELECT * FROM accounts', function (error, results, fields) {
         if (error) return reject(error);
 
         resolve(results);
@@ -744,7 +750,7 @@ module.exports = {
     if (check_if_coupon_exists) {
       return new Promise((resolve, reject) => {
         pool.query(
-          "DELETE FROM coupons WHERE code = ?",
+          'DELETE FROM coupons WHERE code = ?',
           [code],
 
           async (error, results, fields) => {
@@ -762,7 +768,7 @@ module.exports = {
   async getCouponInfo(code) {
     return new Promise((resolve, reject) => {
       pool.query(
-        "SELECT * FROM coupons WHERE code = ?",
+        'SELECT * FROM coupons WHERE code = ?',
         [code],
         function (error, results, fields) {
           if (error) return reject(error);
@@ -781,7 +787,7 @@ module.exports = {
 
     return new Promise((resolve, reject) => {
       pool.query(
-        "DELETE FROM coupons WHERE code = ?",
+        'DELETE FROM coupons WHERE code = ?',
         [code],
 
         async (error, results, fields) => {
@@ -803,7 +809,7 @@ module.exports = {
 
     return new Promise((resolve, reject) => {
       pool.query(
-        "UPDATE accounts SET blacklisted = ? WHERE email = ?",
+        'UPDATE accounts SET blacklisted = ? WHERE email = ?',
         [
           new_status.toString(), // Is .toString() required? Too lazy to check.
           email,
@@ -823,7 +829,7 @@ module.exports = {
 
     return new Promise((resolve, reject) => {
       pool.query(
-        "UPDATE accounts SET blacklisted = ? WHERE discord_id = ?",
+        'UPDATE accounts SET blacklisted = ? WHERE discord_id = ?',
         [
           new_status.toString(), // Is .toString() required? Too lazy to check.
           discord_id,
@@ -838,3 +844,7 @@ module.exports = {
     });
   },
 };
+function containsSpecialChars(str) {
+  const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+  return specialChars.test(str);
+}
