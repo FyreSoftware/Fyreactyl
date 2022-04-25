@@ -19,7 +19,7 @@ module.exports = {
       case "string":
         if (number.length === 0) return null;
 
-        number = parseFloat(number);
+        number = Number(number)
         if (isNaN(number)) return undefined;
 
         return Math.round(number);
