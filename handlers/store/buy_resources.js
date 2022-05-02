@@ -1,16 +1,16 @@
 /* eslint-disable camelcase */
-const functions = require("../../functions.js");
-const suspendCheck = require("../servers/suspension_system.js");
+const functions = require('../../functions.js');
+const suspendCheck = require('../servers/suspension_system.js');
 
 module.exports.load = async function (app, ifValidAPI, ejs) {
   app.post(
-    "/store/buy_resources",
+    '/store/buy_resources',
 
     process.rateLimit({
       windowMs: 1000,
       max: 1,
       message:
-        "You have been requesting this endpoint too fast. Please try again.",
+        'You have been requesting this endpoint too fast. Please try again.',
     }),
 
     async (req, res) => {
@@ -63,12 +63,12 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
           if (process.env.store[type].enabled) {
             how_many_are_enabled++;
 
-            if (typeof amount === "object" && amount == null) {
+            if (typeof amount === 'object' && amount == null) {
               test_if_all_zero++;
-            } else if (typeof amount !== "number") {
+            } else if (typeof amount !== 'number') {
               resource_check_errors.push({
                 type: type,
-                reason: "not a number or null",
+                reason: 'not a number or null',
               });
               hardcoded_errors.push(
                 `The provided ${type} is not a number, nor null.`
@@ -84,7 +84,7 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
                 // Due to Javascript number limitations.
                 resource_check_errors.push({
                   type: type,
-                  reason: "number is too big",
+                  reason: 'number is too big',
                   max: 1073741823 - amount,
                 });
                 hardcoded_errors.push(
@@ -96,7 +96,7 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
                 if (check_multiple !== Math.round(check_multiple)) {
                   resource_check_errors.push({
                     type: type,
-                    reason: "number is not a multiple of x",
+                    reason: 'number is not a multiple of x',
                     x: process.env.store[type].per,
                   });
                   hardcoded_errors.push(
