@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
-const fetch = require("node-fetch");
-const functions = require("../../functions.js");
+const fetch = require('node-fetch');
+const functions = require('../../functions.js');
 
 module.exports = async (email, isAdmin) => {
   // console.error()s should be impossible to get if you set it up properly.
@@ -16,15 +16,15 @@ module.exports = async (email, isAdmin) => {
   const account_info_json = await fetch(
     `${process.env.pterodactyl.domain}/api/application/users/${userinfo.pterodactyl_id}?include=servers`,
     {
-      method: "get",
+      method: 'get',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${process.env.pterodactyl.key}`,
       },
     }
   );
 
-  if ((await account_info_json.statusText) === "Not Found")
+  if ((await account_info_json.statusText) === 'Not Found')
     return console.error(
       `[SERVER SUSPENSION] Could not find user panel information. | Email: ${email} | Pterodactyl Panel ID: ${userinfo.pterodactyl_id}`
     );
@@ -57,9 +57,9 @@ module.exports = async (email, isAdmin) => {
         await fetch(
           `${process.env.pterodactyl.domain}/api/application/servers/${id}/suspend`,
           {
-            method: "post",
+            method: 'post',
             headers: {
-              "Content-Type": "application/json",
+              'Content-Type': 'application/json',
               Authorization: `Bearer ${process.env.pterodactyl.key}`,
             },
           }
@@ -73,16 +73,16 @@ module.exports = async (email, isAdmin) => {
       const renewal_date = await process.db.getSingleRenewalDate(id);
 
       if (
-        renewal_date.action === "suspend" ||
-        renewal_date.action === "auto" ||
-        renewal_date.action === "???"
+        renewal_date.action === 'suspend' ||
+        renewal_date.action === 'auto' ||
+        renewal_date.action === '???'
       ) {
         await fetch(
           `${process.env.pterodactyl.domain}/api/application/servers/${id}/unsuspend`,
           {
-            method: "post",
+            method: 'post',
             headers: {
-              "Content-Type": "application/json",
+              'Content-Type': 'application/json',
               Authorization: `Bearer ${process.env.pterodactyl.key}`,
             },
           }

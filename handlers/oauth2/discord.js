@@ -169,8 +169,9 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
       const blacklist_status = await process.db.blacklistStatusByDiscordID(
         userinfo.id
       );
-      if (blacklist_status && !panelinfo.root_admin)
+      if (blacklist_status !== 'false' && !panelinfo.root_admin) {
         return functions.doRedirect(req, res, redirects.blacklisted);
+      }
 
       const newAcc = await process.db.updateDiscordId(
         account.email,
@@ -348,8 +349,9 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
       const blacklist_status = await process.db.blacklistStatusByDiscordID(
         userinfo.id
       );
-      if (blacklist_status && !panelinfo.root_admin)
+      if (blacklist_status !== 'false' && !panelinfo.root_admin) {
         return functions.doRedirect(req, res, redirects.blacklisted);
+      }
 
       req.session.data = {
         dbinfo: dbinfo,
@@ -461,6 +463,7 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
 
         if (check_if_banned === 200) {
           await process.db.toggleBlacklist(userinfo.id, true);
+          console.log('blacklisto');
         } else if (check_if_banned === 404) {
           await fetch(
             `https://discord.com/api/guilds/${process.env.discord.guild}/members/${userinfo.id}`,
@@ -542,8 +545,9 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
       const blacklist_status = await process.db.blacklistStatusByDiscordID(
         userinfo.id
       );
-      if (blacklist_status && !panelinfo.root_admin)
+      if (blacklist_status !== 'false' && !panelinfo.root_admin) {
         return functions.doRedirect(req, res, redirects.blacklisted);
+      }
 
       req.session.data = {
         dbinfo: dbinfo,
