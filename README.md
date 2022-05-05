@@ -1,7 +1,7 @@
 # Fyreactyl
 
 This is a fork of dashactyl all credits go to them.
-We highly discourage you to not ask support in votion development and instead ask in the [Fyre Developers Discord](https://discord.gg/mufvdGjKpP)
+We highly discourage you to not ask support in votion development and instead ask in the [Fyre Software](https://discord.gg/sXWE8gJrt3)
 
 ## What is Fyreactyl?
 
@@ -9,7 +9,7 @@ Fyreactyl is a fork of dashactyl with custom features.
 
 ## Installation
 
-Fyreactyl doesn't require additional installation methods so you can just follow the [Dashactyl](https://docs.votion.dev/docs/Dashactyl/introduction/) installation method.
+Fyreactyl has it own documentation you can [follow](https://docs.fyresoftware.com)
 
 ## License
 
