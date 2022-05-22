@@ -41,7 +41,7 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
       Kind regards,<br>${dbSettings.name}
   `;
       mailer.sendMail({
-        from: 'main@tovade.xyz',
+        from: dbSettings.smtp_user,
         to: email,
         subject: 'Reset password',
         html: contentHTML,
