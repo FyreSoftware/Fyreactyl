@@ -1,4 +1,4 @@
-# Fyreactyl
+# Fyreactyl // This a fork, please view https://github.com/FyreHub/Fyreactyl
 
 This is a fork of dashactyl all credits go to them.
 We highly discourage you to not ask support in votion development and instead ask in the [Fyre Software](https://discord.gg/sXWE8gJrt3)
