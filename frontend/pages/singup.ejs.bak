@@ -148,7 +148,6 @@
                               id="full-name"
                               placeholder=" "
                               name="username"
-							  required
                             />
                           </div>
                         </div>
@@ -161,7 +160,6 @@
                               id="email"
                               placeholder=" "
                               name="email"
-							  required
                             />
                           </div>
                         </div>
@@ -176,7 +174,6 @@
                               id="password"
                               placeholder=" "
                               name="password"
-							  required
                             />
                           </div>
                         </div>
@@ -191,7 +188,6 @@
                               id="confirm-password"
                               placeholder=" "
                               name="password_confirm"
-							  required
                             />
                           </div>
                         </div>
