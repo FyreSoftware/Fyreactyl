@@ -165,6 +165,22 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
           );
         }
       }
+      let panelinfo;
+      const panelinfo_raw = await fetch(
+        `${process.env.pterodactyl.domain}/api/application/users/${account.pterodactyl_id}?include=servers`,
+        {
+          method: 'get',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${process.env.pterodactyl.key}`,
+          },
+        }
+      );
+
+      if ((await panelinfo_raw.statusText) === 'Not Found')
+        return functions.doRedirect(req, res, redirects.cannotgetinfo);
+
+      panelinfo = (await panelinfo_raw.json()).attributes;
 
       const blacklist_status = await process.db.blacklistStatusByDiscordID(
         userinfo.id
