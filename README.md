@@ -1,4 +1,4 @@
-# Fyreactyl
+# Fyreactyl 
 
 This is a fork of dashactyl all credits go to them.
 We highly discourage you to not ask support in votion development and instead ask in the [Fyre Software](https://discord.gg/sXWE8gJrt3)
@@ -9,7 +9,7 @@ Fyreactyl is a fork of dashactyl with custom features.
 
 ## Installation
 
-Fyreactyl has it own documentation you can [follow](https://docs.fyresoftware.com)
+Fyreactyl has it own documentation you can [follow](http://fyreactyl.bananahosting.xyz/) 
 
 ## License
 
