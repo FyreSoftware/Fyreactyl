@@ -1,7 +1,7 @@
 {
-  "name": "dashactyl-v1",
-  "version": "1.0.0",
-  "description": "The finished version of Dashactyl.",
+  "name": "fyreactyl",
+  "version": "1.1.3",
+  "description": "Fork of dashactyl.",
   "main": "index.js",
   "author": "Two",
   "license": "ISC",
