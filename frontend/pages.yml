@@ -8,7 +8,7 @@ notfound: errors/404.ejs
 renderfail: errors/rendererror.ejs
 
 apimessages:
-  invalidAPIkey: "Invalid API key!"
+  invalidAPIkey: 'Invalid API key!'
 
 pages:
   arc-sw.js:
@@ -112,250 +112,250 @@ pages:
 
 redirectactions:
   logout:
-    path: "/"
-    success: "LOGOUT"
+    path: '/'
+    success: 'LOGOUT'
 
   blacklisted:
-    path: "/"
-    error: "BLACKLISTED"
+    path: '/'
+    error: 'BLACKLISTED'
 
   oauth2:
     cancelledloginaction:
-      path: "/"
-      error: "CANCELLED"
+      path: '/'
+      error: 'CANCELLED'
     missingcode:
-      path: "/"
-      error: "MISSING_CODE"
+      path: '/'
+      error: 'MISSING_CODE'
     invalidcode:
-      path: "/"
-      error: "INVALID_CODE"
+      path: '/'
+      error: 'INVALID_CODE'
     badscopes:
-      path: "/"
-      error: "INVALID_SCOPES"
+      path: '/'
+      error: 'INVALID_SCOPES'
     unverified:
-      path: "/"
-      error: "UNVERIFIED"
+      path: '/'
+      error: 'UNVERIFIED'
     blacklisted:
-      path: "/"
-      error: "BLACKLISTED"
+      path: '/'
+      error: 'BLACKLISTED'
     cannotgetguilds:
-      path: "/"
-      error: "CANNOT_GET_GUILDS"
+      path: '/'
+      error: 'CANNOT_GET_GUILDS'
     anotheraccount:
-      path: "/"
-      error: "ANOTHER_ACCOUNT"
+      path: '/'
+      error: 'ANOTHER_ACCOUNT'
     cannotgetinfo:
-      path: "/"
-      error: "CANNOT_GET_INFO"
+      path: '/'
+      error: 'CANNOT_GET_INFO'
     success:
-      path: "/dashboard"
-      success: "SIGN_IN"
+      path: '/dashboard'
+      success: 'SIGN_IN'
     linked:
-      path: "/dashboard"
-      success: "LINKED"
+      path: '/dashboard'
+      success: 'LINKED'
 
   regenerate_password:
     notsignedin:
-      path: "/"
-      error: "NOTLOGGEDIN"
+      path: '/'
+      error: 'NOTLOGGEDIN'
     success:
-      path: "/dashboard"
-      success: "REGENERATE_PASSWORD"
+      path: '/dashboard'
+      success: 'REGENERATE_PASSWORD'
 
   update_info:
     notsignedin:
-      path: "/"
-      error: "NOTLOGGEDIN"
+      path: '/'
+      error: 'NOTLOGGEDIN'
     cannotgetguilds:
-      path: "/accounts/login"
+      path: '/accounts/login'
     error:
-      path: "/"
-      error: "ERROR_ON_UPDATE_INFO"
+      path: '/'
+      error: 'ERROR_ON_UPDATE_INFO'
     success:
-      path: "/dashboard"
-      success: "UPDATE_INFO"
+      path: '/dashboard'
+      success: 'UPDATE_INFO'
 
   buy_resources:
     notsignedin:
-      path: "/"
-      error: "NOTLOGGEDIN"
+      path: '/'
+      error: 'NOTLOGGEDIN'
     storeisdisabled:
-      path: "/store"
-      error: "STORE_DISABLED"
+      path: '/store'
+      error: 'STORE_DISABLED'
     allvaluescannotbezero:
-      path: "/store"
-      error: "ALL_VALUES_CANNOT_BE_ZERO"
+      path: '/store'
+      error: 'ALL_VALUES_CANNOT_BE_ZERO'
     resourcecheckerrors:
-      path: "/store"
-      error: "RESOURCE_CHECK_ERRORS"
+      path: '/store'
+      error: 'RESOURCE_CHECK_ERRORS'
     cannotafford:
-      path: "/store"
-      error: "CANNOT_AFFORD_RESOURCE"
+      path: '/store'
+      error: 'CANNOT_AFFORD_RESOURCE'
     boughtresources:
-      path: "/store"
-      success: "BOUGHT_RESOURCES"
+      path: '/store'
+      success: 'BOUGHT_RESOURCES'
 
   create_server:
     notsignedin:
-      path: "/"
-      error: "NOTLOGGEDIN"
+      path: '/'
+      error: 'NOTLOGGEDIN'
     exceedsserverplan:
-      path: "/servers/new"
-      error: "EXCEEDS_SERVER_PLAN"
+      path: '/servers/new'
+      error: 'EXCEEDS_SERVER_PLAN'
     namemustbeastring:
-      path: "/servers/new"
-      error: "SERVER_NAME_MUST_BE_A_STRING"
+      path: '/servers/new'
+      error: 'SERVER_NAME_MUST_BE_A_STRING'
     nameistooshort:
-      path: "/servers/new"
-      error: "SERVER_NAME_IS_TOO_SHORT"
+      path: '/servers/new'
+      error: 'SERVER_NAME_IS_TOO_SHORT'
     nameistoolong:
-      path: "/servers/new"
-      error: "SERVER_NAME_IS_TOO_LONG"
+      path: '/servers/new'
+      error: 'SERVER_NAME_IS_TOO_LONG'
     locationmustbeastring:
-      path: "/servers/new"
-      error: "LOCATION_MUST_BE_A_STRING"
+      path: '/servers/new'
+      error: 'LOCATION_MUST_BE_A_STRING'
     invalidlocation:
-      path: "/servers/new"
-      error: "INVALID_LOCATION"
+      path: '/servers/new'
+      error: 'INVALID_LOCATION'
     locationdisabled:
-      path: "/servers/new"
-      error: "LOCATION_DISABLED"
+      path: '/servers/new'
+      error: 'LOCATION_DISABLED'
     lockedlocationfrompackage:
-      path: "/servers/new"
-      error: "NO_ACCESS_TO_LOCATION"
+      path: '/servers/new'
+      error: 'NO_ACCESS_TO_LOCATION'
     eggmustbeastring:
-      path: "/servers/new"
-      error: "EGG_MUST_BE_A_STRING"
+      path: '/servers/new'
+      error: 'EGG_MUST_BE_A_STRING'
     invalidegg:
-      path: "/servers/new"
-      error: "INVALID_EGG"
+      path: '/servers/new'
+      error: 'INVALID_EGG'
     invalidresources:
-      path: "/servers/new"
-      error: "INVALID_RESOURCES"
+      path: '/servers/new'
+      error: 'INVALID_RESOURCES'
     resourcesexceedplan:
-      path: "/servers/new"
-      error: "RESOURCES_EXCEED_PLAN"
+      path: '/servers/new'
+      error: 'RESOURCES_EXCEED_PLAN'
     toolittleresources:
-      path: "/servers/new"
-      error: "TOO_LITTLE_RESOURCES"
+      path: '/servers/new'
+      error: 'TOO_LITTLE_RESOURCES'
     toomanyresources:
-      path: "/servers/new"
-      error: "TOO_MANY_RESOURCES"
+      path: '/servers/new'
+      error: 'TOO_MANY_RESOURCES'
     insufficientcoins:
-      path: "/servers/new"
-      error: "INSUFFICIENT_COINS"
+      path: '/servers/new'
+      error: 'INSUFFICIENT_COINS'
     erroroncreation:
-      path: "/servers/new"
-      error: "ERROR_ON_CREATION"
+      path: '/servers/new'
+      error: 'ERROR_ON_CREATION'
     createdserver:
-      path: "/dashboard"
-      success: "CREATED_SERVER"
+      path: '/dashboard'
+      success: 'CREATED_SERVER'
 
   modify_server:
     notsignedin:
-      path: "/"
-      error: "NOTLOGGEDIN"
+      path: '/'
+      error: 'NOTLOGGEDIN'
     invalidserver:
-      path: "/servers/modify"
-      error: "INVALID_SERVER"
+      path: '/servers/modify'
+      error: 'INVALID_SERVER'
     missingegg:
-      path: "/servers/modify"
-      error: "MISSING_EGG"
+      path: '/servers/modify'
+      error: 'MISSING_EGG'
     missingresources:
-      path: "/servers/modify"
-      error: "MISSING_RESOURCES"
+      path: '/servers/modify'
+      error: 'MISSING_RESOURCES'
     invalidresources:
-      path: "/servers/modify"
-      error: "INVALID_RESOURCES"
+      path: '/servers/modify'
+      error: 'INVALID_RESOURCES'
     resourcesexceedplan:
-      path: "/servers/modify"
-      error: "RESOURCES_EXCEED_PLAN"
+      path: '/servers/modify'
+      error: 'RESOURCES_EXCEED_PLAN'
     toolittleresources:
-      path: "/servers/modify"
-      error: "TOO_LITTLE_RESOURCES"
+      path: '/servers/modify'
+      error: 'TOO_LITTLE_RESOURCES'
     toomanyresources:
-      path: "/servers/modify"
-      error: "TOO_MANY_RESOURCES"
+      path: '/servers/modify'
+      error: 'TOO_MANY_RESOURCES'
     nochanges:
-      path: "/servers/modify"
-      error: "NO_CHANGES_TO_SERVER"
+      path: '/servers/modify'
+      error: 'NO_CHANGES_TO_SERVER'
     erroronmodification:
-      path: "/servers/modify"
-      error: "ERROR_ON_MODIFICATION"
+      path: '/servers/modify'
+      error: 'ERROR_ON_MODIFICATION'
     modifiedserver:
-      path: "/dashboard"
-      success: "MODIFIED_SERVER"
+      path: '/dashboard'
+      success: 'MODIFIED_SERVER'
 
   delete_server:
     notsignedin:
-      path: "/"
-      error: "NOTLOGGEDIN"
+      path: '/'
+      error: 'NOTLOGGEDIN'
     errorondeletion:
-      path: "/dashboard"
-      error: "ERROR_ON_DELETION"
+      path: '/dashboard'
+      error: 'ERROR_ON_DELETION'
     deletedserver:
-      path: "/dashboard"
-      success: "DELETED_SERVER"
+      path: '/dashboard'
+      success: 'DELETED_SERVER'
 
   renew_server:
     notsignedin:
-      path: "/"
-      error: "NOTLOGGEDIN"
+      path: '/'
+      error: 'NOTLOGGEDIN'
     cannotrenewduetohavingmoreresourcesthanyoushouldbeabletohave:
-      path: "/dashboard"
-      error: "OVER_RESOURCES"
+      path: '/dashboard'
+      error: 'OVER_RESOURCES'
     invalidserver:
-      path: "/dashboard"
-      error: "INVALID_SERVER"
+      path: '/dashboard'
+      error: 'INVALID_SERVER'
     dontneedtorenew:
-      path: "/dashboard"
-      error: "DO_NOT_NEED_TO_RENEW"
+      path: '/dashboard'
+      error: 'DO_NOT_NEED_TO_RENEW'
     insufficientcoins:
-      path: "/dashboard"
-      error: "INSUFFICIENT_COINS"
+      path: '/dashboard'
+      error: 'INSUFFICIENT_COINS'
     renewedserver:
-      path: "/dashboard"
-      success: "RENEWED_SERVER"
+      path: '/dashboard'
+      success: 'RENEWED_SERVER'
 
   auto_renew_server:
     notsignedin:
-      path: "/"
-      error: "NOTLOGGEDIN"
+      path: '/'
+      error: 'NOTLOGGEDIN'
     invalidserver:
-      path: "/dashboard"
-      error: "INVALID_SERVER"
+      path: '/dashboard'
+      error: 'INVALID_SERVER'
     dontneedtorenew:
-      path: "/dashboard"
-      error: "DO_NOT_NEED_TO_RENEW"
+      path: '/dashboard'
+      error: 'DO_NOT_NEED_TO_RENEW'
     servermustberenewedfirstbecauseitisgoingtogetdeleted: # Server is on deletion state.
-      path: "/dashboard"
-      error: "MUST_RENEW_FIRST"
+      path: '/dashboard'
+      error: 'MUST_RENEW_FIRST'
     invalidrenewalstate: # Either the database was manually modified incorrectly, or the server was created manually.
-      path: "/dashboard"
-      error: "ERROR_ON_TOGGLE"
+      path: '/dashboard'
+      error: 'ERROR_ON_TOGGLE'
     fewsecondstorenew: # Basically, the user tried to toggle this toggle this option 7 seconds before renewal. This is placed here to prevent database strains.
-      path: "/dashboard"
-      error: "ERROR_ON_TOGGLE"
+      path: '/dashboard'
+      error: 'ERROR_ON_TOGGLE'
     toggledAuto:
-      path: "/dashboard"
-      success: "TOGGLED_AUTO"
+      path: '/dashboard'
+      success: 'TOGGLED_AUTO'
     toggledSuspend:
-      path: "/dashboard"
-      success: "TOGGLED_SUSPEND"
+      path: '/dashboard'
+      success: 'TOGGLED_SUSPEND'
 
   redeem_coupon:
     notsignedin:
-      path: "/"
-      error: "NOTLOGGEDIN"
+      path: '/'
+      error: 'NOTLOGGEDIN'
     missingcouponcode:
-      path: "/earn/redeem"
-      error: "MISSINGCOUPONCODE"
+      path: '/earn/redeem'
+      error: 'MISSINGCOUPONCODE'
     zerocharactercodesareinvalid:
-      path: "/earn/redeem"
-      error: "INVALIDCOUPONCODE"
+      path: '/earn/redeem'
+      error: 'INVALIDCOUPONCODE'
     invalidcouponcode:
-      path: "/earn/redeem"
-      error: "INVALIDCOUPONCODE"
+      path: '/earn/redeem'
+      error: 'INVALIDCOUPONCODE'
     successfullyclaimedcoupon:
-      path: "/earn/redeem"
-      success: "CLAIMEDCOUPON"
+      path: '/earn/redeem'
+      success: 'CLAIMEDCOUPON'

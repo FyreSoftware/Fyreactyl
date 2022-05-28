@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-const JavaScriptObfuscator = require("javascript-obfuscator");
+const JavaScriptObfuscator = require('javascript-obfuscator');
 
 const everywhat = process.env.afk.everywhat;
 const gaincoins = process.env.afk.gaincoins;
@@ -9,12 +9,12 @@ const currentlyonpage = {};
 const currentlyonpage_ip = {};
 
 module.exports.load = async function (app, ifValidAPI, ejs) {
-  app.ws("/earn/afk", async (ws, req) => {
+  app.ws('/earn/afk', async (ws, req) => {
     let onpage = false;
 
     if (!req.session.arcsessiontoken) ws.close();
 
-    if (typeof req.session.arcsessiontoken !== "object") {
+    if (typeof req.session.arcsessiontoken !== 'object') {
       delete req.session.arcsessiontoken;
       return ws.close();
     }
@@ -26,10 +26,10 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
       return ws.close();
     }
 
-    const token = req.headers["sec-websocket-protocol"];
+    const token = req.headers['sec-websocket-protocol'];
 
     if (!token) return ws.close();
-    if (typeof token !== "string") return ws.close();
+    if (typeof token !== 'string') return ws.close();
 
     if (token !== arcsessiontoken.token) {
       delete req.session.arcsessiontoken;
@@ -41,7 +41,7 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
       return ws.close();
     }
 
-    const ip = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
+    const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 
     if (currentlyonpage[req.session.data.dbinfo.email]) {
       // currentlyonpage_ip[ip]
@@ -98,17 +98,17 @@ module.exports.generateAfkSrc = async (token) => {
     domainLockRedirectUrl: process.env.afk.redirect_on_attempt_to_steal_code,
     forceTransformStrings: [],
     identifierNamesCache: null,
-    identifierNamesGenerator: "hexadecimal",
+    identifierNamesGenerator: 'hexadecimal',
     identifiersDictionary: [],
-    identifiersPrefix: "",
+    identifiersPrefix: '',
     ignoreRequireImports: true,
-    inputFileName: "",
+    inputFileName: '',
     log: false,
     numbersToExpressions: false,
-    optionsPreset: "default",
+    optionsPreset: 'default',
     renameGlobals: true,
     renameProperties: true,
-    renamePropertiesMode: "safe",
+    renamePropertiesMode: 'safe',
     reservedNames: [],
     reservedStrings: [],
     rotateStringArray: true,
@@ -117,21 +117,21 @@ module.exports.generateAfkSrc = async (token) => {
     shuffleStringArray: true,
     simplify: true,
     sourceMap: true,
-    sourceMapBaseUrl: "",
-    sourceMapFileName: "",
-    sourceMapMode: "separate",
+    sourceMapBaseUrl: '',
+    sourceMapFileName: '',
+    sourceMapMode: 'separate',
     splitStrings: true,
     splitStringsChunkLength: 10,
     stringArray: true,
-    stringArrayIndexesType: ["hexadecimal-number"],
+    stringArrayIndexesType: ['hexadecimal-number'],
     stringArrayEncoding: [],
     stringArrayIndexShift: true,
     stringArrayWrappersCount: 1,
     stringArrayWrappersChainedCalls: true,
     stringArrayWrappersParametersMaxCount: 2,
-    stringArrayWrappersType: "variable",
+    stringArrayWrappersType: 'variable',
     stringArrayThreshold: 0.75,
-    target: "browser",
+    target: 'browser',
     transformObjectKeys: true,
     unicodeEscapeSequence: true,
   });
