@@ -1,23 +1,23 @@
 /* eslint-disable camelcase */
 // NOTE FOR ANY DASHACTYL MODIFIERS: This file is needed or else index.js will error, unless correct modifications are made.
 
-const fetch = require("node-fetch");
-const functions = require("../functions.js");
-const afk = require("./earning/afk.js");
-const yaml = require("js-yaml");
-const fs = require("fs");
-const ms = require("ms");
+const fetch = require('node-fetch');
+const functions = require('../functions.js');
+const afk = require('./earning/afk.js');
+const yaml = require('js-yaml');
+const fs = require('fs');
+const ms = require('ms');
 const status_replies = yaml.load(
-  fs.readFileSync("./status replies.yml", "utf8")
+  fs.readFileSync('./status replies.yml', 'utf8')
 );
-const axios = require("axios");
+const axios = require('axios');
 
-const express = require("express");
+const express = require('express');
 
 module.exports.load = async function (app, ifValidAPI, ejs) {
-  app.use("/assets", express.static("./frontend/assets")); // Makes the assets folder display on /assets.
+  app.use('/assets', express.static('./frontend/assets')); // Makes the assets folder display on /assets.
 
-  app.get("*", async (req, res) => {
+  app.get('*', async (req, res) => {
     // makes pages.json and variables stuff
     // ./frontend/pages/index.ejs
 
@@ -26,13 +26,13 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
     let file; // This is the variable that will hold the name of the file that should be opened and shown to the user.
     let type; // Sets the "type" variable, which will be the file type.
 
-    if (req._parsedUrl.pathname === "/") {
+    if (req._parsedUrl.pathname === '/') {
       file = process.pagesettings.index; // The value of "index" on pages.yml is the page to be shown.
     } else {
       // This gets the path name and removes the beginning and ending slashes.
       let pathname = req._parsedUrl.pathname.slice(1);
 
-      if (pathname.slice(-1) === "/") pathname = pathname.slice(0, -1);
+      if (pathname.slice(-1) === '/') pathname = pathname.slice(0, -1);
 
       // This checks if the path name exists on pages.yml exist.
       const checkexist = Object.entries(process.pagesettings.pages).filter(
@@ -102,16 +102,16 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
             `[WEBSITE] On the path "${pathname}", the permission value is invalid. The value must be 0 (everyone), 1 (logged in), or 2 (administrator).`
           );
           return res.send(
-            "An error has occured while attempting to load this page. Please contact an administrator to fix this."
+            'An error has occured while attempting to load this page. Please contact an administrator to fix this.'
           );
         }
 
         if (pathexists.special) {
-          if (pathexists.special === "afk") {
+          if (pathexists.special === 'afk') {
             const arcsessiontoken = Math.random().toString(36).substring(2, 15);
 
             special = await afk.generateAfkSrc(arcsessiontoken);
-            special.type = "afk"; // Not necessary.
+            special.type = 'afk'; // Not necessary.
 
             req.session.arcsessiontoken = {
               token: arcsessiontoken,
@@ -124,16 +124,16 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
           }
         }
         if (pathexists.file) {
-          if (pathexists.file === "reset/password.ejs") {
+          if (pathexists.file === 'reset/password.ejs') {
             if (!req.query.id) {
-              return res.redirect("/login");
+              return res.redirect('/login');
             }
             const confirm = await process.db.fetchAccountByResetId(
               req.query.id
             );
 
             if (!confirm) {
-              return res.redirect("/login");
+              return res.redirect('/login');
             }
           }
         }
@@ -143,7 +143,7 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
           `[WEBSITE] Please remove one of the pages "${pathname}"s from the pages.yml object.`
         );
         return res.send(
-          "An error has occured while attempting to load this page. Please contact an administrator to fix this."
+          'An error has occured while attempting to load this page. Please contact an administrator to fix this.'
         );
       }
     }
@@ -165,21 +165,21 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
       }
 
       if (
-        Object.entries(server_timers).filter((t) => t[1].timer === "???")
+        Object.entries(server_timers).filter((t) => t[1].timer === '???')
           .length !== 0
       ) {
         const account_info_json = await fetch(
           `${process.env.pterodactyl.domain}/api/application/users/${req.session.data.panelinfo.id}?include=servers`,
           {
-            method: "get",
+            method: 'get',
             headers: {
-              "Content-Type": "application/json",
+              'Content-Type': 'application/json',
               Authorization: `Bearer ${process.env.pterodactyl.key}`,
             },
           }
         );
 
-        if (account_info_json.statusText !== "Not Found") {
+        if (account_info_json.statusText !== 'Not Found') {
           const account_info = (await account_info_json.json()).attributes;
 
           req.session.data.panelinfo = account_info;
@@ -200,11 +200,11 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
 
     const d = await axios({
       url: `${process.env.pterodactyl.domain}/api/application/servers`,
-      method: "GET",
+      method: 'GET',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${process.env.pterodactyl.key}`,
-        Accept: "application/json",
+        Accept: 'application/json',
       },
     });
 
@@ -265,7 +265,7 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
                 );
                 console.log(err);
                 return res.send(
-                  "An error has occured while attempting to load this page. Please contact an administrator to fix this."
+                  'An error has occured while attempting to load this page. Please contact an administrator to fix this.'
                 ); // Backup rendering error page.
               }
 
