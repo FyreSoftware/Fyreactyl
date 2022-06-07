@@ -1,11 +1,11 @@
 /* eslint-disable no-constant-condition */
 /* eslint-disable camelcase */
-const fetch = require('node-fetch');
-const functions = require('../../functions.js');
-const suspendCheck = require('../servers/suspension_system.js');
-const nodemailer = require('nodemailer');
+const fetch = require("node-fetch");
+const functions = require("../../functions.js");
+const suspendCheck = require("../servers/suspension_system.js");
+const nodemailer = require("nodemailer");
 module.exports.load = async function (app, ifValidAPI, ejs) {
-  app.post('/accounts/email/reset', async (req, res) => {
+  app.post("/accounts/email/reset", async (req, res) => {
     const email = req.body.email;
 
     const account = await process.db.fetchAccountByEmail(email);
@@ -14,10 +14,10 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
       req.session.variables = {
         error: {
           message:
-            'Account does not exist with that email, try signing up instead.',
+            "Account does not exist with that email, try signing up instead.",
         },
       };
-      return res.redirect('/reset/password');
+      return res.redirect("/reset/password");
     }
     const dbSettings = await process.db.findOrCreateSettings(
       process.env.discord.guild
@@ -43,7 +43,7 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
       mailer.sendMail({
         from: dbSettings.smtp_user,
         to: email,
-        subject: 'Reset password',
+        subject: "Reset password",
         html: contentHTML,
       });
       req.session.variables = {
@@ -53,32 +53,32 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
       };
 
       await process.db.updateResetId(email, id);
-      return res.redirect('/reset/password');
+      return res.redirect("/reset/password");
     } catch (err) {
       req.session.variables = {
         error: {
           message:
-            'Something went wrong with the smtp config. Please contact an administrator to fix this issue.',
+            "Something went wrong with the smtp config. Please contact an administrator to fix this issue.",
         },
       };
-      return res.redirect('/login');
+      return res.redirect("/login");
     }
   });
-  app.post('/accounts/email/password/reset/:id', async (req, res) => {
+  app.post("/accounts/email/password/reset/:id", async (req, res) => {
     if (!req.params.id) {
-      return res.redirect('/login');
+      return res.redirect("/login");
     }
 
     const confirm = await process.db.fetchAccountByResetId(req.params.id);
 
     if (!confirm) {
-      return res.redirect('/login');
+      return res.redirect("/login");
     }
 
     if (req.body.password !== req.body.password_confirm) {
       req.session.variables = {
         error: {
-          message: 'Password is not the same as the confirm password field.',
+          message: "Password is not the same as the confirm password field.",
         },
       };
       return res.redirect(`/reset/password/form?id=${req.params.id}`);
@@ -91,10 +91,10 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
         message: `Your password is now ${req.body.password}`,
       },
     };
-    return res.redirect('/login');
+    return res.redirect("/login");
   });
 
-  app.post('/accounts/email/login', async (req, res) => {
+  app.post("/accounts/email/login", async (req, res) => {
     const redirects = process.pagesettings.redirectactions.oauth2;
     const userinfo_withemail = await process.db.fetchAccountByEmail(
       req.body.email
@@ -104,10 +104,10 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
       req.session.variables = {
         error: {
           message:
-            'Looks like you signed up with discord, try using discord to login.',
+            "Looks like you signed up with discord, try using discord to login.",
         },
       };
-      return res.redirect('/');
+      return res.redirect("/");
     }
     const userinfo = await process.db.fetchAccountByEmailAndPassword(
       req.body.email,
@@ -116,28 +116,31 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
     if (!userinfo) {
       req.session.variables = {
         error: {
-          message: 'Wrong email or password, try again.',
+          message: "Wrong email or password, try again.",
         },
       };
-      return res.redirect('/');
+      return res.redirect("/");
     }
     const panelinfo_raw = await fetch(
       `${process.env.pterodactyl.domain}/api/application/users/${userinfo.pterodactyl_id}?include=servers`,
       {
-        method: 'get',
+        method: "get",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${process.env.pterodactyl.key}`,
         },
       }
     );
 
-    if ((await panelinfo_raw.statusText) === 'Not Found')
+    if ((await panelinfo_raw.statusText) === "Not Found")
       return functions.doRedirect(req, res, redirects.cannotgetinfo);
 
     const panelinfo = (await panelinfo_raw.json()).attributes;
-    const blacklist_status = process.db.blacklistStatusByEmail(req.body.email);
-    if (blacklist_status !== 'false' && !panelinfo.root_admin) {
+    const blacklist_status = await process.db.blacklistStatusByEmail(
+      req.body.email
+    );
+    console.log(blacklist_status, panelinfo);
+    if (blacklist_status !== "false" && !panelinfo.root_admin) {
       return functions.doRedirect(req, res, redirects.blacklisted);
     }
 
@@ -148,14 +151,14 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
     return functions.doRedirect(req, res, redirects.success);
   });
 
-  app.post('/accounts/email/singup', async (req, res) => {
+  app.post("/accounts/email/singup", async (req, res) => {
     const redirects = process.pagesettings.redirectactions.oauth2;
     if (req.body.password !== req.body.password_confirm) {
       req.session.variables = {
-        message: 'Password is not the same as Confirm password input',
+        message: "Password is not the same as Confirm password input",
       };
 
-      return res.redirect('/signup');
+      return res.redirect("/signup");
     }
     const account = await process.db.fetchAccountByEmail(req.body.email);
     if (account) {
@@ -163,7 +166,7 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
         message:
           "Account already exis's with that email, try logging in instead.",
       };
-      return res.redirect('/signup');
+      return res.redirect("/signup");
     }
     const userinfo = await process.db.createOrFindAccount(
       req.body.username,
@@ -175,9 +178,9 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
     );
     if (!userinfo) {
       req.session.variables = {
-        message: 'An error has occured, please report this to an admin',
+        message: "An error has occured, please report this to an admin",
       };
-      return res.redirect('/signup');
+      return res.redirect("/signup");
     }
     panel_id = userinfo.pterodactyl_id;
 
@@ -199,7 +202,7 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
     functions.doRedirect(req, res, redirects.success);
   });
 
-  app.get('/accounts/logout', (req, res) => {
+  app.get("/accounts/logout", (req, res) => {
     delete req.session.data;
 
     // req.session.destroy(() => {
