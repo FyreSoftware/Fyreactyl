@@ -6,7 +6,8 @@
   "author": "Two",
   "license": "ISC",
   "scripts": {
-    "lint": "npx eslint --fix ."
+    "lint": "npx eslint --fix .",
+    "update": "git pull origin master"
   },
   "dependencies": {
     "axios": "^0.25.0",
