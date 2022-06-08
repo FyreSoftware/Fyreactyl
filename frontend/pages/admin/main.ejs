@@ -203,59 +203,74 @@
         </div>
       <div class="conatiner-fluid content-inner mt-n5 py-0">
       <div class="row">
-                      <div class="col-lg-3 col-md-6">
-                        <div class="card">
-                           <div class="card-body">
-                              <div class="d-flex justify-content-between align-items-center">
-                                 <div class="bg-warning text-white rounded p-3">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 20 20" fill="currentColor">
-                                       <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
-                                    </svg>
-                                 </div>
-                                 <div class="text-end">
-                                    Users
-                                       <h2 class="counter"><%= accounts.length %></h2>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
+        <div class="card">
+          <div class="card-header d-flex justify-content-between flex-wrap">
+              <div class="header-title">
+                  <h4 class="card-title mb-0">Version</h4>
+              </div>
+          </div>
+          <div class="card-body">
+              <% if(versionData.fetched.version == versionData.version) { %>
+                <h6 class="text-success">You are running <%= versionData.version %> which is up-to-date!</h6>
+                <% } else { %>
+                <h6 class="text-danger">You are running <%= versionData.version %>. Latest version is <%= versionData.fetched.version %>. Please upgrade</h6>
+                <% } %>
+          </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="card">
+               <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-center">
+                     <div class="bg-warning text-white rounded p-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 20 20" fill="currentColor">
+                           <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                        </svg>
                      </div>
-                     <div class="col-lg-3 col-md-6">
-                      <div class="card">
-                         <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-center">
-                               <div class="bg-warning text-white rounded p-3">
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 20 20" fill="currentColor">
-                                     <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
-                                  </svg>
-                               </div>
-                               <div class="text-end">
-                                  Servers
-                                     <h2 class="counter"><%= servers.length || "0" %></h2>
-                               </div>
-                            </div>
-                         </div>
-                      </div>
+                     <div class="text-end">
+                        Servers
+                           <h2 class="counter"><%= servers.length || "0" %></h2>
+                     </div>
+                  </div>
                </div>
-               <div class="col-lg-3 col-md-6">
-                <div class="card">
-                   <div class="card-body">
-                      <div class="d-flex justify-content-between align-items-center">
-                         <div class="bg-warning text-white rounded p-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 20 20" fill="currentColor">
-                               <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
-                            </svg>
-                         </div>
-                         <div class="text-end">
-                            Nodes
-                               <h2 class="counter"><%= nodes.length %></h2>
-                         </div>
-                      </div>
+            </div>
+         </div>
+         <div class="col-lg-3 col-md-6">
+          <div class="card">
+             <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                   <div class="bg-warning text-white rounded p-3">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 20 20" fill="currentColor">
+                         <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                      </svg>
+                   </div>
+                   <div class="text-end">
+                      Clients
+                         <h2 class="counter"><%= accounts.length %></h2>
                    </div>
                 </div>
+             </div>
+          </div>
+       </div>
+       <div class="col-lg-3 col-md-6">
+        <div class="card">
+           <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center">
+                 <div class="bg-warning text-white rounded p-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 20 20" fill="currentColor">
+                       <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                    </svg>
+                 </div>
+                 <div class="text-end">
+                    Nodes
+                       <h2 class="counter"><%= nodes.length %></h2>
+                 </div>
+              </div>
+           </div>
          </div>
          </div>
-      </div>
+         </div>
+         </div>
+
 
 
 

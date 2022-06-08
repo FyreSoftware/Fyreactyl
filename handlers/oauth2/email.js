@@ -139,7 +139,6 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
     const blacklist_status = await process.db.blacklistStatusByEmail(
       req.body.email
     );
-    console.log(blacklist_status, panelinfo);
     if (blacklist_status !== "false" && !panelinfo.root_admin) {
       return functions.doRedirect(req, res, redirects.blacklisted);
     }

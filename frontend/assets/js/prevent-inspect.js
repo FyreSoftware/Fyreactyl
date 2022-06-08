@@ -1,4 +1,4 @@
-document.onkeydown = function (e) {
+/*document.onkeydown = function (e) {
   if (event.keyCode == 123) {
     return (document.location = "https://www.youtube.com/watch?v=dQw4w9WgXcQ");
   }
@@ -15,3 +15,4 @@ document.onkeydown = function (e) {
     return (document.location = "https://www.youtube.com/watch?v=dQw4w9WgXcQ");
   }
 };
+*/
