@@ -209,7 +209,7 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
       },
     });
     const dataFetch = await axios({
-      url: "https://fyrehub.github.io/Fyreactyl/",
+      url: "https://fyresoftware.github.io/Fyreactyl/",
       method: "GET",
     });
     const versionData = {
