@@ -134,7 +134,9 @@ afk:
     - localhost:8000 # Change this to your actual domain.
   redirect_on_attempt_to_steal_code: https://www.youtube.com/watch?v=dQw4w9WgXcQ
   arc_id: ""
-  google_ads_pub_key: ""
+  google_ads:
+    pub_key: "ca-pub-################"
+    slot: ""
   everywhat: 60 # seconds
   gaincoins: 1 # coins
 
