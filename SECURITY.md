@@ -7,10 +7,11 @@ currently being supported with security updates.
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 1.0.X   | :white_check_mark: |
+| 1.1.X   | :white_check_mark: |
+| 1.0.X   | :x: |
 
 ## Reporting a Vulnerability
 
-Found a vulnerabilit?
+Found a vulnerability?
 
 Please join our (discord server)[https://discord.gg/mufvdGjKpP] and report it there
