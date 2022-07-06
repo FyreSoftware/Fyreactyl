@@ -562,10 +562,8 @@
                         
                         <a href="#" class="btn btn-primary" onclick="document.getElementById('one').click()"> Renew </a><% if (server_timers[server.attributes.id].action !== "deletion") { %> <br><br> <a class="btn btn-primary" href="#" onclick="document.getElementById('two').click()"><%= server_timers[server.attributes.id].action == "auto" ? "Disable" : "Enable" %> Automatic Renewal</a><% } %>
 </td>
-<!-- Unnecessary code
-<td>
-    <br>
-    <br> <br>          <button class="btn btn-primary btn-rounded" disabled>Renew</button>
+ <td>
+             <!-- <button class="btn btn-primary btn-rounded" disabled>Renewal</button> -->
 
                         <% if (server_timers[server.attributes.id].action !== "deletion") { %>
                             <form action="/servers/auto_renew/<%= server.attributes.id %>" method="POST">
@@ -584,15 +582,15 @@
                             </form>
                         <% } %>
                         
-                            
+                  
+                    <a class="btn btn-primary justify-content-center" href="/servers/modify?id=<%= server.attributes.id %>">Modify </a>
+                      <br> <br>   <a id="deleteServer"class="btn btn-primary justify-content-center" onclick="deleteServer('<%= server.attributes.id %>')">Delete</a>
+          
                             
                      
 
-                    </td> -->
-                  <td>
-                    <a class="btn btn-primary justify-content-center" href="/servers/modify?id=<%= server.attributes.id %>">Modify </a>
-                      <br> <br>   <a id="deleteServer"class="btn btn-primary justify-content-center" onclick="deleteServer('<%= server.attributes.id %>')">Delete</a></td>
-                </tr>
+                    </td> 
+                                  </tr>
             <% } %>
         </tbody>
       </table>
