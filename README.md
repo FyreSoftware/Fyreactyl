@@ -13,7 +13,7 @@ Fyreactyl has it own documentation you can [follow](https://docs.fyresoftware.co
 
 ## License
 
-Fyreactyl uses apache 2.0 as a license, you can remove the credits if its a private project. If it isn't please keep the credits in the footer.
+Fyreactyl uses MIT as a license, you can remove the credits if its a private project. If it isn't please keep the credits in the footer.
 
 ## Example's
 
