@@ -65,8 +65,6 @@ process.functions = functions;
 // Start express website.
 
 const app = express(); // Creates express object.
-expressWs(app); // Creates app.ws() function, and does websocket stuff;
-
 process.rateLimit = rateLimit;
 
 app.use(
@@ -139,7 +137,7 @@ app.use(async (req, res, next) => {
 });
 
 const server = http.createServer(app);
-
+expressWs(app, server); // Creates app.ws() function, and does websocket stuff;
 const listener = server.listen(process.env.website.port, function () {
   // Listens the website at a port.
   console.log(
@@ -154,7 +152,6 @@ const listener = server.listen(process.env.website.port, function () {
     if (typeof api.load === 'function') api.load(app, ifValidAPI, ejs);
   }
 });
-
 /*
   ifValidAPI(req, res, permission);
 

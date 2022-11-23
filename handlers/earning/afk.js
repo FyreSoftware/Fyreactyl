@@ -13,12 +13,10 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
     let onpage = false;
 
     if (!req.session.arcsessiontoken) {
-      console.log("no arcsessiontoken");
       return ws.close();
     }
 
     if (typeof req.session.arcsessiontoken !== "object") {
-      console.log("no object");
 
       delete req.session.arcsessiontoken;
       return ws.close();
@@ -27,35 +25,29 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
     const arcsessiontoken = Object.assign(req.session.arcsessiontoken, {});
 
     if (!arcsessiontoken) {
-      console.log("no object");
       delete req.session.arcsessiontoken;
       return ws.close();
     }
 
     const token = req.headers["sec-websocket-protocol"];
-    console.log("token part");
 
     if (!token) return ws.close();
-    console.log("token pass 1");
 
     if (typeof token !== "string") return ws.close();
-    console.log("token pass2");
 
     if (token !== arcsessiontoken.token) {
-      console.log("token not arc");
 
       delete req.session.arcsessiontoken;
       return ws.close();
     }
 
     if (Date.now() > arcsessiontoken.created + waitforwebsocketreq) {
-      console.log("to old");
 
       delete req.session.arcsessiontoken;
       return ws.close();
     }
 
-    if (currentlyonpage[req.session.data.userinfo.id]) {
+    if (currentlyonpage[req.session.data.dbinfo?.username]) {
       delete req.session.arcsessiontoken;
       if (ws.readyState === 1) await ws.send('{"error": "Already on page."}');
       if (ws.readyState === 1) await ws.close();
@@ -66,11 +58,11 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
 
     onpage = true;
 
-    currentlyonpage[req.session.data.userinfo.id] = true;
+    currentlyonpage[req.session.data.dbinfo?.username] = true;
 
     const coinloop = setInterval(async () => {
-      await process.db.addCoinsByDiscordID(
-        req.session.data.userinfo.id,
+      await process.db.addCoinsByEmail(
+        req.session.data.dbinfo?.email,
         gaincoins
       );
       return ws.send(gaincoins);
@@ -80,7 +72,7 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
       if (!onpage) return;
 
       clearInterval(coinloop);
-      delete currentlyonpage[req.session.data.userinfo.id];
+      delete currentlyonpage[req.session.data.dbinfo?.username];
     };
   });
 };
