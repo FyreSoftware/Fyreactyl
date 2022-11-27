@@ -9,31 +9,31 @@
         }
       </style>
       <title>Dashboard | <%= dbSettings.name %></title>
-      
+
       <!-- Favicon -->
       <link rel="shortcut icon" href="../assets/images/favicon.ico" />
-      
+
       <!-- Nofications JS -->
       <link rel="shortcut icon" href="../assets/js/nofications.js" />
 
       <!-- Library / Plugin Css Build -->
       <link rel="stylesheet" href="../assets/css/core/libs.min.css" />
-      
+
       <!-- Aos Animation Css -->
       <link rel="stylesheet" href="../assets/vendor/aos/dist/aos.css" />
-      
+
       <!-- Hope Ui Design System Css -->
       <link rel="stylesheet" href="../assets/css/hope-ui.min.css?v=1.1.1" />
-      
+
       <!-- Custom Css -->
       <link rel="stylesheet" href="../assets/css/custom.min.css?v=1.1.1" />
-      
+
       <!-- Dark Css -->
       <link rel="stylesheet" href="../assets/css/dark.min.css"/>
-      
+
       <!-- RTL Css -->
       <link rel="stylesheet" href="../assets/css/rtl.min.css"/>
-      
+
       <!-- Customizer Css -->
       <link rel="stylesheet" href="../assets/css/customizer.min.css" />
 
@@ -52,8 +52,8 @@
       </div>    </div>
     <!-- loader END -->
 
-    <%- include('../components/sidebar.ejs') %> 
-    
+    <%- include('../components/sidebar.ejs') %>
+
 
     </aside> <main class="main-content">
       <div class="position-relative">
@@ -532,13 +532,13 @@
                                     let hrs = (s - mins) / 60;
                                     let output = hrs + ' hours';
                                 %>
-                            
+
                                 <% if (server_timers[server.attributes.id].action == "auto") { %>
                                     Automatically renewing in: <%= output %>
                                 <% } else if (server_timers[server.attributes.id].action == "suspend") { %>
                                     <%= output %>
                                 <% } else if (server_timers[server.attributes.id].action == "deletion") { %>
-                                    Server deletion in: <%= output %> 
+                                    Server deletion in: <%= output %>
                                 <% } %>
                             <% } else { %>
                                 None.
@@ -551,16 +551,16 @@
                             let renewcoststring;
                             renewcoststring = settings.renewal.renew_fee + " coin" + (settings.renewal.renew_fee == 1 ? "" : "s");
                         %>
-                        
+
                         <% if (server_timers[server.attributes.id] && server_timers[server.attributes.id].action !== "???") { %>
 
 
     <br>
       <form  action="/servers/renew/<%= server.attributes.id %>" method="POST">
-                            <input class="btn btn-primary" type="submit" id="one" style="display: none" value="Renew">
+                            <input class="btn btn-primary" type="submit" id="<%= server.attributes.id %>" style="display: none" value="Renew">
                         </form>
-                        
-                        <a href="#" class="btn btn-primary" onclick="document.getElementById('one').click()"> Renew </a><% if (server_timers[server.attributes.id].action !== "deletion") { %> <br><br> <a class="btn btn-primary" href="#" onclick="document.getElementById('two').click()"><%= server_timers[server.attributes.id].action == "auto" ? "Disable" : "Enable" %> Automatic Renewal</a><% } %>
+
+                        <a href="#" class="btn btn-primary" onclick="document.getElementById('<%= server.attributes.id %>').click()"> Renew </a><% if (server_timers[server.attributes.id].action !== "deletion") { %> <br><br> <a class="btn btn-primary" href="#" onclick="document.getElementById('<%= server.attributes.id %>_two').click()"><%= server_timers[server.attributes.id].action == "auto" ? "Disable" : "Enable" %> Automatic Renewal</a><% } %>
 </td>
  <td>
              <!-- <button class="btn btn-primary btn-rounded" disabled>Renewal</button> -->
@@ -568,12 +568,12 @@
                         <% if (server_timers[server.attributes.id].action !== "deletion") { %>
                             <form action="/servers/auto_renew/<%= server.attributes.id %>" method="POST">
                                 <% let toggle_type = server_timers[server.attributes.id].action == "auto" ? "Disable" : "Enable" %>
-                                <input type="submit" style="display: none" id="two" value="<%= toggle_type %> automatic renewals.">
+                                <input type="submit" style="display: none" id="<%= server.attributes.id %>_two" value="<%= toggle_type %> automatic renewals.">
                             </form>
                             <% } %>
                         <% } else { %>
                             <button class="btn btn-primary btn-rounded" disabled>Renew</button>
-                            
+
                         <% } %>
 
                         <% if (Object.entries(settings.eggs).filter(egg=> server.attributes.egg == egg[1].info.egg).length == 1) { %>
@@ -581,15 +581,15 @@
                                 <input type="submit" style="display: none;" value="Renew">
                             </form>
                         <% } %>
-                        
-                  
+
+
                     <a class="btn btn-primary justify-content-center" href="/servers/modify?id=<%= server.attributes.id %>">Modify </a>
                       <br> <br>   <a id="deleteServer"class="btn btn-primary justify-content-center" onclick="deleteServer('<%= server.attributes.id %>')">Delete</a>
-          
-                            
-                     
 
-                    </td> 
+
+
+
+                    </td>
                                   </tr>
             <% } %>
         </tbody>
@@ -600,7 +600,7 @@
             </div>
          </div>
       </div>
-   </div> 
+   </div>
 </div>
    <div class="col-md-12 col-lg-4">
       <div class="row">
@@ -622,7 +622,7 @@
           <div class="mb-3">
                 <label class="form-label">Panel Email</label>
                 <input class="form-control" value="<%= data.panelinfo.email %>" disabled>
-            </div>            
+            </div>
           <div class="mb-3">
                 <label class="form-label">Panel Password</label>
                 <input style="color:red" value="<%= variables ? (variables.password ? `${variables.password}` : '') : '' %>" disabled class="form-control">
@@ -631,18 +631,18 @@
             <form action="/accounts/regenerate_password" method="POST">
                     <button type="sumbit" class="btn btn-primary">Reset Password</button>
             </form>
-          
+
             </div>
                   </div>
                </div>
             </div>
          </div>
       </div>
-   </div> 
+   </div>
 </div>
       </div>
       <!-- Footer Section Start -->
-      <%- include("../components/footer.ejs") %> 
+      <%- include("../components/footer.ejs") %>
       <!-- Footer Section End -->    </main>
       <a
       class="btn btn-fixed-end btn-warning btn-icon btn-setting"
@@ -1301,29 +1301,29 @@
     </div>
     <!-- Library Bundle Script -->
     <script src="../assets/js/core/libs.min.js"></script>
-    
+
     <!-- External Library Bundle Script -->
     <script src="../assets/js/core/external.min.js"></script>
-    
+
     <!-- Widgetchart Script -->
     <script src="../assets/js/charts/widgetcharts.js"></script>
-    
+
     <!-- mapchart Script -->
     <script src="../assets/js/charts/vectore-chart.js"></script>
     <script src="../assets/js/charts/dashboard.js" ></script>
-    
+
     <!-- fslightbox Script -->
     <script src="../assets/js/plugins/fslightbox.js"></script>
-    
+
     <!-- Settings Script -->
     <script src="../assets/js/plugins/setting.js"></script>
-    
+
     <!-- Form Wizard Script -->
     <script src="../assets/js/plugins/form-wizard.js"></script>
-    
+
     <!-- AOS Animation Plugin-->
     <script src="../assets/vendor/aos/dist/aos.js"></script>
-    
+
     <!-- App Script -->
     <script src="../assets/js/hope-ui.js" defer></script>
 
