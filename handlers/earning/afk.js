@@ -47,7 +47,7 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
       return ws.close();
     }
 
-    if (currentlyonpage[req.session.data.dbinfo?.username]) {
+    if (currentlyonpage[req.session.data.dbinfo.email]) {
       delete req.session.arcsessiontoken;
       if (ws.readyState === 1) await ws.send('{"error": "Already on page."}');
       if (ws.readyState === 1) await ws.close();
@@ -58,7 +58,7 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
 
     onpage = true;
 
-    currentlyonpage[req.session.data.dbinfo?.username] = true;
+    currentlyonpage[req.session.data.dbinfo.email] = true;
 
     const coinloop = setInterval(async () => {
       await process.db.addCoinsByEmail(
@@ -72,7 +72,7 @@ module.exports.load = async function (app, ifValidAPI, ejs) {
       if (!onpage) return;
 
       clearInterval(coinloop);
-      delete currentlyonpage[req.session.data.dbinfo?.username];
+      delete currentlyonpage[req.session.data.dbinfo.email];
     };
   });
 };
