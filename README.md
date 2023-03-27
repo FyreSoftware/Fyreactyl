@@ -1,6 +1,6 @@
 # Fyreactyl
 
-DEPRECATED. Fyreactyl v1 has been deprecated. Do not expect fyreactyl v2 to be finished soon. I won't promise anything about its release.
+! DEPRECATED. Fyreactyl v1 has been deprecated. Do not expect fyreactyl v2 to be finished soon. I won't promise anything about its release.
 
 This is a fork of dashactyl all credits go to them.
 We highly discourage you to not ask support in votion development and instead ask in the [Fyre Software](https://discord.gg/sXWE8gJrt3)
